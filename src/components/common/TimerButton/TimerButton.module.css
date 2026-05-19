@@ -1,0 +1,40 @@
+.button {
+  border: none;
+  border-radius: 50%;
+
+  color: white;
+  font-weight: 800;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  box-shadow: inset 0 -4px 0 rgba(65, 65, 65, 0.18);
+}
+
+.large {
+  width: 72px;
+  height: 72px;
+  font-size: 34px;
+}
+
+.medium {
+  width: 52px;
+  height: 52px;
+  font-size: 26px;
+}
+
+.small {
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+}
+
+.active {
+  background: var(--green-text);
+}
+
+.disabled {
+  background: var(--gray-818181);
+}
