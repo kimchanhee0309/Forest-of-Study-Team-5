@@ -1,0 +1,47 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+}
+
+.item {
+  flex: 1;
+  height: 56px;
+
+  background: var(--gray-eeeeee);
+
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--gray-818181);
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.deleteButton {
+  width: 24px;
+  height: 37px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: var(--ping-bg);
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+
+  object-fit: contain;
+}

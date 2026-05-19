@@ -1,122 +1,243 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import "./App.css";
+import { useState } from "react";
+import pointIcon from "./assets/icons/ic_point.png";
+
+import {
+  Button,
+  Chip,
+  Modal,
+  Popup,
+  Toast,
+  Dropdown,
+  TimerButton,
+  HabitItem,
+  PasswordModal,
+  Tag,
+  StudyCard,
+} from "./components/common";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [sort, setSort] = useState("최근 순");
+  const [showModal, setShowModal] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [habits, setHabits] = useState([
+    { id: 1, name: "미라클모닝 6시 기상", completed: false },
+    { id: 2, name: "아침 챙겨 먹기", completed: false },
+  ]);
+
+  const sortOptions = [
+    "최근 순",
+    "오래된 순",
+    "많은 포인트 순",
+    "적은 포인트 순",
+  ];
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <main
+        style={{
+          minHeight: "100vh",
+          padding: "40px",
+          backgroundColor: "#414141",
+          color: "white",
+        }}
+      >
+        <h1>Common UI Test</h1>
 
-      <div className="ticks"></div>
+        <section style={{ marginTop: "40px" }}>
+          <h2>Button</h2>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            <Button size="large">만들기</Button>
+            <Button size="medium">확인</Button>
+            <Button size="small">수정 완료</Button>
+            <Button variant="cancel" size="large">
+              취소
+            </Button>
+            <Button disabled size="large" icon="▶">
+              Start!
+            </Button>
+            <Button size="large" icon="▶">
+              Start!!
+            </Button>
+            <Button size="large" icon="⏹">
+              Stop!
+            </Button>
+          </div>
+        </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+        <section style={{ marginTop: "40px", maxWidth: "520px" }}>
+          <h2>Chip</h2>
+
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "24px" }}
+          >
+            {habits.map((habit) => (
+              <Chip
+                key={habit.id}
+                completed={habit.completed}
+                onClick={() =>
+                  setHabits((prev) =>
+                    prev.map((item) =>
+                      item.id === habit.id
+                        ? { ...item, completed: !item.completed }
+                        : item,
+                    ),
+                  )
+                }
+              >
+                {habit.name}
+              </Chip>
+            ))}
+          </div>
+        </section>
+
+        <section style={{ marginTop: "40px" }}>
+          <h2>Timer Button</h2>
+
+          <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+            <TimerButton type="restart" size="large" />
+            <TimerButton type="restart" size="medium" />
+            <TimerButton type="restart" size="small" />
+            <TimerButton type="restart" size="large" active={false} />
+
+            <TimerButton type="pause" size="large" />
+            <TimerButton type="pause" size="medium" />
+            <TimerButton type="pause" size="small" />
+            <TimerButton type="pause" size="large" active={false} />
+          </div>
+        </section>
+
+        <section style={{ marginTop: "40px" }}>
+          <h2>Dropdown</h2>
+
+          <Dropdown value={sort} options={sortOptions} onChange={setSort} />
+        </section>
+
+        <section style={{ marginTop: "80px" }}>
+          <h2>Toast</h2>
+
+          <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+            <Toast type="point" message="50포인트를 획득했습니다!" />
+            <Toast type="warning" message="집중이 중단되었습니다." />
+          </div>
+        </section>
+
+        <section style={{ marginTop: "40px" }}>
+          <h2>Modal / Popup</h2>
+
+          <div style={{ display: "flex", gap: "16px" }}>
+            <Button onClick={() => setShowModal(true)}>Modal 열기</Button>
+            <Button onClick={() => setShowPopup(true)}>Popup 열기</Button>
+          </div>
+        </section>
+
+        <section style={{ marginTop: "40px" }}>
+          <h2>PasswordModal</h2>
+
+          <div style={{ display: "flex", gap: "16px" }}>
+            <Button onClick={() => setShowPasswordModal(true)}>
+              PasswordModal 열기
+            </Button>
+          </div>
+        </section>
+
+        <section style={{ marginTop: "40px" }}>
+          <h2>Tag</h2>
+
+          <div style={{ display: "flex", gap: "16px" }}>
+            <Tag icon={<img src={pointIcon} alt="" width={20} />}>
+              310P 획득
+            </Tag>
+            <Tag icon="🧑🏻‍💻">37</Tag>
+            <Tag
+              variant="gray"
+              size="large"
+              icon={<img src={pointIcon} alt="" width={28} />}
+            >
+              310P 획득
+            </Tag>
+          </div>
+        </section>
+
+        <section style={{ marginTop: "40px" }}>
+          <h2>StudyCard</h2>
+
+          <div style={{ display: "flex", gap: "16px" }}>
+            <StudyCard
+              title="이유디의 UX 스터디"
+              elapsedDays={62}
+              description="Slow And Steady Wins The Race!!"
+              point={310}
+              emojis={[
+                { id: 1, icon: "🧑🏻‍💻", count: 37 },
+                { id: 2, icon: "🔥", count: 26 },
+                { id: 3, icon: "🤍", count: 14 },
+              ]}
+            />
+          </div>
+        </section>
+
+        {showModal && (
+          <Modal title="습관 목록" onClose={() => setShowModal(false)}>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+            >
+              <HabitItem
+                text="미라클모닝 6시 기상"
+                onDelete={() => console.log("삭제")}
+              />
+
+              <HabitItem
+                text="아침 챙겨 먹기"
+                onDelete={() => console.log("삭제")}
+              />
+
+              <HabitItem
+                text="React 스터디 책 1챕터 읽기"
+                onDelete={() => console.log("삭제")}
+              />
+
+              <Button size="medium" fullWidth>
+                +
+              </Button>
+
+              <div style={{ display: "flex", gap: "24px", marginTop: "24px" }}>
+                <Button variant="cancel" size="medium" fullWidth>
+                  취소
+                </Button>
+
+                <Button size="medium" fullWidth>
+                  수정 완료
+                </Button>
+              </div>
+            </div>
+          </Modal>
+        )}
+
+        {showPopup && (
+          <Popup
+            message="정말 나가시겠습니까?"
+            onCancel={() => setShowPopup(false)}
+            onConfirm={() => setShowPopup(false)}
+          />
+        )}
+
+        {showPasswordModal && (
+          <PasswordModal
+            title="연우의 개발공장"
+            buttonText="수정하러 가기"
+            onClose={() => setShowPasswordModal(false)}
+            onSubmit={(password) => {
+              console.log("입력한 비밀번호: ", password);
+              setShowPasswordModal(false);
+            }}
+          />
+        )}
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

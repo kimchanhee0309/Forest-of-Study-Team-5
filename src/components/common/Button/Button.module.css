@@ -1,0 +1,61 @@
+.button {
+  border: none;
+  border-radius: 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  box-sizing: border-box;
+  transition: 0.2s;
+  box-shadow: inset 0 -4px 0 rgba(65, 65, 65, 0.18);
+}
+
+.button:disabled {
+  background: var(--gray-818181);
+  color: white;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: var(--brand);
+  color: white;
+}
+
+.cancel {
+  background: var(--gray-dddddd);
+  color: white;
+}
+
+.small {
+  min-width: 96px;
+  height: 44px;
+  padding: 0 24px;
+  font-size: 16px;
+}
+
+.medium {
+  min-width: 180px;
+  height: 56px;
+  padding: 0 32px;
+  font-size: 18px;
+}
+
+.large {
+  min-width: 360px;
+  height: 64px;
+  padding: 0 40px;
+  font-size: 20px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+}

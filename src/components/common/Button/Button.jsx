@@ -1,4 +1,4 @@
-import styles from "./ButtonModule.css";
+import styles from "./Button.module.css";
 
 function Button({
   children,
@@ -6,8 +6,8 @@ function Button({
   size = "medium",
   type = "button",
   disabled = false,
-  icon,
   fullWidth = false,
+  icon,
   onClick,
 }) {
   return (

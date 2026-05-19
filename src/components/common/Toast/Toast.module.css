@@ -1,0 +1,24 @@
+.toast {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 260px;
+  height: 54px;
+  padding: 0 24px;
+
+  border-radius: 12px;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.point {
+  background: var(--green-bg);
+  color: var(--green-text);
+}
+
+.warning {
+  background: var(--pink-bg);
+  color: var(--red);
+}
