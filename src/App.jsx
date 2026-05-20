@@ -3,6 +3,7 @@ import { useState } from "react";
 import pointIcon from "./assets/icons/ic_point.png";
 
 import {
+  GNB,
   Button,
   Chip,
   Modal,
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <>
+      <GNB onCreateStudy={() => console.log("스터디 생성")} />
       <main
         style={{
           minHeight: "100vh",

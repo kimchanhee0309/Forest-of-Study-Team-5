@@ -4,7 +4,7 @@
 
   padding: 48px 48px 40px;
 
-  border-radius: 232x;
+  border-radius: 23px;
   background: var(--green-bg);
 
   box-sizing: border-box;
@@ -53,7 +53,7 @@
 }
 
 .description {
-  margin: 56px 0 0;
+  margin: 56px 0 48px;
 
   color: var(--black);
   font-size: 24px;
@@ -64,11 +64,7 @@
 }
 
 .emojiList {
-  margin-top: 48px;
-
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   gap: 10px;
 }
 

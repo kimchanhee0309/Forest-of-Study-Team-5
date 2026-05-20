@@ -1,3 +1,4 @@
+export { default as GNB } from "./GNB/GNB.jsx";
 export { default as Button } from "./Button/Button.jsx";
 export { default as Chip } from "./Chip/Chip.jsx";
 export { default as Modal } from "./Modal/Modal.jsx";
