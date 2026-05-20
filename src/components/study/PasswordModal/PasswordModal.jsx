@@ -29,7 +29,7 @@ function PasswordModal({
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button fullWidth size="large" onClick={handleSubmit}>
+        <Button fullWidth size="content-large" onClick={handleSubmit}>
           {buttonText}
         </Button>
       </div>

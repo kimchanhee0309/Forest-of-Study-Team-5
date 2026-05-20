@@ -30,25 +30,123 @@
   color: white;
 }
 
-.small {
-  min-width: 96px;
-  height: 44px;
-  padding: 0 24px;
-  font-size: 16px;
+/* Btn_CTA */
+.cta-large {
+  min-width: 252px;
+  height: 58px;
+  font-size: var(--font-18);
+  top: 20px;
+  left: 20px;
+  border-radius: 16px;
+  padding: 10px;
+  gap: 10px;
+  opacity: 1;
 }
 
-.medium {
-  min-width: 180px;
-  height: 56px;
-  padding: 0 32px;
-  font-size: 18px;
+.cta-medium {
+  min-width: 160px;
+  height: 58px;
+  font-size: var(--font-18);
+
+  top: 21px;
+  left: 314px;
+  border-radius: 14px;
+  padding: 10px;
+  gap: 10px;
+
+  opacity: 1;
 }
 
-.large {
-  min-width: 360px;
-  height: 64px;
-  padding: 0 40px;
-  font-size: 20px;
+.cta-small {
+  min-width: 106px;
+  height: 38px;
+  font-size: var(--font-12);
+
+  top: 21px;
+  left: 524px;
+  border-radius: 8px;
+  padding: 10px;
+  gap: 10px;
+  opacity: 1;
+}
+
+/* btn_habit/make/focus/confirm/modification(수정하러가기) */
+.content-large {
+  min-width: 600px;
+  height: 58px;
+  font-size: var(--font-18);
+
+  top: 20px;
+  left: 20px;
+  border-radius: 16px;
+  padding: 10px;
+  gap: 10px;
+  opacity: 1;
+}
+
+.content-mediumLarge {
+  min-width: 312px;
+  height: 58px;
+  font-size: var(--font-18);
+
+  top: 98px;
+  left: 20px;
+  border-radius: 16px;
+  padding: 10px;
+  gap: 10px;
+  opacity: 1;
+}
+
+/* btn_confirm/cancel/modification(수정완료) */
+.content-mediumSmall {
+  min-width: 288px;
+  height: 58px;
+  font-size: var(--font-18);
+
+  top: 98px;
+  left: 20px;
+  border-radius: 16px;
+  padding: 10px;
+  gap: 10px;
+  opacity: 1;
+}
+
+.content-small {
+  min-width: 140px;
+  height: 58px;
+  font-size: var(--font-18);
+
+  top: 185px;
+  left: 20px;
+  border-radius: 16px;
+  padding: 10px;
+  gap: 10px;
+  opacity: 1;
+}
+
+/* btn_start/stop */
+.btn-large {
+  min-width: 333px;
+  height: 60px;
+  font-size: var(--font-24);
+  border: none;
+  border-radius: 50px;
+
+  top: 20px;
+  left: 20px;
+  opacity: 1;
+}
+
+.btn-small {
+  min-width: 140px;
+  height: 45px;
+  font-size: var(--font-18);
+  border: none;
+  border-radius: 50px;
+
+  top: 188px;
+  left: 20px;
+  opacity: 1;
 }
 
 .fullWidth {

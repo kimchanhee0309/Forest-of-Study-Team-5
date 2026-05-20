@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 function Button({
   children,
   variant = "primary",
-  size = "medium",
+  size = "content-mediumSmall",
   type = "button",
   disabled = false,
   fullWidth = false,

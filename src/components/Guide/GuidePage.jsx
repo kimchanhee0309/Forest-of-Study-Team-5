@@ -73,19 +73,24 @@ function GuidePage() {
           <h2>Button</h2>
 
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-            <Button size="large">만들기</Button>
-            <Button size="medium">확인</Button>
-            <Button size="small">수정 완료</Button>
-            <Button variant="cancel" size="large">
+            <Button size="cta-large">만들기</Button>
+            <Button size="cta-medium">만들기</Button>
+            <Button size="cta-small">만들기</Button>
+
+            <Button size="content-large">습관@!</Button>
+            <Button size="content-mediumLarge">수정하기</Button>
+
+            <Button size="content-mediumSmall">수정 완료</Button>
+            <Button variant="cancel" size="content-small">
               취소
             </Button>
-            <Button disabled size="large" icon="▶">
+            <Button disabled size="btn-large" icon="▶">
               Start!
             </Button>
-            <Button size="large" icon="▶">
+            <Button size="btn-small" icon="▶">
               Start!!
             </Button>
-            <Button size="large" icon="⏹">
+            <Button size="btn-small" icon="⏹">
               Stop!
             </Button>
           </div>
@@ -122,12 +127,10 @@ function GuidePage() {
 
           <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
             <TimerButton type="restart" size="large" />
-            <TimerButton type="restart" size="medium" />
             <TimerButton type="restart" size="small" />
             <TimerButton type="restart" size="large" active={false} />
 
             <TimerButton type="pause" size="large" />
-            <TimerButton type="pause" size="medium" />
             <TimerButton type="pause" size="small" />
             <TimerButton type="pause" size="large" active={false} />
           </div>
@@ -264,16 +267,16 @@ function GuidePage() {
                 onDelete={() => console.log("삭제")}
               />
 
-              <Button size="medium" fullWidth>
+              <Button size="content-mediumLarge" fullWidth>
                 +
               </Button>
 
               <div style={{ display: "flex", gap: "24px", marginTop: "24px" }}>
-                <Button variant="cancel" size="medium" fullWidth>
+                <Button variant="cancel" size="content-small" fullWidth>
                   취소
                 </Button>
 
-                <Button size="medium" fullWidth>
+                <Button size="content-small" fullWidth>
                   수정 완료
                 </Button>
               </div>

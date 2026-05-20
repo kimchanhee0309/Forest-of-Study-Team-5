@@ -1,4 +1,26 @@
 :root {
+  /* font */
+  --font-main: "Pretendard", sans-serif;
+
+  --font-150: 150px;
+  --font-120: 120px;
+  --font-80: 80px;
+
+  --font-32: 32px;
+  --font-24: 24px;
+  --font-20: 20px;
+  --font-18: 18px;
+  --font-16: 16px;
+  --font-14: 14px;
+  --font-12: 12px;
+  --font-10: 10px;
+
+  /* font weight */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+
+  /* color */
   --black: #414141;
 
   --gray-818181: #818181;

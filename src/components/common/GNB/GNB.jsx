@@ -9,7 +9,7 @@ function GNB({ onCreateStudy }) {
       <div className={styles.container}>
         <img src={logo} alt="공부의 숲" className={styles.logo} />
 
-        <Button size="medium" onClick={onCreateStudy}>
+        <Button size="cta-large" onClick={onCreateStudy}>
           스터디 만들기
         </Button>
       </div>
