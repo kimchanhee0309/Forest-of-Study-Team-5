@@ -1,12 +1,18 @@
 import Button from "../Button/Button.jsx";
 import styles from "./GNB.module.css";
 
-function GNB() {
+import logo from "../../../assets/images/logo.png";
+
+function GNB({ onCreateStudy }) {
   return (
     <header className={styles.gnb}>
-      <div className={styles.loge}>공부의 숲</div>
+      <div className={styles.container}>
+        <img src={logo} alt="공부의 숲" className={styles.logo} />
 
-      <Button size="small">스터디 만들기</Button>
+        <Button size="medium" onClick={onCreateStudy}>
+          스터디 만들기
+        </Button>
+      </div>
     </header>
   );
 }
