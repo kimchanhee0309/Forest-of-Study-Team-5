@@ -14,21 +14,23 @@
 }
 
 .large {
-  width: 72px;
-  height: 72px;
-  font-size: 34px;
-}
+  font-size: var(--font-32);
 
-.medium {
-  width: 52px;
-  height: 52px;
-  font-size: 26px;
+  width: 64px;
+  height: 64px;
+  top: 20px;
+  left: 20px;
+  opacity: 1;
 }
 
 .small {
-  width: 36px;
-  height: 36px;
-  font-size: 18px;
+  width: 48px;
+  height: 48px;
+  font-size: var(--font-18);
+
+  top: 20px;
+  left: 102px;
+  opacity: 1;
 }
 
 .active {

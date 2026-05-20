@@ -40,8 +40,13 @@
 }
 
 .icon {
-  width: 20px;
-  height: 20px;
+  width: 48px;
+  height: 48px;
 
-  object-fit: contain;
+  top: 3px;
+  left: 508px;
+  border-radius: 35px;
+  gap: 10px;
+  opacity: 1;
+  padding: 12px;
 }

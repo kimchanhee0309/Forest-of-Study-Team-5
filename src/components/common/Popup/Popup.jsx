@@ -15,12 +15,17 @@ function Popup({
 
         <div className={styles.actions}>
           {onCancel && (
-            <Button variant="cancel" size="medium" fullWidth onClick={onCancel}>
+            <Button
+              variant="cancel"
+              size="content-small"
+              fullWidth
+              onClick={onCancel}
+            >
               {cancelText}
             </Button>
           )}
 
-          <Button size="medium" fullWidth onClick={onConfirm}>
+          <Button size="content-small" fullWidth onClick={onConfirm}>
             {confirmText}
           </Button>
         </div>
