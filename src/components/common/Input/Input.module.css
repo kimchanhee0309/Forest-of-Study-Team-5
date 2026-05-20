@@ -2,28 +2,42 @@
   width: 100%;
 }
 
-.label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.input {
+.inputBox {
   width: 100%;
-  height: 58px;
+  height: 56px;
 
-  padding: 0 24px;
+  display: flex;
+  align-items: center;
+
+  background: #ffffff;
 
   border: 1px solid var(--gray-dddddd);
   border-radius: 16px;
 
-  background: white;
+  box-sizing: border-box;
+}
+
+.errorBox {
+  border: 2px solid var(--error);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  border-radius: 16px;
+
+  padding: 0 20px;
 
   color: var(--black);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
 
-  outline: none;
   box-sizing: border-box;
 }
 
@@ -31,18 +45,42 @@
   color: var(--gray-818181);
 }
 
-.input:focus {
-  border-color: var(--color-primary);
+.eyeButton {
+  width: 52px;
+  height: 100%;
+
+  border: none;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
 }
 
-.errorInput {
-  border-color: var(--color-danger);
+.eyeIcon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
-.error {
-  color: var(--color-danger);
+.errorText {
+  margin: 8px 0 0;
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 600;
+}
 
-  font-size: 13px;
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  -webkit-text-fill-color: var(--black);
+  transition: background-color 9999s ease-in-out 0s;
+}
 
-  margin-top: 6px;
+.inputBox:has(.input:-webkit-autofill) {
+  background: #ffffff;
 }
