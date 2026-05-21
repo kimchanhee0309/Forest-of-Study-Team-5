@@ -5,3 +5,10 @@ textarea,
 select {
   font-family: "Pretendard", sans-serif;
 }
+
+body {
+  background: var(--bg);
+  color: var(--black);
+
+  min-height: 100vh;
+}
