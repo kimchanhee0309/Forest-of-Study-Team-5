@@ -3,15 +3,9 @@ import pointIcon from "../../assets/icons/ic_point.png";
 import arrowIcon from "../../assets/icons/ic_arrow_right.png";
 import style from "./StudyDetail.module.css";
 import {
-  GNB,
   Button,
   Chip,
   Modal,
-  Popup,
-  Toast,
-  Dropdown,
-  TimerButton,
-  HabitItem,
   PasswordModal,
   Tag,
   Input,
