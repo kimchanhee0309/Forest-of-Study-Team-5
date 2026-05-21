@@ -1,7 +1,9 @@
 import GuidePage from "./components/guide/GuidePage.jsx";
+import StudyDetail from "./page/StudyDetail/StudyDetail.jsx";
 
 function App() {
-  return <GuidePage />;
+  return <StudyDetail />;
+  // return <GuidePage />;
 }
 
 export default App;

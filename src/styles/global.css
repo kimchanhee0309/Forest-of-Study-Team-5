@@ -12,3 +12,11 @@ body {
 
   min-height: 100vh;
 }
+.postTitle {
+  color: var(--black);
+  font-family: Pretendard;
+  font-size: var(--text-32);
+  font-style: normal;
+  font-weight: var(--weight-extrabold);
+  line-height: normal;
+}
