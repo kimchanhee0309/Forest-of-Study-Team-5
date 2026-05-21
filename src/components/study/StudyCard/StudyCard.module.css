@@ -36,7 +36,7 @@
   margin: 0;
 
   color: var(--green-text);
-  font-size: var(--font-18);
+  font-size: var(--text-18);
   font-weight: var(--weight-bold);
   line-height: 1.2;
 
@@ -47,7 +47,7 @@
   margin: 16px 0 0;
 
   color: var(--gray-818181);
-  font-size: var(--font-14);
+  font-size: var(--text-14);
   font-weight: var(--weight-regular);
 
   text-align: left;
@@ -57,7 +57,7 @@
   margin: 48px 0 48px;
 
   color: var(--black);
-  font-size: var(--font-16);
+  font-size: var(--text-16);
   font-weight: var(--weight-regular);
   line-height: 1.4;
 
