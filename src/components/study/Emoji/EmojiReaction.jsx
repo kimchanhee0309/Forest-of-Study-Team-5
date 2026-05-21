@@ -9,11 +9,7 @@ function EmojiReaction() {
   {
     /* 화면에 기본으로 나타내는 이모지 */
   }
-  const [reactions, setReactions] = useState([
-    { emoji: "👍", count: 0 },
-    { emoji: "🔥", count: 0 },
-    { emoji: "😍", count: 0 },
-  ]);
+  const [reactions, setReactions] = useState([]);
 
   const sortedReactions = [...reactions].sort((a, b) => b.count - a.count); // 내림차순 정렬
 
@@ -59,10 +55,10 @@ function EmojiReaction() {
 
         {hiddenReactions.length > 0 && (
           <button
-            className={style.emoji_more_btn}
+            className={style.plus_btn}
             onClick={() => setShowHidden((prev) => !prev)}
           >
-            +{hiddenReactions.length}
+            <span className={style.plus}>+ {hiddenReactions.length}..</span>
           </button>
         )}
 
