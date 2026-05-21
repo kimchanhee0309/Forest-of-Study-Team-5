@@ -1,4 +1,4 @@
-import GuidePage from "./components/Guide/GuidePage.jsx";
+import GuidePage from "./components/guide/GuidePage.jsx";
 
 function App() {
   return <GuidePage />;
