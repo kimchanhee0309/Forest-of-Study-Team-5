@@ -11,8 +11,8 @@
 }
 
 .popup {
-  width: 560px;
-  max-width: calc(100% - 40px);
+  width: 100%;
+  max-width: 560px;
 
   background: white;
   border-radius: 24px;
@@ -25,8 +25,8 @@
   margin: 0 0 48px;
 
   text-align: center;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: var(--text-20);
+  font-weight: var(--weight-bold);
   color: var(--black);
 }
 

@@ -1,7 +1,7 @@
 .button {
   border: none;
   border-radius: 16px;
-  font-weight: 700;
+  font-weight: var(--weight-bold);
   cursor: pointer;
 
   display: inline-flex;
@@ -32,9 +32,10 @@
 
 /* Btn_CTA */
 .cta-large {
-  min-width: 252px;
+  width: 100%;
+  max-width: 252px;
   height: 58px;
-  font-size: var(--font-18);
+  font-size: var(--text-18);
   top: 20px;
   left: 20px;
   border-radius: 16px;
@@ -44,9 +45,10 @@
 }
 
 .cta-medium {
-  min-width: 160px;
+  width: 100%;
+  max-width: 160px;
   height: 58px;
-  font-size: var(--font-18);
+  font-size: var(--text-18);
 
   top: 21px;
   left: 314px;
@@ -58,9 +60,10 @@
 }
 
 .cta-small {
-  min-width: 106px;
+  width: 100%;
+  max-width: 106px;
   height: 38px;
-  font-size: var(--font-12);
+  font-size: var(--text-12);
 
   top: 21px;
   left: 524px;
@@ -72,9 +75,10 @@
 
 /* btn_habit/make/focus/confirm/modification(수정하러가기) */
 .content-large {
-  min-width: 600px;
+  width: 100%;
+  max-width: 600px;
   height: 58px;
-  font-size: var(--font-18);
+  font-size: var(--text-18);
 
   top: 20px;
   left: 20px;
@@ -85,9 +89,10 @@
 }
 
 .content-mediumLarge {
-  min-width: 312px;
+  width: 100%;
+  max-width: 312px;
   height: 58px;
-  font-size: var(--font-18);
+  font-size: var(--text-18);
 
   top: 98px;
   left: 20px;
@@ -99,9 +104,10 @@
 
 /* btn_confirm/cancel/modification(수정완료) */
 .content-mediumSmall {
-  min-width: 288px;
+  width: 100%;
+  max-width: 288px;
   height: 58px;
-  font-size: var(--font-18);
+  font-size: var(--text-18);
 
   top: 98px;
   left: 20px;
@@ -112,9 +118,10 @@
 }
 
 .content-small {
-  min-width: 140px;
+  width: 100%;
+  max-width: 140px;
   height: 58px;
-  font-size: var(--font-18);
+  font-size: var(--text-18);
 
   top: 185px;
   left: 20px;
@@ -126,9 +133,10 @@
 
 /* btn_start/stop */
 .btn-large {
-  min-width: 333px;
+  width: 100%;
+  max-width: 333px;
   height: 60px;
-  font-size: var(--font-24);
+  font-size: var(--text-24);
   border: none;
   border-radius: 50px;
 
@@ -138,9 +146,10 @@
 }
 
 .btn-small {
-  min-width: 140px;
+  width: 100%;
+  max-width: 140px;
   height: 45px;
-  font-size: var(--font-18);
+  font-size: var(--text-18);
   border: none;
   border-radius: 50px;
 

@@ -1,9 +1,11 @@
 .wrapper {
-  min-width: 600px;
+  width: 100%;
+  max-width: 600px;
 }
 
 .inputBox {
-  min-width: 600px;
+  width: 100%;
+  max-width: 600px;
   height: 56px;
 
   display: flex;
@@ -37,7 +39,7 @@
 
   color: var(--black);
   font-size: var(--font-16);
-  font-weight: 500;
+  font-weight: var(--weight-medium);
 
   box-sizing: border-box;
 }
@@ -69,8 +71,8 @@
 .errorText {
   margin: 8px 0 0;
   color: var(--error);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--text-14);
+  font-weight: var(--weight-semibold);
 }
 
 .input:-webkit-autofill,
