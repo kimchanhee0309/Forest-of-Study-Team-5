@@ -3,14 +3,15 @@
   align-items: center;
   justify-content: center;
 
-  min-width: 260px;
+  width: 100%;
+  max-width: 260px;
   height: 54px;
   padding: 0 24px;
 
   border-radius: 12px;
 
-  font-size: 18px;
-  font-weight: 700;
+  font-size: var(--text-18);
+  font-weight: var(--weight-bold);
 }
 
 .point {

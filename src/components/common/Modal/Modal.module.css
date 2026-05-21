@@ -17,7 +17,8 @@
 .modal {
   position: relative;
 
-  width: 1152px;
+  width: 100%;
+  max-width: 1152px;
 
   background: white;
   border-radius: 20px;
@@ -29,22 +30,22 @@
 }
 
 .default {
-  width: 640px;
-  max-width: calc(100% - 40px);
+  width: 100%;
+  max-width: 640px;
   padding: 56px 48px 48px;
 }
 
 .password {
-  width: 720px;
-  max-width: calc(100% - 40px);
+  width: 100%;
+  max-width: 720px;
   padding: 56px 64px 58px;
 }
 .title {
   margin: 0 0 32px;
 
   text-align: center;
-  font-size: 28px;
-  font-weight: 800;
+  font-size: var(--text-32);
+  font-weight: var(--weight-extrabold);
   color: var(--black);
 }
 
@@ -61,8 +62,8 @@
   background: none;
 
   color: var(--green-text);
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
 
   cursor: pointer;
 }

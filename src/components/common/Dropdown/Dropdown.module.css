@@ -1,6 +1,7 @@
 .dropdown {
   position: relative;
-  width: 220px;
+  width: 100%;
+  max-width: 220px;
 }
 
 .trigger {
@@ -19,12 +20,12 @@
   align-items: center;
   justify-content: space-between;
 
-  font-size: 18px;
+  font-size: var(--text-18);
   cursor: pointer;
 }
 
 .arrow {
-  font-size: 14px;
+  font-size: var(--text-14);
 }
 
 .menu {
@@ -57,7 +58,7 @@
   border: none;
   background: white;
 
-  font-size: 18px;
+  font-size: var(--text-18);
   color: var(--black);
 
   cursor: pointer;

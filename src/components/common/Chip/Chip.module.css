@@ -1,5 +1,6 @@
 .chip {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 54px;
 
   border: none;
@@ -8,8 +9,8 @@
   background: var(--gray-eeeeee);
   color: var(--gray-818181);
 
-  font-size: var(--font-16);
-  font-weight: 700;
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
 
   cursor: pointer;
 

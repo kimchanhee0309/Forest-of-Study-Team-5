@@ -17,16 +17,19 @@
 }
 
 .small {
-  width: 28px;
+  width: 100%;
+  max-width: 28px;
   height: 28px;
 }
 
 .medium {
-  width: 44px;
+  width: 100%;
+  max-width: 44px;
   height: 44px;
 }
 
 .large {
-  width: 56px;
+  width: 100%;
+  max-width: 56px;
   height: 56px;
 }

@@ -1,5 +1,6 @@
 .card {
-  width: 354px;
+  width: 100%;
+  max-width: 354px;
   min-height: 243px;
 
   padding: 28px;
@@ -36,7 +37,7 @@
 
   color: var(--green-text);
   font-size: var(--font-18);
-  font-weight: 700;
+  font-weight: var(--weight-bold);
   line-height: 1.2;
 
   text-align: left;
@@ -47,7 +48,7 @@
 
   color: var(--gray-818181);
   font-size: var(--font-14);
-  font-weight: 400;
+  font-weight: var(--weight-regular);
 
   text-align: left;
 }
@@ -57,7 +58,7 @@
 
   color: var(--black);
   font-size: var(--font-16);
-  font-weight: 400;
+  font-weight: var(--weight-regular);
   line-height: 1.4;
 
   text-align: left;

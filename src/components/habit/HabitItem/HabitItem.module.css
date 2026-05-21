@@ -19,8 +19,8 @@
 
   color: var(--gray-818181);
 
-  font-size: 18px;
-  font-weight: 600;
+  font-size: var(--text-18);
+  font-weight: var(--weight-semibold);
 }
 
 .deleteButton {

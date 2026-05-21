@@ -267,16 +267,16 @@ function GuidePage() {
                 onDelete={() => console.log("삭제")}
               />
 
-              <Button size="content-mediumLarge" fullWidth>
+              <Button size="content-large" fullWidth>
                 +
               </Button>
 
               <div style={{ display: "flex", gap: "24px", marginTop: "24px" }}>
-                <Button variant="cancel" size="content-small" fullWidth>
+                <Button variant="cancel" size="content-mediumSmall" fullWidth>
                   취소
                 </Button>
 
-                <Button size="content-small" fullWidth>
+                <Button size="content-mediumSmall" fullWidth>
                   수정 완료
                 </Button>
               </div>

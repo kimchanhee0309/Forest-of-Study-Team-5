@@ -32,7 +32,7 @@
 
 @media (max-width: 768px) {
   .gnb {
-    height: 88px;
+    height: 100px;
   }
 
   .container {
@@ -40,18 +40,18 @@
   }
 
   .logo {
-    width: 100px;
+    width: 130px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 375px) {
   .gnb {
-    height: 72px;
+    height: 100px;
   }
   .container {
     padding: 0 16px;
   }
   .logo {
-    width: 72px;
+    width: 106px;
   }
 }
