@@ -6,23 +6,26 @@ import smileIcon from "../../../assets/icons/ic_smile.png";
 function EmojiReaction() {
   const [open, setOpen] = useState(false);
   const [showHidden, setShowHidden] = useState(false);
+  {
+    /* 화면에 기본으로 나타내는 이모지 */
+  }
   const [reactions, setReactions] = useState([
     { emoji: "👍", count: 0 },
     { emoji: "🔥", count: 0 },
     { emoji: "😍", count: 0 },
   ]);
 
-  const sortedReactions = [...reactions].sort((a, b) => b.count - a.count);
+  const sortedReactions = [...reactions].sort((a, b) => b.count - a.count); // 내림차순 정렬
 
-  const topReactions = sortedReactions.slice(0, 3);
+  const topReactions = sortedReactions.slice(0, 3); //TOP3 이모지
 
-  const hiddenReactions = sortedReactions.slice(3);
+  const hiddenReactions = sortedReactions.slice(3); //TOP3외 이모지
 
   const handleEmojiClick = (emojiData) => {
-    const selectedEmoji = emojiData.emoji;
+    const selectedEmoji = emojiData.emoji; // 선택한 이모지
 
     setReactions((prev) => {
-      const exists = prev.find((reaction) => reaction.emoji === selectedEmoji);
+      const exists = prev.find((reaction) => reaction.emoji === selectedEmoji); // 중복검사
 
       if (exists) {
         return prev.map((reaction) =>
@@ -33,9 +36,9 @@ function EmojiReaction() {
               }
             : reaction,
         );
-      }
+      } // 중복시 +1
 
-      return [...prev, { emoji: selectedEmoji, count: 1 }];
+      return [...prev, { emoji: selectedEmoji, count: 1 }]; // 새로운 이모지 추가
     });
 
     setOpen(false);
