@@ -82,7 +82,7 @@ function EmojiReaction() {
         onClick={() => setOpen((prev) => !prev)}
       >
         <img src={smileIcon} alt="smileIcon" className={style.smileIcon} />
-        추가
+        <span className={style.add}>추가</span>
       </button>
 
       {open && (
