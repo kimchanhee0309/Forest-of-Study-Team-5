@@ -3,9 +3,9 @@ import { Button, Input, Modal } from "../../common";
 import styles from "./PasswordModal.module.css";
 
 function PasswordModal({
-  title,
+  title = "연우의 개발공장",
   description = "권한이 필요해요!",
-  buttonText,
+  buttonText = "수정하러 가기",
   onClose,
   onSubmit,
 }) {

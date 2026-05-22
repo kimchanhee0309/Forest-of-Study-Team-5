@@ -3,24 +3,17 @@ import pointIcon from "../../assets/icons/ic_point.png";
 import arrowIcon from "../../assets/icons/ic_arrow_right.png";
 import style from "./StudyDetail.module.css";
 import EmojiReaction from "../../components/study/Emoji/EmojiReaction.jsx";
-import {
-  Button,
-  Modal,
-  PasswordModal,
-  Tag,
-  Input,
-  StudyCard,
-  Sticker,
-} from "../../components/common";
+import PasswordModal from "../../components/study/PasswordModal/PasswordModal.jsx";
+import { Tag, Sticker } from "../../components/common";
 
 function StudyDetailPage() {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <div className={style.page}>
       <div className={style.container}>
         <div className={style.container_inner}>
           <div className={style.top_frame}>
             <div className={style.action_frame}>
-              {/* 이모지 추가 */}
               <EmojiReaction />
               <div className={style.edit_frame}>
                 {/* 모달 추가 */}
@@ -33,7 +26,12 @@ function StudyDetailPage() {
                   <span className={style.editGreen}>수정하기</span>
                 </button>
                 <span className={style.editGray}>|</span>
-                <span className={style.editGray}>스터디 삭제하기</span>
+                <button
+                  onClick={() => setOpenModal(true)}
+                  className={style.editGray}
+                >
+                  스터디 삭제하기
+                </button>
               </div>
             </div>
             <div className={style.post_frame}>
@@ -73,7 +71,9 @@ function StudyDetailPage() {
                 <div className={style.point}>
                   <span className={style.postGray}>현재까지 획득한 포인트</span>
                   <Tag
-                    variant="light"
+                    variant="studyDetail"
+                    size="studyDetailSize"
+                    children={"310P 획득"}
                     icon={
                       <img
                         src={pointIcon}
@@ -81,10 +81,7 @@ function StudyDetailPage() {
                         className={style.pointIcon}
                       />
                     }
-                    className={style.point_tag}
-                  >
-                    310P 획득
-                  </Tag>
+                  />
                 </div>
               </div>
             </div>
@@ -102,6 +99,16 @@ function StudyDetailPage() {
           </div>
         </div>
       </div>
+      {openModal && (
+        <PasswordModal
+          onClose={() => setOpenModal(false)}
+          onSubmit={(password) => {
+            console.log(password);
+
+            setOpenModal(false);
+          }}
+        />
+      )}
     </div>
   );
 }

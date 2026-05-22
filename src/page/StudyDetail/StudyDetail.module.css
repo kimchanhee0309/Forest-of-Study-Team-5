@@ -89,14 +89,6 @@
   align-items: flex-start;
   gap: 8px;
 }
-.point_tag {
-  display: flex;
-  width: 108px;
-  height: 31px;
-  justify-content: flex-end;
-  align-items: center;
-  background: fff;
-}
 .pointIcon {
   width: 19px;
   height: 19px;
