@@ -5,7 +5,6 @@ import style from "./StudyDetail.module.css";
 import EmojiReaction from "../../components/study/Emoji/EmojiReaction.jsx";
 import {
   Button,
-  Chip,
   Modal,
   PasswordModal,
   Tag,

@@ -36,50 +36,6 @@
   align-items: center;
   background: #fff;
 }
-.emoji {
-  display: flex;
-  align-items: flex-start;
-  gap: 4px;
-}
-.emoji_btn {
-  display: flex;
-  padding: 6px 8px;
-  align-items: flex-start;
-  gap: 5px;
-  border-radius: 50px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.3);
-}
-.picker {
-  position: absolute;
-  margin-top: 40px;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: var(--gray-light-gray-00, #fff);
-}
-.emoji_n_frame {
-  display: flex;
-  padding: 6px 8px;
-  align-items: center;
-  gap: 5px;
-  border-radius: 50px;
-  background: rgba(0, 0, 0, 0.5);
-}
-.emoji_n {
-  width: 40px;
-  height: 19px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.emoji_more_btn {
-  display: flex;
-  padding: 6px 8px;
-  align-items: center;
-  gap: 5px;
-  border-radius: 50px;
-  background: rgba(0, 0, 0, 0.3);
-}
 .edit_frame {
   display: flex;
   align-items: flex-start;
@@ -242,17 +198,4 @@
 .modal_body {
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(3px);
-}
-.hidden_emoji_list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  position: absolute;
-  margin-top: 40px;
-  padding: 12px;
-  align-items: flex-start;
-  gap: 10px;
-  border-radius: 15px;
-  border: 1px solid var(--gray-gray_DDDDDD, #ddd);
-  background: #fff;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
 } */

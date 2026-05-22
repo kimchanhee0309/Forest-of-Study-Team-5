@@ -58,7 +58,7 @@ function EmojiReaction() {
             className={style.plus_btn}
             onClick={() => setShowHidden((prev) => !prev)}
           >
-            <span className={style.plus}>+ {hiddenReactions.length}..</span>
+            <span className={style.plus}>＋ {hiddenReactions.length}..</span>
           </button>
         )}
 

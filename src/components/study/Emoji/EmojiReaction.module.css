@@ -17,11 +17,13 @@
   background: rgba(0, 0, 0, 0.3);
 }
 .picker {
-  position: absolute;
-  margin-top: 40px;
+  position: fixed;
+  top: 219px;
+  left: 632px;
   border-radius: 12px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: var(--gray-light-gray-00, #fff);
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.08));
 }
 .emoji_n_frame {
   display: flex;
@@ -51,10 +53,11 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   position: absolute;
-  margin-top: 40px;
+  top: 219px;
+  left: 382px;
   padding: 12px;
   align-items: flex-start;
-  gap: 10px;
+  gap: 4px;
   border-radius: 15px;
   border: 1px solid var(--gray-gray_DDDDDD, #ddd);
   background: #fff;
