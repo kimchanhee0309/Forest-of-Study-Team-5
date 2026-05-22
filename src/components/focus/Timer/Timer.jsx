@@ -1,5 +1,5 @@
 import styles from "./Timer.module.css";
-//import timerIcon from "../../../assets/icons/ic_timer.png";
+import timerIcon from "../../../assets/icons/ic_timer.png";
 
 function Timer({ remainSeconds = 0, status = "idle", targetTime = "00:00" }) {
 
@@ -22,7 +22,7 @@ function Timer({ remainSeconds = 0, status = "idle", targetTime = "00:00" }) {
     <div className={styles.wrapper}>
       {status !== "idle" && (
         <p className={styles.targetLabel}>
-          {/* <img src={timerIcon} alt="timer" className={styles.targetIcon} /> */}
+          <img src={timerIcon} alt="timer" className={styles.targetIcon} />
           {targetTime}
         </p>
       )}
