@@ -2,6 +2,7 @@ import { useState } from "react";
 import pointIcon from "../../assets/icons/ic_point.png";
 import arrowIcon from "../../assets/icons/ic_arrow_right.png";
 import style from "./StudyDetail.module.css";
+import EmojiReaction from "../../components/study/Emoji/EmojiReaction.jsx";
 import {
   Button,
   Chip,
@@ -20,11 +21,8 @@ function StudyDetailPage() {
         <div className={style.container_inner}>
           <div className={style.top_frame}>
             <div className={style.action_frame}>
-              <div className={style.emoji_frame}>
-                {/* 이모지 추가 */}
-                <div className={style.emoji}>이모지</div>
-                <button className={style.emoji_btn}>추가</button>
-              </div>
+              {/* 이모지 추가 */}
+              <EmojiReaction />
               <div className={style.edit_frame}>
                 {/* 모달 추가 */}
                 <button onClick={() => setOpenModal(true)} className="edit-btn">

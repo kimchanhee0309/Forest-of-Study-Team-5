@@ -30,16 +30,11 @@
   gap: 24px;
 }
 .action_frame {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 591px;
   background: #fff;
-}
-.emoji_frame {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
 }
 .emoji {
   display: flex;
