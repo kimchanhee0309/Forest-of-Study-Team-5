@@ -109,11 +109,58 @@
   background: var(--pink-bg);
 }
 
+.backgroundItem,
 .uploadItem {
-  background: var(--bg);
-  color: var(--gray-818181);
+  position: relative;
+  overflow: hidden;
+
+  width: 100;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--gray-dddddd);
+  border-radius: 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uploadItem {
+  background: var(--gray-eeeeee);
   font-size: 24px;
   font-weight: 700;
+  color: var(--gray-818181);
+}
+
+.customBackgroundItem {
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--gray-dddddd);
+  border-radius: 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 0;
+}
+
+.customBackgroundImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.selectedSticker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 36px;
+  height: 36px;
 }
 
 .fileInput {
