@@ -5,10 +5,23 @@ import style from "./StudyDetail.module.css";
 import EmojiReaction from "../../components/study/Emoji/EmojiReaction.jsx";
 import PasswordModal from "../../components/study/PasswordModal/PasswordModal.jsx";
 import { Tag, Sticker } from "../../components/common";
+import { useNavigate } from "react-router-dom";
 
 function StudyDetailPage() {
   const [openModal, setOpenModal] = useState(null);
   const [habits, setHabits] = useState([]);
+  // const navigate = useNavigate();
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+
+      alert("링크가 복사되었습니다.");
+    } catch (error) {
+      console.error(error);
+
+      alert("복사에 실패했습니다.");
+    }
+  };
   return (
     <div className={style.page}>
       <div className={style.container}>
@@ -18,7 +31,7 @@ function StudyDetailPage() {
               <EmojiReaction />
               <div className={style.edit_frame}>
                 {/* URL 복사기능 추가 필요 */}
-                <button onClick={() => setOpenModal(true)} className="edit-btn">
+                <button onClick={handleShare} className="edit-btn">
                   <span className={style.editGreen}>공유하기</span>
                 </button>
                 {/* 페이지 이동 추가 필요 */}
@@ -127,11 +140,28 @@ function StudyDetailPage() {
                   ? "오늘의 습관으로 가기"
                   : "오늘의 집중으로 가기"
           }
-          onClose={() => setOpenModal(false)}
+          onClose={() => setOpenModal(null)}
           onSubmit={(password) => {
             console.log(password);
+            {
+              /* 페이지 이동 */
+            }
+            // if (openModal === "edit") {
+            //   navigate("/study/edit/1");
+            // }
+            // if (openModal === "delete") {
+            //   console.log("삭제 API");
+            // }
 
-            setOpenModal(false);
+            // if (openModal === "habit") {
+            //   navigate("/habit");
+            // }
+
+            // if (openModal === "focus") {
+            //   navigate("/focus");
+            // }
+
+            setOpenModal(null);
           }}
         />
       )}
