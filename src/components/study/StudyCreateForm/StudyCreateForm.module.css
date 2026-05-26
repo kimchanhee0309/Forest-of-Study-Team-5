@@ -42,27 +42,14 @@
   border: 1px solid var(--gray-dddddd);
   border-radius: 15px;
   resize: none;
+  overflow-y: auto;
   box-sizing: border-box;
   font-family: inherit;
   font-size: 16px;
   outline: none;
 }
 
-/* 비밀번호 확인 input
-   - 공용 Input 사용 시 눈 아이콘 출력 문제로 별도 제작 */
-.passwordConfirmInput {
-  width: 100%;
-  height: 56px;
-  padding: 15px 20px;
-  border: 1px solid var(--gray-dddddd);
-  border-radius: 15px;
-  box-sizing: border-box;
-  font-family: inherit;
-  font-size: 16px;
-  outline: none;
-}
-
-/* 배경 선택b grid  */
+/* 배경 선택 grid  */
 .backgroundGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

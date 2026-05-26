@@ -16,6 +16,44 @@ function StudyCreateForm() {
     passwordConfirm: "",
   });
 
+  // 유효성 검사 에러 메세지 상태
+  const [errors, setErrors] = useState({
+    studyName: "",
+    description: "",
+    password: "",
+    passwordConfirm: "",
+  });
+
+  const validateForm = () => {
+    const nextErrors = {
+      studyName: "",
+      description: "",
+      password: "",
+      passwordConfirm: "",
+    };
+
+    // 스터디 이름
+    if (!formData.studyName.trim()) {
+      nextErrors.studyName = "*스터디 이름을 입력해주세요";
+    }
+
+    // 비번 입력 안했을 때
+    if (!formData.password) {
+      nextErrors.password = "*비밀번호를 입력해주세요";
+    }
+
+    // 비번 확인 입력 안했을 때
+    if (!formData.passwordConfirm) {
+      nextErrors.passwordConfirm = "*비밀번호를 다시 입력해주세요";
+
+      // 비번 불일치
+    } else if (formData.password !== formData.passwordConfirm) {
+      nextErrors.passwordConfirm = "*비밀번호가 일치하지 않습니다";
+    }
+
+    setErrors(nextErrors);
+  };
+
   // input / textarea 공통 입력 변경 처리
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -94,6 +132,7 @@ function StudyCreateForm() {
             value={formData.studyName}
             onChange={handleChange}
             placeholder="스터디 이름을 입력해주세요"
+            error={errors.studyName}
           />
         </div>
 
@@ -189,26 +228,31 @@ function StudyCreateForm() {
             value={formData.password}
             onChange={handleChange}
             placeholder="비밀번호를 입력해주세요"
+            error={errors.password}
           />
         </div>
 
         <div className={styles.field}>
           <label className={styles.label}>비밀번호 확인</label>
 
-          {/* 피그마 UI 맞춤용 커스텀 input*/}
-          <input
+          <Input
             type="password"
             name="passwordConfirm"
             value={formData.passwordConfirm}
             onChange={handleChange}
-            className={styles.passwordConfirmInput}
             placeholder="비밀번호를 다시 입력해주세요"
+            error={errors.passwordConfirm}
           />
         </div>
 
         {/* 생성 버튼 */}
         <div className={styles.submitButtonWrapper}>
-          <Button type="button" size="content-large" fullWidth>
+          <Button
+            type="button"
+            size="content-large"
+            fullWidth
+            onClick={validateForm}
+          >
             만들기
           </Button>
         </div>
