@@ -18,8 +18,10 @@ function HabitTable({ habits }) {
 
   return (
     <div className={styles.habit_table}>
+      {/* 요일 */}
       <HabitTableHeader />
 
+      {/* 습관 기록표 타이틀과 진행도 */}
       <div className={styles.table_body}>
         {habits.map((habit) => (
           <HabitTableRow key={habit.id} title={habit.title} logs={habit.logs} />

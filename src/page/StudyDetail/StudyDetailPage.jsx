@@ -1,3 +1,21 @@
+/**
+ * StudyDetailPage
+ *
+ * 스터디 상세 페이지
+ *
+ * 기능:
+ * - 스터디 정보 조회
+ * - 응원 이모지 조회 및 추가
+ * - 공유 기능
+ * - 수정/삭제 비밀번호 모달
+ * - 습관 기록표 조회
+ *
+ * API 연동 예정:
+ * - GET /studies/:id
+ * - GET /studies/:id/habits
+ * - POST /studies/:id/emojis
+ */
+
 import { useState } from "react";
 import pointIcon from "../../assets/icons/ic_point.png";
 import arrowIcon from "../../assets/icons/ic_arrow_right.png";
@@ -9,7 +27,9 @@ import { Tag } from "../../components/common/Tag/Tag.jsx";
 import { useNavigate } from "react-router-dom";
 
 function StudyDetailPage() {
+  //현재 열려 있는 모달 상태
   const [openModal, setOpenModal] = useState(null);
+
   /* 습관 기록표 API 가져오기 */
   //   const [habits, setHabits] = useState([]);
 
@@ -17,10 +37,10 @@ function StudyDetailPage() {
   //   fetchHabits();
   // }, []);
 
-  /* 오늘의 습관, 집중 이동 */
+  /* 오늘의 습관, 집중 버튼 홈페이지이동 */
   // const navigate = useNavigate();
 
-  /* 공유하기 주소 복사 핸들러 */
+  // [공유하기] 현재 페이지 URL 복사
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -32,7 +52,8 @@ function StudyDetailPage() {
       alert("복사에 실패했습니다.");
     }
   };
-  /* 임시값 */
+
+  //  임시 습관 기록표 값
   const habits = [
     {
       id: 1,
@@ -67,6 +88,7 @@ function StudyDetailPage() {
       <div className={style.container}>
         <div className={style.container_inner}>
           <div className={style.top_frame}>
+            {/* 이모지와 공유하기, 수정하기 라인 */}
             <div className={style.action_frame}>
               <EmojiReaction />
               <div className={style.edit_frame}>
@@ -90,10 +112,14 @@ function StudyDetailPage() {
                 </button>
               </div>
             </div>
+
+            {/* 스터디 게시글 API 라인 */}
+            {/* 스터디 이름 API 연동 필요 */}
             <div className={style.post_frame}>
               <div className={style.post_header}>
-                <span className={style.postTitle}>연우의 개발공장</span>
+                <span className={style.postTitle}>"연우"의 개발공장</span>
                 <div className={style.post_btn_frame}>
+                  {/* 오늘의 습관, 집중을 눌렀을때 나타나는 모달구현 */}
                   {/* 페이지 이동 추가 필요 */}
                   <button
                     onClick={() => setOpenModal("habit")}
@@ -126,7 +152,7 @@ function StudyDetailPage() {
                 </div>
               </div>
               <div className={style.post_main}>
-                {/* 게시글, 소개, 포인트 등 API 연동 필요 */}
+                {/* 소개, 포인트 등 API 연동 필요 */}
                 <div className={style.introduce}>
                   <span className={style.postGray}>소개</span>
                   <span className={style.postBlack}>
@@ -160,7 +186,7 @@ function StudyDetailPage() {
           </div>
         </div>
       </div>
-      {/* 값에 따른 버튼 이름 */}
+      {/* [모달] 값에 따른 버튼 이름 배치 */}
       {openModal && (
         <PasswordModal
           buttonText={
@@ -172,12 +198,10 @@ function StudyDetailPage() {
                   ? "오늘의 습관으로 가기"
                   : "오늘의 집중으로 가기"
           }
+          // [모달] 페이지 이동 코드
           onClose={() => setOpenModal(null)}
           onSubmit={(password) => {
             console.log(password);
-            {
-              /* 페이지 이동 */
-            }
             // if (openModal === "edit") {
             //   navigate("/study/edit/1");
             // }
