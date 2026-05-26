@@ -4,15 +4,23 @@ import arrowIcon from "../../assets/icons/ic_arrow_right.png";
 import style from "./StudyDetail.module.css";
 import EmojiReaction from "../../components/study/Emoji/EmojiReaction.jsx";
 import PasswordModal from "../../components/study/PasswordModal/PasswordModal.jsx";
-import { Tag, Sticker } from "../../components/common";
-// import { useNavigate } from "react-router-dom";
+import HabitTable from "../../components/study/HabitTable/HabitTable.jsx";
+import { Tag } from "../../components/common/Tag/Tag.jsx";
+import { useNavigate } from "react-router-dom";
 
 function StudyDetailPage() {
   const [openModal, setOpenModal] = useState(null);
-  // const [habits, setHabits] = useEffect(() => {
+  /* 습관 기록표 API 가져오기 */
+  //   const [habits, setHabits] = useState([]);
+
+  // useEffect(() => {
   //   fetchHabits();
   // }, []);
+
+  /* 오늘의 습관, 집중 이동 */
   // const navigate = useNavigate();
+
+  /* 공유하기 주소 복사 핸들러 */
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -24,9 +32,7 @@ function StudyDetailPage() {
       alert("복사에 실패했습니다.");
     }
   };
-  /* 임시 */
-  const weekDays = ["월", "화", "수", "목", "금", "토", "일"];
-
+  /* 임시값 */
   const habits = [
     {
       id: 1,
@@ -64,7 +70,6 @@ function StudyDetailPage() {
             <div className={style.action_frame}>
               <EmojiReaction />
               <div className={style.edit_frame}>
-                {/* URL 복사기능 추가 필요 */}
                 <button onClick={handleShare} className="edit-btn">
                   <span className={style.editGreen}>공유하기</span>
                 </button>
@@ -121,6 +126,7 @@ function StudyDetailPage() {
                 </div>
               </div>
               <div className={style.post_main}>
+                {/* 게시글, 소개, 포인트 등 API 연동 필요 */}
                 <div className={style.introduce}>
                   <span className={style.postGray}>소개</span>
                   <span className={style.postBlack}>
@@ -149,50 +155,12 @@ function StudyDetailPage() {
             <div className={style.bottom_inner}>
               <span className={style.bottomBlack}>습관 기록표</span>
               {/* 데이터 유무에 따른 습관 기록표 추가 및 상태값 */}
-              {habits.length === 0 ? (
-                <div className={style.bottom_state}>
-                  <span>
-                    아직 습관이 없어요 <br />
-                    오늘의 습관에서 습관을 생성해보세요
-                  </span>
-                </div>
-              ) : (
-                <div className={style.habit_table}>
-                  {/* 헤더 */}
-                  <div className={style.table_header}>
-                    <div className={style.empty_cell}></div>
-                    {weekDays.map((day) => (
-                      <div key={day} className={style.day}>
-                        {day}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* 내용 */}
-                  {habits.map((habit) => (
-                    <div key={habit.id} className={style.table_row}>
-                      {/* 습관 이름 */}
-                      <div className={style.table_title}>
-                        <span className={style.habitTitle}>{habit.title}</span>
-                      </div>
-                      {/* 체크 */}
-                      {habit.logs.map((checked, index) => (
-                        <div key={index} className={style.check_cell}>
-                          <Sticker
-                            checked={checked}
-                            color="pink"
-                            size="medium"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              )}
+              <HabitTable habits={habits} />
             </div>
           </div>
         </div>
       </div>
+      {/* 값에 따른 버튼 이름 */}
       {openModal && (
         <PasswordModal
           buttonText={
