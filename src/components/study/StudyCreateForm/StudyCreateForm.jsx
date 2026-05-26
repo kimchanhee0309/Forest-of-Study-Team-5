@@ -4,9 +4,10 @@ import Button from "../../common/Button/Button.jsx";
 import styles from "./StudyCreateForm.module.css";
 
 // 배경 선택시 스티커 이미지
-import stickerDarkblue from "../../../assets/sticker/sticker_darkblue.png";
+import sticker_gray from "../../../assets/sticker/sticker_gray.png";
 
 function StudyCreateForm() {
+  // form 입력값 상태 관리
   const [formData, setFormData] = useState({
     nickname: "",
     studyName: "",
@@ -15,13 +16,9 @@ function StudyCreateForm() {
     passwordConfirm: "",
   });
 
+  // input / textarea 공통 입력 변경 처리
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    console.log({
-      name,
-      value,
-    });
 
     setFormData((prev) => ({
       ...prev,
@@ -29,11 +26,15 @@ function StudyCreateForm() {
     }));
   };
 
+  // UI 제공 기본 배경 id 관리
   const [selectedBackground, setSelectedBackground] = useState("green");
+
+  // 배경 선택 시 선택 id 변경
   const handleSelectBackground = (background) => {
     setSelectedBackground(background);
   };
 
+  // 기본 제공 배경 목록
   const defaultBackgrounds = [
     { id: "green", className: styles.bgGreen },
     { id: "yellow", className: styles.bgYellow },
@@ -41,8 +42,10 @@ function StudyCreateForm() {
     { id: "pink", className: styles.bgPink },
   ];
 
+  // 사용자가 업로드한 배경 이미지 목록
   const [customBackgrounds, setCustomBackgrounds] = useState([]);
 
+  // 사용자 배경 이미지 추가
   const handleAddCustomBackground = (e) => {
     const file = e.target.files[0];
 
@@ -54,6 +57,18 @@ function StudyCreateForm() {
     setCustomBackgrounds((prev) => [...prev, imageUrl]);
 
     e.target.value = "";
+  };
+
+  // 사용자 배경 이미지 삭제
+  const handleDeleteCustomBackground = (deleteIndex) => {
+    setCustomBackgrounds((prev) =>
+      prev.filter((_, index) => index !== deleteIndex),
+    );
+
+    // 삭제한 배경이 선택 중이면 기본 배경으로 초기화
+    if (selectedBackground === `custom-${deleteIndex}`) {
+      setSelectedBackground("green");
+    }
   };
 
   return (
@@ -107,7 +122,11 @@ function StudyCreateForm() {
                 onClick={() => handleSelectBackground(background.id)}
               >
                 {selectedBackground === background.id && (
-                  <img src={stickerDarkblue} alt="선택 스티커" />
+                  <img
+                    src={sticker_gray}
+                    alt="선택 스티커"
+                    className={styles.selectedSticker}
+                  />
                 )}
               </button>
             ))}
@@ -120,35 +139,45 @@ function StudyCreateForm() {
                 className={styles.customBackgroundItem}
                 onClick={() => handleSelectBackground(`custom-${index}`)}
               >
-              <img
-                src={imageUrl}
-                alt="사용자 추가 배경"
-                className={styles.customBackgroundImage}              
-              />
-
-              {selectedBackground === `custom-${index}` && (
                 <img
-                src={stickerDarkblue}
-                alt="선택 스티커"
-                className={styles.selectedSticker}              
-              />
-              )}
+                  src={imageUrl}
+                  alt="사용자 추가 배경"
+                  className={styles.customBackgroundImage}
+                />
+
+                {selectedBackground === `custom-${index}` && (
+                  <img
+                    src={sticker_gray}
+                    alt="선택 스티커"
+                    className={styles.selectedSticker}
+                  />
+                )}
+
+                <div
+                  className={styles.deleteBackgroundButton}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteCustomBackground(index);
+                  }}
+                >
+                  X
+                </div>
               </button>
             ))}
 
             {customBackgrounds.length < 4 && (
               <label className={styles.uploadItem}>
                 <input
-                 type="file"
-                 accept="image/*"
-                 className={styles.fileInput}
-                 onChange={handleAddCustomBackground}
+                  type="file"
+                  accept="image/*"
+                  className={styles.fileInput}
+                  onChange={handleAddCustomBackground}
                 />
                 +
               </label>
             )}
-            </div>
           </div>
+        </div>
 
         {/* 비밀번호 입력 */}
         <div className={styles.field}>
