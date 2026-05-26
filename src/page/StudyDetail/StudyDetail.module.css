@@ -174,20 +174,17 @@
   font-weight: 800;
   line-height: normal;
 }
-/* .modal {
-  width: 648px;
-  height: 369px;
-  border-radius: 20px;
-  background: #fff;
-  border: none;
-
-  position: fixed;
+.bottom_state {
+  color: var(--gray-gray_818181, #818181);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  position: relative;
   top: 50%;
   left: 50%;
 
   transform: translate(-50%, -50%);
 }
-.modal_body {
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(3px);
-} */

@@ -5,7 +5,7 @@ import styles from "./PasswordModal.module.css";
 function PasswordModal({
   title = "연우의 개발공장",
   description = "권한이 필요해요!",
-  buttonText = "수정하러 가기",
+  buttonText,
   onClose,
   onSubmit,
 }) {

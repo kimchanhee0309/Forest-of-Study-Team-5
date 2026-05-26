@@ -7,7 +7,8 @@ import PasswordModal from "../../components/study/PasswordModal/PasswordModal.js
 import { Tag, Sticker } from "../../components/common";
 
 function StudyDetailPage() {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(null);
+  const [habits, setHabits] = useState([]);
   return (
     <div className={style.page}>
       <div className={style.container}>
@@ -16,18 +17,21 @@ function StudyDetailPage() {
             <div className={style.action_frame}>
               <EmojiReaction />
               <div className={style.edit_frame}>
-                {/* 모달 추가 */}
+                {/* URL 복사기능 추가 필요 */}
                 <button onClick={() => setOpenModal(true)} className="edit-btn">
                   <span className={style.editGreen}>공유하기</span>
                 </button>
-
+                {/* 페이지 이동 추가 필요 */}
                 <span className={style.editGreen}>|</span>
-                <button onClick={() => setOpenModal(true)} className="edit-btn">
+                <button
+                  onClick={() => setOpenModal("edit")}
+                  className="edit-btn"
+                >
                   <span className={style.editGreen}>수정하기</span>
                 </button>
                 <span className={style.editGray}>|</span>
                 <button
-                  onClick={() => setOpenModal(true)}
+                  onClick={() => setOpenModal("delete")}
                   className={style.editGray}
                 >
                   스터디 삭제하기
@@ -38,8 +42,11 @@ function StudyDetailPage() {
               <div className={style.post_header}>
                 <span className={style.postTitle}>연우의 개발공장</span>
                 <div className={style.post_btn_frame}>
-                  {/* LINK 추가 */}
-                  <button className={style.post_btn}>
+                  {/* 페이지 이동 추가 필요 */}
+                  <button
+                    onClick={() => setOpenModal("habit")}
+                    className={style.post_btn}
+                  >
                     <div className={style.post_btn_inner}>
                       <span className={style.btnGray}>오늘의 습관</span>
                       <img
@@ -51,7 +58,12 @@ function StudyDetailPage() {
                   </button>
                   <button className={style.post_btn}>
                     <div className={style.post_btn_inner}>
-                      <span className={style.btnGray}>오늘의 집중</span>
+                      <span
+                        onClick={() => setOpenModal("focus")}
+                        className={style.btnGray}
+                      >
+                        오늘의 집중
+                      </span>
                       <img
                         src={arrowIcon}
                         alt="arrow"
@@ -89,18 +101,32 @@ function StudyDetailPage() {
           <div className={style.bottom_frame}>
             <div className={style.bottom_inner}>
               <span className={style.bottomBlack}>습관 기록표</span>
-              {/* 습관 기록표 추가 */}
-              <span>
-                아직 습관이 없어요
-                <br />
-                오늘의 습관에서 습관을 생성해보세요
-              </span>
+              {/* 데이터 유무에 따른 습관 기록표 추가 및 상태값 */}
+              {habits.length === 0 ? (
+                <div className={style.bottom_state}>
+                  <span>
+                    아직 습관이 없어요 <br />
+                    오늘의 습관에서 습관을 생성해보세요
+                  </span>
+                </div>
+              ) : (
+                <div>{/*습관 기록표 들어갈 자리 */}</div>
+              )}
             </div>
           </div>
         </div>
       </div>
       {openModal && (
         <PasswordModal
+          buttonText={
+            openModal === "edit"
+              ? "수정하러 가기"
+              : openModal === "delete"
+                ? "삭제하기"
+                : openModal === "habit"
+                  ? "오늘의 습관으로 가기"
+                  : "오늘의 집중으로 가기"
+          }
           onClose={() => setOpenModal(false)}
           onSubmit={(password) => {
             console.log(password);
