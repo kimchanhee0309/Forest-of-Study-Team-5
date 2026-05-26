@@ -1,0 +1,60 @@
+.mainPage {
+  background-color: var(--bg, #f6f4ef);
+  display: flex;
+  flex-direction: column;
+  height: 1558px;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.recentStudies,
+.studyList {
+  max-width: 1200px;
+  width: 100%;
+
+  margin: 0 auto;
+  margin-top: 40px;
+  border-radius: 20px;
+  background-color: #fff;
+  margin-bottom: 48px;
+  padding: 40px;
+}
+
+.recentStudies {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-height: 382px;
+}
+
+.studyList {
+  min-height: 822px;
+}
+
+.sectionTitle {
+  align-items: center;
+  font-size: var(--text-24, 24px);
+  font-weight: var(--weight-extrabold, 800);
+  color: var(--black, #414141);
+}
+
+.studyCardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.emptyContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+.emptyMessage {
+  color: var(--gray-818181, #818181);
+  font-size: var(--text-20, 20px);
+  font-weight: var(--weight-medium, 500);
+}
