@@ -9,7 +9,9 @@ import { Tag, Sticker } from "../../components/common";
 
 function StudyDetailPage() {
   const [openModal, setOpenModal] = useState(null);
-  const [habits, setHabits] = useState([]);
+  // const [habits, setHabits] = useEffect(() => {
+  //   fetchHabits();
+  // }, []);
   // const navigate = useNavigate();
   const handleShare = async () => {
     try {
@@ -22,6 +24,38 @@ function StudyDetailPage() {
       alert("복사에 실패했습니다.");
     }
   };
+  /* 임시 */
+  const weekDays = ["월", "화", "수", "목", "금", "토", "일"];
+
+  const habits = [
+    {
+      id: 1,
+      title: "미라클모닝 6시 기상",
+
+      logs: [true, false, true, true, false, true, false],
+    },
+
+    {
+      id: 2,
+      title: "아침 챙겨 먹기",
+
+      logs: [true, true, false, false, false, false, false],
+    },
+
+    {
+      id: 3,
+      title: "React 스터디 챕 1션 읽기",
+
+      logs: [true, false, false, false, false, false, false],
+    },
+
+    {
+      id: 4,
+      title: "스트레칭",
+
+      logs: [false, false, false, false, false, false, false],
+    },
+  ];
   return (
     <div className={style.page}>
       <div className={style.container}>
@@ -123,7 +157,37 @@ function StudyDetailPage() {
                   </span>
                 </div>
               ) : (
-                <div>{/*습관 기록표 들어갈 자리 */}</div>
+                <div className={style.habit_table}>
+                  {/* 헤더 */}
+                  <div className={style.table_header}>
+                    <div className={style.empty_cell}></div>
+                    {weekDays.map((day) => (
+                      <div key={day} className={style.day}>
+                        {day}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* 내용 */}
+                  {habits.map((habit) => (
+                    <div key={habit.id} className={style.table_row}>
+                      {/* 습관 이름 */}
+                      <div className={style.table_title}>
+                        <span className={style.habitTitle}>{habit.title}</span>
+                      </div>
+                      {/* 체크 */}
+                      {habit.logs.map((checked, index) => (
+                        <div key={index} className={style.check_cell}>
+                          <Sticker
+                            checked={checked}
+                            color="pink"
+                            size="medium"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
           </div>
