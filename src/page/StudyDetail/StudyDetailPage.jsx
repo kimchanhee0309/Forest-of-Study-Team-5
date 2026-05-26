@@ -5,7 +5,7 @@ import style from "./StudyDetail.module.css";
 import EmojiReaction from "../../components/study/Emoji/EmojiReaction.jsx";
 import PasswordModal from "../../components/study/PasswordModal/PasswordModal.jsx";
 import { Tag, Sticker } from "../../components/common";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function StudyDetailPage() {
   const [openModal, setOpenModal] = useState(null);
