@@ -1,0 +1,108 @@
+.layout {
+  min-height: 100vh;
+  background-color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  max-width: 1920px;
+
+  /* 1. 핵심: 콘텐츠가 적어도 브라우저 화면의 남은 높이를 꽉 채우도록 만듭니다 */
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* 카드를 위쪽 기준으로 정렬 */
+
+  /* 2. 피그마에 적힌 정확한 상하 마진(위 139px, 아래 100px)을 여기에 패딩으로 줍니다 */
+  /* 좌우는 억지로 고정하지 않고 자동 정렬되도록 0으로 둡니다 */
+  padding: 139px 0 100px 0;
+  box-sizing: border-box;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  padding: 40px;
+  border-radius: 20px;
+  background: #fff;
+
+  width: 1248px;
+  min-height: 863px; /* ✨ 추가: 내용물이 비어도 최소 863px 높이 유지! */
+  box-sizing: border-box;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: var(--text-32); /* 32px */
+  font-weight: var(--weight-bold); /* 700 */
+  color: var(--black); /* #414141 */
+}
+
+.timeInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  /* width: 184px; height: 64px; 속성은 지워주세요! (이것 때문에 찌그러짐) */
+}
+
+.timeLabel {
+  color: var(--gray-818181);
+  font-size: var(--text-14); /* 14px */
+}
+
+.timeValue {
+  padding: 8px 16px; /* 좌우 여백을 조금 더 넉넉하게 */
+  border-radius: 20px;
+  border: 1px solid var(--gray-dddddd);
+  color: var(--black);
+  font-size: var(--text-16);
+  font-weight: var(--weight-medium);
+  white-space: nowrap; /* 핵심: 절대 줄바꿈 하지 마! 라는 뜻입니다 */
+}
+
+.navButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.navBtnActive,
+.navBtn {
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  border: 1px solid var(--gray-dddddd);
+  background: #fff;
+  color: var(--gray-818181);
+  font-size: var(--text-16); /* 16px */
+  font-weight: var(--weight-medium); /* 500 */
+}
+
+.navBtnActive {
+  width: 144px;
+}
+
+.navBtn {
+  width: 82px;
+}

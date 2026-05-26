@@ -1,0 +1,90 @@
+.sectionContainer {
+  width: 100%;
+  flex-grow: 1; /* ✨ 추가: 커진 하얀색 카드 내부의 남는 세로 공간을 끝까지 꽉 채움! */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  gap: 10px;
+  border-radius: 20px;
+  border: 1px solid var(--gray-dddddd);
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* 이전에 있던 .sectionHeader, .sectionTitle, .editButton을 아래 코드로 덮어씌워주세요 */
+
+.sectionHeader {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* 좌(빈공간) : 중앙(타이틀) : 우(버튼) */
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  grid-column: 2; /* 2번째 칸(정중앙)에 배치 */
+  font-size: var(--text-24);
+  font-weight: var(--weight-bold);
+  color: var(--black);
+  text-align: center;
+}
+
+.editButtonContainer {
+  grid-column: 3; /* 3번째 칸에 배치 */
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 92px; /* 피그마에 있던 92px 간격 적용 */
+}
+
+.editButton {
+  color: var(--gray-818181);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.habitList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.habitItem {
+  display: flex;
+  width: 400px;
+  height: 54px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 20px;
+  font-size: var(--text-16); /* 16px */
+  font-weight: var(--weight-medium); /* 500 */
+}
+
+.completed {
+  background: var(--brand); /* #99C08E */
+  color: #fff;
+}
+
+.incomplete {
+  background: var(--gray-eeeeee); /* #EEE */
+  color: var(--gray-818181);
+}
+
+.emptyState {
+  flex-grow: 1; /* 빈 공간을 다 차지함 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 텍스트를 위아래 정중앙으로 */
+  text-align: center;
+  color: var(--gray-818181);
+  font-size: var(--text-16);
+  line-height: 1.5;
+}
