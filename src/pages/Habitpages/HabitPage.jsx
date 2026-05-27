@@ -1,19 +1,20 @@
 import { useState } from "react";
 import styles from "./HabitPage.module.css";
 
-// 1. common 폴더(GNB): Habitpages 폴더 안으로 들어왔으므로 위로 두 번(../../) 탈출해서 찾아가는 게 맞습니다!
+// 공용 GNB 컴포넌트 불러오기
 import GNB from "../../components/common/GNB/GNB";
 
-// 2. 하위 부품들: 이제 완벽하게 내 바로 옆집(같은 폴더 안)에 있으므로 점 하나(./)로 연결합니다.
+// 하위 컴포넌트들
 import HabitSection from "./HabitSection/HabitSection";
 import HabitEditModal from "./HabitEditModal/HabitEditModal";
 
-// 3. assets 폴더: 똑같이 위로 두 번(../../) 탈출해서 아이콘을 가져옵니다.
 import icArrowRight from "../../assets/icons/ic_arrow_right.png";
 
 function HabitPage() {
+  // 모달창 열림/닫힘 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // 습관 목록 데이터 (나중에 서버에서 받아오게 수정해야 함)
   const [habits, setHabits] = useState([
     { id: 1, title: "미라클모닝 6시 기상", isCompleted: true },
     { id: 2, title: "아침 챙겨 먹기", isCompleted: true },
@@ -66,6 +67,7 @@ function HabitPage() {
         </article>
       </main>
 
+      {/* 목록 수정 버튼 누르면 모달창 띄우기 */}
       {isModalOpen && (
         <HabitEditModal
           habits={habits}

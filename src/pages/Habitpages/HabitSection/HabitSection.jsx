@@ -1,20 +1,19 @@
 import styles from "./HabitSection.module.css";
 
 function HabitSection({ habits, onOpenEdit }) {
+  // 습관 목록이 비어있는지 확인
   const isEmpty = habits.length === 0;
 
   return (
     <section className={styles.sectionContainer}>
       <header className={styles.sectionHeader}>
-        {/* ✨ 불필요한 빈 div 제거 완료! */}
         <h2 className={styles.sectionTitle}>오늘의 습관</h2>
-
-        {/* ✨ 버튼을 감싸던 container div를 지우고 버튼만 깔끔하게 노출! */}
         <button className={styles.editButton} onClick={onOpenEdit}>
           목록 수정
         </button>
       </header>
 
+      {/* 습관이 없을 때 보여줄 안내 문구 */}
       {isEmpty ? (
         <div className={styles.emptyState}>
           <p>아직 습관이 없어요</p>
@@ -22,6 +21,7 @@ function HabitSection({ habits, onOpenEdit }) {
         </div>
       ) : (
         <ul className={styles.habitList}>
+          {/* 배열 돌면서 습관 리스트 화면에 그리기 */}
           {habits.map((habit) => (
             <li
               key={habit.id}
