@@ -57,21 +57,21 @@
 }
 
 /* ======================================================== */
-/* 📱 iPad mini 해상도 구역 (max-width: 768px) */
+/* iPad mini 해상도 구역 (max-width: 768px) */
 /* ======================================================== */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .gnb {
     height: 100px;
     display: flex;
-    justify-content: center; /* GNB 컨테이너를 무조건 가운데로 */
+    justify-content: center; 
   }
-
   .container {
     display: flex;
     width: 100%;
-    max-width: 744px; /* 피그마 아이패드 전체 폭 */
+    max-width: 744px;
     padding: 0 24px;
-    margin: 0 auto; /* ⭐️ 핵심: 양옆 여백을 자동으로 계산해서 정중앙에 배치 */
+    margin: 0 auto;
     box-sizing: border-box;
   }
 }
+*/

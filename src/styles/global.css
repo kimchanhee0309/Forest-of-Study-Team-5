@@ -1,28 +1,14 @@
-/* 다운받은 폰트 파일 EF_jejudoldam'이름으로 등록. */
-@font-face {
-  font-family: "EF_jejudoldam";
-  /* 주소창 경로: styles 폴더에서 위로 탈출(..) 후 assets/fonts/폰트파일명 */
-  src: url("../assets/fonts/EF_jejudoldam(TTF).ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* 🛑 2. 기본 폰트는 팀의 규칙대로 'Pretendard'를 기본값으로 유지합니다. */
 body,
 button,
 input,
 textarea,
 select {
-  font-family: "Pretendard", sans-serif !important;
+  font-family: "Pretendard", sans-serif;
 }
 
 body {
   background: var(--bg);
   color: var(--black);
-  min-height: 100vh;
-}
 
-button.jejuFont,
-.jejuFont {
-  font-family: "EF_jejudoldam", sans-serif !important;
+  min-height: 100vh;
 }
