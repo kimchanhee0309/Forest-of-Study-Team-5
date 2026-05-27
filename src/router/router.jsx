@@ -11,35 +11,38 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-  },
-  {
-    index: true,
-    element: <MainPage />,
-  },
 
-  {
-    path: "/studies/new",
-    element: <StudyCreatePage />,
-  },
+    children: [
+      {
+        index: true,
+        element: <MainPage />,
+      },
 
-  {
-    path: "/studies/:studyId",
-    element: <StudyDetailPage />,
-  },
+      {
+        path: "/studies/new",
+        element: <StudyCreatePage />,
+      },
 
-  {
-    path: "/studies/:studyId/habits",
-    element: <HabitPage />,
-  },
+      {
+        path: "/studies/:studyId",
+        element: <StudyDetailPage />,
+      },
 
-  {
-    path: "/studies/:studyId/focus",
-    element: <FocusPage />,
-  },
+      {
+        path: "/studies/:studyId/habits",
+        element: <HabitPage />,
+      },
 
-  {
-    path: "*",
-    element: <div>404 Not Found</div>,
+      {
+        path: "/studies/:studyId/focus",
+        element: <FocusPage />,
+      },
+
+      {
+        path: "*",
+        element: <div>404 Not Found</div>,
+      },
+    ],
   },
 ]);
 
