@@ -27,7 +27,6 @@ function StudyCreateForm() {
   const validateForm = () => {
     const nextErrors = {
       studyName: "",
-      description: "",
       password: "",
       passwordConfirm: "",
     };
@@ -52,6 +51,23 @@ function StudyCreateForm() {
     }
 
     setErrors(nextErrors);
+
+    return (
+      !nextErrors.studyName &&
+      !nextErrors.description &&
+      !nextErrors.password &&
+      !nextErrors.passwordConfirm
+    );
+  };
+
+  const handleSubmit = () => {
+    const isValid = validateForm();
+
+    if (!isValid) {
+      return;
+    }
+
+  // TODO: API 연동 시 스터디 생성 요청 연결
   };
 
   // input / textarea 공통 입력 변경 처리
@@ -251,7 +267,7 @@ function StudyCreateForm() {
             type="button"
             size="content-large"
             fullWidth
-            onClick={validateForm}
+            onClick={handleSubmit}
           >
             만들기
           </Button>
