@@ -6,13 +6,13 @@ function HabitSection({ habits, onOpenEdit }) {
   return (
     <section className={styles.sectionContainer}>
       <header className={styles.sectionHeader}>
-        <div /> {/* 그리드 비율을 맞추기 위한 빈 공간 */}
+        {/* ✨ 불필요한 빈 div 제거 완료! */}
         <h2 className={styles.sectionTitle}>오늘의 습관</h2>
-        <div className={styles.editButtonContainer}>
-          <button className={styles.editButton} onClick={onOpenEdit}>
-            목록 수정
-          </button>
-        </div>
+
+        {/* ✨ 버튼을 감싸던 container div를 지우고 버튼만 깔끔하게 노출! */}
+        <button className={styles.editButton} onClick={onOpenEdit}>
+          목록 수정
+        </button>
       </header>
 
       {isEmpty ? (

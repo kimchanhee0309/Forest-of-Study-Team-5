@@ -56,3 +56,12 @@
   object-fit: contain;
   background: transparent;
 }
+
+/* 📱 iPad mini 피그마 수치 100% 반영 구역 (HabitItem) */
+@media (max-width: 768px) {
+  /* [습관 목록 개별 카드 크기] */
+  .item {
+    width: 400px; /* */
+    height: 54px; /* */
+  }
+}

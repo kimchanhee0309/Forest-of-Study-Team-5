@@ -136,6 +136,7 @@
   padding: 0 !important;
   background: transparent !important;
 }
+
 .addIcon {
   width: 24px;
   height: 24px;
@@ -209,4 +210,32 @@ button.saveBtn {
 
   /* ✨ 서열 정리를 위해 맨 뒤에 !important 주입 */
   font-family: "EF_jejudoldam", sans-serif !important;
+}
+
+/* 📱 iPad mini 피그마 수치 반영 구역 (HabitEditModal) */
+@media (max-width: 768px) {
+  /* 1. 모달창 전체 껍데기 크기 축소 */
+  .modal {
+    width: 500px !important;
+    height: 700px !important;
+    padding: 32px 20px !important;
+    gap: 24px !important;
+  }
+
+  /* 2. 입력 상자 및 플러스(+) 버튼 크기 슬림화 */
+  .inputWrapper,
+  .addBtn {
+    width: 380px;
+    height: 50px;
+  }
+
+  /* 3. 하단 [취소] 및 [수정 완료] 버튼 비율 조정 */
+  .cancelBtn,
+  .saveBtn,
+  button.cancelBtn,
+  button.saveBtn {
+    width: 210px;
+    height: 52px;
+    font-size: var(--text-16);
+  }
 }

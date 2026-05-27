@@ -85,3 +85,66 @@
   font-size: var(--text-16);
   line-height: 1.5;
 }
+
+@media (max-width: 768px) {
+  /* 1. 오늘의 습관 전체 상자 박스 */
+  .sectionContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto !important;
+    min-height: auto !important;
+    /* ✨ 피그마 수치 반영: 레이아웃 위에서 40px 딱 누르기 */
+    padding: 40px 24px !important;
+    box-sizing: border-box;
+  }
+
+  /* 2. 헤더 영역 (오늘의 습관 + 목록 수정) */
+  .sectionHeader {
+    position: relative; /* 🚨 중요: 이제 바로 아래에 있는 .editButton의 기준점이 됩니다 */
+    display: flex;
+    justify-content: center; /* ✨ '오늘의 습관'을 1px 오차도 없이 완벽한 정중앙(센터) 정렬 */
+    align-items: center;
+    width: 100%;
+    height: 29px; /* 피그마 텍스트 상자 높이 반영 */
+    margin: 0 !important;
+    /* ✨ 피그마 수치 반영: 습관 목록(아래) 기준에서 24px 정확하게 띄우기 */
+    margin-bottom: 24px !important;
+  }
+
+  /* 3. '오늘의 습관' 글씨 자체 스타일 */
+  .sectionTitle {
+    margin: 0;
+    font-size: 20px; /* 기존 디자인 시스템에 맞게 폰트 크기 유지 */
+    font-weight: 700;
+  }
+
+  /* 4. '목록 수정' 버튼 (드디어 탈출 성공!) */
+  .editButton {
+    position: absolute; /* .sectionHeader를 기준으로 공중에 띄움 */
+    right: 88px; /* ✨ 피그마 수치 반영: 우측 끝에서 안쪽으로 정확히 88px 이동 */
+
+    white-space: nowrap; /* 좁은 틈에서도 글씨 깨짐 절대 방지 */
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    /* 작성자님이 가져오신 피그마 CSS 스타일 주입 */
+    color: var(--gray-gray_818181, #818181);
+    text-align: center;
+    font-family: Pretendard, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* 5. 습관 목록 리스트들 */
+  .habitList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+    align-items: center;
+  }
+}

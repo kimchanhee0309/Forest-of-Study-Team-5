@@ -126,3 +126,85 @@
   padding: 40px 24px !important;
   box-sizing: border-box;
 }
+
+:global(body)::-webkit-scrollbar {
+  display: none;
+}
+:global(body) {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ======================================================== */
+/* 📱 iPad mini 해상도 구역 (max-width: 768px) */
+/* ======================================================== */
+@media (max-width: 768px) {
+  .main {
+    width: 100%;
+    /* ✨ 작성자님이 찾으신 하단 79px 여백 완벽 적용! */
+    padding: 24px 24px 79px 24px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 696px;
+    /* 🚨 핵심 해결책: 데스크탑의 고정 높이를 무효화시켜서 하단 빈 공간 제거! */
+    height: 847px !important;
+    min-height: 847px !important;
+    /* ✨ 작성자님이 찾으신 상하좌우 24px 여백 완벽 적용! */
+    padding: 24px;
+    box-sizing: border-box;
+    background: #fff;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .titleGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .timeInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .navButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: auto;
+  }
+
+  .navBtnActive,
+  .navBtn {
+    height: 48px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navBtnActive {
+    width: 144px;
+  }
+  .navBtn {
+    width: 82px;
+  }
+}
