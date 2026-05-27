@@ -1,6 +1,6 @@
 import styles from "./HabitTable.module.css";
 
-import { Sticker } from "../../common/Sticker/Sticker.jsx";
+import Sticker from "../../common/Sticker/Sticker.jsx";
 
 function HabitTableRow({ title, logs }) {
   return (

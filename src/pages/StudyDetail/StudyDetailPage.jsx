@@ -23,7 +23,7 @@ import style from "./StudyDetail.module.css";
 import EmojiReaction from "../../components/study/Emoji/EmojiReaction.jsx";
 import PasswordModal from "../../components/study/PasswordModal/PasswordModal.jsx";
 import HabitTable from "../../components/study/HabitTable/HabitTable.jsx";
-import { Tag } from "../../components/common/Tag/Tag.jsx";
+import Tag from "../../components/common/Tag/Tag.jsx";
 import { useNavigate } from "react-router-dom";
 
 function StudyDetailPage() {
