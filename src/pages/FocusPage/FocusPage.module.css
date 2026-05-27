@@ -1,0 +1,109 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 53.5px;
+  padding-top: 53.5px;
+  padding-bottom: 152.5px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* 상단: 스터디 정보 */
+.studyInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.studyHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px 12px 24px;
+  border-radius: 15px;
+  border: 1px solid var(--gray-dddddd);
+  background: #ffffff;
+  font-size: var(--text-16);
+  font-weight: var(--weight-medium);
+  color: var(--gray-818181);
+  cursor: pointer;
+  line-height: normal;
+}
+
+.navIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.studyName {
+  font-size: var(--text-32);
+  font-weight: var(--weight-extrabold);
+  color: var(--black);
+  margin: 0;
+}
+
+.studyDescription {
+  font-size: var(--text-18);
+  font-weight: var(--weight-regular);
+  color: var(--gray-818181);
+  margin: 0;
+}
+
+/* 중앙: 타이머 */
+.timerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 94px;
+  padding: 40px;
+  border: 1px solid var(--gray-dddddd);
+  border-radius: 20px;
+}
+
+.title {
+  font-size: var(--text-32);
+  font-weight: var(--weight-extrabold);
+  color: var(--black);
+  margin: 0;
+}
+
+.iconButtons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 토스트 */
+.toastWrapper {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
