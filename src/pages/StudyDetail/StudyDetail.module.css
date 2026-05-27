@@ -126,51 +126,43 @@
   color: var(--green-green_text_578246, #578246);
   text-align: center;
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: var(--text-16);
   font-style: normal;
-  font-weight: 500;
+  font-weight: var(--weight-medium);
   line-height: normal;
 }
-.editGray {
-  color: var(--gray-gray_818181, #818181);
+.editGray,
+.btnGray {
+  color: var(--gray-818181);
   text-align: center;
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: var(--text-16);
   font-style: normal;
-  font-weight: 500;
+  font-weight: var(--weight-medium);
   line-height: normal;
 }
 .postGray {
-  color: var(--gray-gray_818181, #818181);
+  color: var(--gray-818181);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: var(--text-18);
   font-style: normal;
-  font-weight: 400;
+  font-weight: var(--weight-regular);
   line-height: normal;
 }
 .postBlack {
-  color: var(--black-black_414141, #414141);
+  color: var(--black);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: var(--text-18);
   font-style: normal;
-  font-weight: 500;
+  font-weight: var(--weight-medium);
   line-height: 26px; /* 144.444% */
 }
-.btnGray {
-  color: var(--gray-gray_818181, #818181);
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
 .bottomBlack {
-  color: var(--black-black_414141, #414141);
+  color: var(--black);
   text-align: right;
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: var(--text-24);
   font-style: normal;
-  font-weight: 800;
+  font-weight: var(--weight-extrabold);
   line-height: normal;
 }
