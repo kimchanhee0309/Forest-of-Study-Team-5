@@ -5,8 +5,8 @@ import { Routes, Route } from "react-router-dom";
 import MainPage from "./pages/MainPage/MainPage.jsx";
 import StudyCreatePage from "./pages/StudyCreatePage/StudyCreatePage.jsx";
 import FocusPage from "./pages/FocusPage/FocusPage.jsx";
-import HabitPage from "./pages/HabitPage/HabitPage.jsx";
-import StudyDetailPage from "./pages/StudyDetailPage/StudyDetailPage.jsx";
+import HabitPage from "./pages/Habitpages/HabitPage.jsx";
+import StudyDetailPage from "./pages/StudyDetail/StudyDetailPage.jsx";
 import RootLayout from "./layouts/RootLayout.jsx";
 
 function App() {
