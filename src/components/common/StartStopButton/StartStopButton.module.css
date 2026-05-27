@@ -1,0 +1,32 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 333px;
+  height: 60px;
+
+  border: none;
+  border-radius: 50px;
+  box-shadow: inset 0 -4px 0 rgba(65, 65, 65, 0.18);
+
+  font-size: var(--text-24);
+  font-weight: var(--weight-bold);
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.active {
+  background: var(--brand);
+}
+
+.inactive {
+  background: var(--gray-818181);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
