@@ -2,7 +2,6 @@
   background-color: var(--bg, #f6f4ef);
   display: flex;
   flex-direction: column;
-  height: 1558px;
   min-height: 100vh;
   align-items: center;
 }
@@ -49,6 +48,7 @@
   display: flex;
   max-width: 1120px;
   align-items: center;
+
   justify-content: space-between;
   margin-top: 24px;
   margin-bottom: 24px;
@@ -143,3 +143,26 @@
   font-size: var(--text-20, 20px);
   font-weight: var(--weight-medium, 500);
 }
+
+/*반응형 구현 다시 할 예정*/
+
+/*태블릿*/
+/* @media (max-width: 768px) {
+  .studyCardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/*모바일*/
+/* @media (max-width: 375px) {
+  .studyCardGrid {
+    grid-template-columns: 1fr;
+  }
+} */
+
+/* @media (max-wigth: 375px) {
+  .searchBar {
+    flex-direction: column;
+    align-items: stretch;
+    
+  }
+}  */

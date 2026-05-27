@@ -9,8 +9,8 @@ import GNB from "../src/components/common/GNB/GNB.jsx";
 function App() {
   return (
     <>
-      <GNB />;
-      <MainPage />;
+      <GNB />
+      <MainPage />
     </>
   );
 }

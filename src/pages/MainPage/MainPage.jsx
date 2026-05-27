@@ -4,7 +4,17 @@ import styles from "./MainPage.module.css";
 import searchIcon from "../../assets/icons/ic_search.png";
 import Dropdown from "../../components/common/Dropdown/Dropdown";
 
+// 메인 페이지 기능
+// - 스터디 목록 불러오기
+// - 검색 기능 (필터)
+// - 드롭다운 버튼 (최근 순, 오래된 순, 포인트 많은 순, 포인트 적은 순)
+// - Loadmore 더보기 버튼 (데이터 없을시에는 보이지 않음 확인 완료)
+
+//API 연동 필요
+//- GET / studies
+
 function MainPage() {
+  //최근 목록 조회 및 테스트 데이터
   const [recentStudies, setRecentStudies] = useState([
     {
       id: 1,
@@ -39,6 +49,7 @@ function MainPage() {
       emojis: [],
     },
   ]);
+  //스터디 둘러보기 목록 및 테스트 데이터
   const [studies, setStudies] = useState([
     {
       id: 1,
@@ -97,6 +108,7 @@ function MainPage() {
       emojis: [],
     },
   ]);
+  // 스터디 검색 기능, 정렬순, loadmore
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState("최근 순");
   const sortOptions = [
@@ -107,7 +119,12 @@ function MainPage() {
   ];
   const [visibleCount, setVisibleCount] = useState(6);
 
+  //기초 세팅
   useEffect(() => {}, []);
+
+  //상세페이지 이동 추후 연결 필요
+  // const navigate = useNavigate();
+
   //검색 핸들러
   const handleSearch = (e) => {
     setSearchKeyword(e.target.value);
@@ -144,6 +161,7 @@ function MainPage() {
   return (
     <div className={styles.mainPage}>
       {/*섹션 1: 최근 조회한 스터디*/}
+      {/* 스터디 카드 데이터 상세 페이지 이동 추가 필요 현재는 아이디만 받는중(166 - onClick)*/}
       <section className={styles.recentStudies}>
         <h2 className={styles.sectionTitle}>최근 조회한 스터디</h2>
         {recentStudies.length === 0 ? (
@@ -191,7 +209,7 @@ function MainPage() {
             />
           </div>
         </div>
-
+        {/* 스터디 카드 데이터 상세 페이지 이동 추가 필요 현재는 아이디만 받는중(211 - onClick)*/}
         {visibleStudies.length === 0 ? (
           <div className={styles.emptyContainer}>
             <p className={styles.emptyMessage}>아직 둘러 볼 스터디가 없어요 </p>
