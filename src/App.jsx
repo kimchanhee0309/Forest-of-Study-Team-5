@@ -1,6 +1,6 @@
 // import GuidePage from "./components/guide/GuidePage.jsx";
 
-import MainPage from "./pages/MainPage.jsx";
+import MainPage from "./pages/MainPage/MainPage.jsx";
 import GNB from "../src/components/common/GNB/GNB.jsx";
 // function App() {
 //   return <GuidePage />;
