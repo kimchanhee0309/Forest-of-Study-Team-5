@@ -1,0 +1,130 @@
+/* 오늘의 습관 전체 박스 */
+.sectionContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 24px;
+  gap: 24px;
+  border-radius: 20px;
+  border: 1px solid var(--gray-dddddd);
+  background: #fff;
+  box-sizing: border-box;
+}
+
+/* 목록 수정 버튼 위치 잡기 위한 부모 요소 */
+.sectionHeader {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* 오늘의 습관 텍스트 가운데 고정 */
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: var(--text-24);
+  font-weight: var(--weight-bold);
+  color: var(--black);
+  margin: 0;
+}
+
+/* 목록 수정 텍스트 버튼 */
+.editButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-818181);
+  font-size: var(--text-14);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+
+  /* 중앙 기준에서 92px 우측으로 띄움 */
+  position: absolute;
+  left: calc(50% + 147px);
+}
+
+.habitList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+/* 각 습관 박스 스타일 */
+.habitItem {
+  width: 400px;
+  height: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  font-size: var(--text-16);
+  font-weight: var(--weight-medium);
+}
+
+/* 완료된 습관 */
+.completed {
+  background: var(--brand);
+  color: #fff;
+}
+
+/* 아직 안한 습관 */
+.incomplete {
+  background: var(--gray-eeeeee);
+  color: var(--gray-818181);
+}
+
+/* ======================================================== */
+/* 아이패드 미니 사이즈 */
+/* ======================================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+  .habitItem {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  /* 피그마 수치대로 목록 수정 위치 고정 */
+  .editButton {
+    left: 460px;
+    right: 88px;
+    top: 6px;
+    bottom: 6px;
+  }
+}
+
+/* ======================================================== */
+/* 모바일 사이즈 */
+/* ======================================================== */
+@media (max-width: 480px) {
+  .sectionContainer {
+    padding: 24px 16px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 0;
+  }
+
+  .sectionTitle {
+    font-size: var(--text-18);
+  }
+
+  .habitList {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .habitItem {
+    width: 100%;
+    max-width: 280px;
+    height: 54px;
+    font-size: var(--text-16);
+  }
+
+  /* 모바일에서는 우측 끝으로 딱 붙임 */
+  .editButton {
+    font-size: var(--text-14);
+    left: auto;
+    right: 0;
+    top: 6px;
+    bottom: auto;
+  }
+}

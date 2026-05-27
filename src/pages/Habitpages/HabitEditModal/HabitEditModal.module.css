@@ -1,0 +1,197 @@
+/* 모달창 뒤에 깔리는 어두운 배경 */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 모달창 본체 */
+.modal {
+  width: 600px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  gap: 30px;
+  border-radius: 20px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.modalTitle {
+  font-size: var(--text-24);
+  font-weight: var(--weight-bold);
+}
+
+.editList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  overflow-y: auto;
+}
+
+/* 습관 목록 간격 */
+.editItemRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 플러스 버튼 가운데 맞추려고 휴지통이랑 같은 크기로 만든 투명 여백 */
+.emptySpace {
+  width: 48px !important;
+  min-width: 48px !important;
+  height: 48px !important;
+  display: block;
+}
+
+/* 수정 모드일 때 인풋 박스 */
+.inputWrapper {
+  width: 400px;
+  height: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: var(--gray-eeeeee);
+}
+
+.editItemInput {
+  width: 90%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  text-align: center;
+}
+
+.deleteBtn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* 맨 아래 추가하는 플러스 버튼 */
+.addBtn {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 400px !important;
+  height: 54px;
+  border-radius: 20px;
+  border: 2px solid var(--black);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.addIcon {
+  width: 24px !important;
+  height: 24px !important;
+  display: block;
+  object-fit: contain;
+}
+
+.modalActions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+}
+
+/* 취소, 수정 완료 버튼 공통 속성 */
+.cancelBtn,
+.saveBtn {
+  display: flex;
+  width: 264px !important;
+  height: 58px !important;
+  padding: 10px !important;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-family: "EF_jejudoldam", sans-serif !important;
+  font-size: var(--text-18) !important;
+  font-style: normal;
+  font-weight: var(--weight-regular) !important;
+  line-height: normal;
+}
+
+.cancelBtn {
+  background: var(--gray-dddddd) !important;
+  color: var(--gray-818181) !important;
+}
+
+.saveBtn {
+  background: var(--brand) !important;
+  color: #fff !important;
+}
+
+/* ======================================================== */
+/* 아이패드 미니 사이즈 */
+/* ======================================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+  .modal {
+    width: 500px;
+    padding: 32px 20px;
+  }
+
+  .inputWrapper,
+  .addBtn {
+    width: 380px !important;
+  }
+
+  .cancelBtn,
+  .saveBtn {
+    width: 210px !important;
+    height: 52px !important;
+  }
+}
+
+/* ======================================================== */
+/* 모바일 사이즈 */
+/* ======================================================== */
+@media (max-width: 480px) {
+  .modal {
+    width: 344px;
+    padding: 24px 16px;
+    gap: 20px;
+  }
+
+  .inputWrapper {
+    width: 100%;
+    height: 54px;
+  }
+
+  /* 모바일에서 플러스 버튼 작아지게 적용 */
+  .addBtn {
+    width: 280px !important;
+    height: 54px;
+  }
+
+  .modalActions {
+    flex-direction: row !important;
+    gap: 12px;
+  }
+
+  /* 취소, 수정완료 모바일 140px 규격 */
+  .cancelBtn,
+  .saveBtn {
+    width: 140px !important;
+    height: 58px !important;
+  }
+}

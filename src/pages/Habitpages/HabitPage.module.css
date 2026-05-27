@@ -1,0 +1,190 @@
+/* 전체 레이아웃 가운데 정렬 */
+.layout {
+  min-height: 100vh;
+  background-color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  width: 100%;
+  max-width: 1920px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 139px 24px 100px;
+  box-sizing: border-box;
+}
+
+/* 메인 하얀색 카드 */
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1248px;
+  min-height: 863px;
+  padding: 40px;
+  border-radius: 20px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: var(--text-32);
+  font-weight: var(--weight-bold);
+  color: var(--black);
+}
+
+/* 현재 시간 부분 */
+.timeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timeLabel {
+  color: var(--gray-818181);
+  font-size: var(--text-14);
+}
+
+.timeValue {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--gray-dddddd);
+  color: var(--black);
+  font-size: var(--text-16);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+.navButtons {
+  display: flex;
+  gap: 12px;
+}
+
+/* 오늘의 집중, 홈 버튼 공통 스타일 */
+.navBtnActive,
+.navBtn {
+  height: 48px;
+  border-radius: 15px;
+  border: 1px solid var(--gray-dddddd);
+  background: #fff;
+  color: var(--gray-818181);
+  font-size: var(--text-16);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.navBtnActive {
+  width: 144px;
+}
+
+.navBtn {
+  width: 82px;
+}
+
+.arrowIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.listSection {
+  width: 100%;
+  padding: 40px 24px;
+  box-sizing: border-box;
+}
+
+/* ======================================================== */
+/* 아이패드 미니 사이즈 */
+/* ======================================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+  .main {
+    padding: 24px 24px 79px;
+  }
+
+  .card {
+    max-width: 696px;
+    min-height: auto;
+    padding: 24px;
+  }
+
+  .header {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: var(--text-32);
+  }
+}
+
+/* ======================================================== */
+/* 모바일 사이즈 */
+/* ======================================================== */
+@media (max-width: 480px) {
+  .main {
+    padding: 120px 16px 141px 15px;
+  }
+
+  .card {
+    width: 344px;
+    min-height: 781px;
+    padding: 24px 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .titleGroup {
+    gap: 16px;
+  }
+
+  .title {
+    font-size: var(--text-24);
+  }
+
+  .timeValue {
+    padding: 8px 12px;
+    font-size: var(--text-16);
+  }
+
+  .navButtons {
+    gap: 8px;
+    width: 100%;
+  }
+
+  .navBtnActive {
+    width: 120px;
+    height: 40px;
+  }
+
+  .navBtn {
+    width: 58px;
+    height: 40px;
+  }
+
+  .listSection {
+    padding: 24px 0 0;
+  }
+}
