@@ -49,3 +49,20 @@
   display: inline-flex;
   align-items: center;
 }
+
+.studyDetail {
+  display: flex;
+  padding: 8px 12px;
+  align-items: flex-start;
+  gap: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.3);
+}
+.studyDetailSize {
+  color: var(--black);
+  font-family: Pretendard;
+  font-size: var(--text-16);
+  font-style: normal;
+  font-weight: var(--weight-medium);
+  line-height: normal;
+}

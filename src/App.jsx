@@ -1,17 +1,25 @@
-// import GuidePage from "./components/guide/GuidePage.jsx";
+/*import GuidePage from "./components/guide/GuidePage.jsx";*/
+
+import { Routes, Route } from "react-router-dom";
 
 import MainPage from "./pages/MainPage/MainPage.jsx";
-import GNB from "../src/components/common/GNB/GNB.jsx";
-// function App() {
-//   return <GuidePage />;
-// }
+import StudyCreatePage from "./pages/StudyCreatePage/StudyCreatePage.jsx";
+import FocusPage from "./pages/FocusPage/FocusPage.jsx";
+import HabitPage from "./pages/HabitPage/HabitPage.jsx";
+import StudyDetailPage from "./pages/StudyDetailPage/StudyDetailPage.jsx";
+import RootLayout from "./layouts/RootLayout.jsx";
 
 function App() {
   return (
-    <>
-      <GNB />
-      <MainPage />
-    </>
+    <Routes>
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<MainPage />} />
+        <Route path="studies/new" element={<StudyCreatePage />} />
+        <Route path="studies/:studyId" element={<StudyDetailPage />} />
+        <Route path="studies/:studyId/habits" element={<HabitPage />} />
+        <Route path="studies/:studyId/focus" element={<FocusPage />} />
+      </Route>
+    </Routes>
   );
 }
 export default App;

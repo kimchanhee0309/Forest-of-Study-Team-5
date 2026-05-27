@@ -32,45 +32,28 @@
 
 /* Btn_CTA */
 .cta-large {
-  width: 100%;
-  max-width: 252px;
+  width: 252px;
   height: 58px;
   font-size: var(--text-18);
-  top: 20px;
-  left: 20px;
   border-radius: 16px;
   padding: 10px;
-  gap: 10px;
-  opacity: 1;
 }
 
 .cta-medium {
-  width: 100%;
-  max-width: 160px;
+  width: 160px;
   height: 58px;
   font-size: var(--text-18);
-
-  top: 21px;
-  left: 314px;
   border-radius: 14px;
   padding: 10px;
-  gap: 10px;
-
-  opacity: 1;
 }
 
 .cta-small {
-  width: 100%;
-  max-width: 106px;
+  width: 106px;
   height: 38px;
   font-size: var(--text-12);
-
-  top: 21px;
-  left: 524px;
   border-radius: 8px;
   padding: 10px;
   gap: 10px;
-  opacity: 1;
 }
 
 /* btn_habit/make/focus/confirm/modification(수정하러가기) */
@@ -165,4 +148,24 @@
 .icon {
   display: inline-flex;
   align-items: center;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .cta-large {
+    width: 160px;
+    height: 58px;
+    border-radius: 14px;
+    font-size: var(--text-18);
+  }
+}
+
+/* Mobile */
+@media (max-width: 357px) {
+  .cta-large {
+    width: 106px;
+    height: 38px;
+    border-radius: 8px;
+    font-size: var(--text-12);
+  }
 }
