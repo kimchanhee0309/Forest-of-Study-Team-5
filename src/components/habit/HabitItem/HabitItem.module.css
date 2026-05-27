@@ -1,52 +1,58 @@
 .wrapper {
   display: flex;
   align-items: center;
-
+  justify-content: center;
   gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .item {
-  flex: 1;
+  width: 400px;
   height: 56px;
-
   background: var(--gray-eeeeee);
-
   border-radius: 20px;
-
   display: flex;
   justify-content: center;
   align-items: center;
 
+  /* ✨ 글자 크기, 두께, 색상 모두 공용 변수 사용 */
   color: var(--gray-818181);
-
   font-size: var(--text-18);
   font-weight: var(--weight-semibold);
+
+  box-sizing: border-box;
+  text-decoration: underline !important;
+  text-underline-offset: 4px !important;
 }
 
 .deleteButton {
-  width: 24px;
-  height: 37px;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  padding: 12px !important;
+  border-radius: 35px !important;
 
-  border: none;
-  border-radius: 50%;
-
+  /* ✨ 핑크색 배경 공용 변수 사용 */
   background: var(--pink-bg);
-
+  border: none;
   cursor: pointer;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .icon {
-  width: 48px;
-  height: 48px;
-
-  top: 3px;
-  left: 508px;
-  border-radius: 35px;
-  gap: 10px;
-  opacity: 1;
-  padding: 12px;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  display: block;
+  object-fit: contain;
+  background: transparent;
 }

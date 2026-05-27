@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styles from "./HabitEditModal.module.css";
-import icTrash from "../../../assets/icons/ic_trash.svg"; // 확장자 다시 확인해주세요!
+// ✨ [추가] 멀리 떨어져 있는 공용 컴포넌트를 폴더 구조에 맞게 정확히 불러옵니다.
+import HabitItem from "../../../components/habit/HabitItem/HabitItem";
+import icAdd from "../../../assets/icons/ic_plus.png";
 
 function HabitEditModal({ habits, onClose, onSave }) {
   const [editHabits, setEditHabits] = useState(habits);
-
-  // ✨ 새로 추가: 현재 어떤 항목을 수정 중인지 추적하는 상태 (아무것도 안 누르면 null)
   const [editingId, setEditingId] = useState(null);
 
   const handleDelete = (id) => {
@@ -15,11 +15,10 @@ function HabitEditModal({ habits, onClose, onSave }) {
   const handleAdd = () => {
     const newHabit = {
       id: Date.now(),
-      title: "", // 처음엔 빈 텍스트
+      title: "",
       isCompleted: false,
     };
     setEditHabits((prev) => [...prev, newHabit]);
-    // ✨ 추가하자마자 바로 입력 모드로 들어가게 세팅
     setEditingId(newHabit.id);
   };
 
@@ -39,21 +38,20 @@ function HabitEditModal({ habits, onClose, onSave }) {
         <ul className={styles.editList}>
           {editHabits.map((habit) => (
             <li key={habit.id} className={styles.editItemRow}>
-              {/* ✨ 핵심 로직: 현재 수정 중인 ID면 input을 보여주고, 아니면 span을 보여줍니다 */}
-              <div
-                className={styles.inputWrapper}
-                onClick={() => setEditingId(habit.id)}
+              {/* ✨ [핵심] 기존 HTML을 지우고 HabitItem 컴포넌트를 통째로 사용합니다! */}
+              <HabitItem
+                onClickItem={() => setEditingId(habit.id)}
+                onDelete={() => handleDelete(habit.id)}
               >
+                {/* HabitItem의 안쪽(children)에 input이나 span을 상황에 맞게 띄워줍니다 */}
                 {editingId === habit.id ? (
                   <input
                     type="text"
                     className={styles.editItemInput}
                     value={habit.title}
                     onChange={(e) => handleChange(habit.id, e.target.value)}
-                    onBlur={() =>
-                      setEditingId(null)
-                    } /* 클릭 해제 시 텍스트로 돌아감 */
-                    autoFocus /* 나타날 때 바로 커서 깜빡이게 */
+                    onBlur={() => setEditingId(null)}
+                    autoFocus
                   />
                 ) : (
                   <span
@@ -64,21 +62,14 @@ function HabitEditModal({ habits, onClose, onSave }) {
                     {habit.title.trim() === "" ? "" : habit.title}
                   </span>
                 )}
-              </div>
-
-              <button
-                type="button"
-                className={styles.deleteBtn}
-                onClick={() => handleDelete(habit.id)}
-              >
-                <img src={icTrash} alt="삭제" className={styles.icon} />
-              </button>
+              </HabitItem>
             </li>
           ))}
 
           <li className={styles.editItemRow}>
             <button type="button" className={styles.addBtn} onClick={handleAdd}>
-              +
+              {/* 텍스트 + 를 지우고 이미지 태그로 변경! */}
+              <img src={icAdd} alt="추가" className={styles.addIcon} />
             </button>
             <div className={styles.emptySpace}></div>
           </li>

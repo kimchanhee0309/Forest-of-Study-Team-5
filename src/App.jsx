@@ -1,5 +1,5 @@
 // 1. 기존 GuidePage를 지우고, 방금 만든 HabitPage를 불러옵니다.
-import HabitPage from "./components/habit/HibitPage";
+import HabitPage from "./pages/Habitpages/HabitPage";
 
 function App() {
   return (
