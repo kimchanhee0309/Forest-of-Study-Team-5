@@ -56,6 +56,46 @@ function MainPage() {
       point: 50,
       emojis: [],
     },
+    {
+      id: 3,
+      title: "테스트 스터디",
+      elapsedDays: 5,
+      description: "자바스크립트 기초부터 같이 공부해요",
+      point: 50,
+      emojis: [],
+    },
+    {
+      id: 4,
+      title: "이얍 스터디",
+      elapsedDays: 5,
+      description: "자바스크립트 기초부터 같이 공부해요",
+      point: 50,
+      emojis: [],
+    },
+    {
+      id: 5,
+      title: "자바스크립트 스터디",
+      elapsedDays: 5,
+      description: "자바스크립트 기초부터 같이 공부해요",
+      point: 50,
+      emojis: [],
+    },
+    {
+      id: 6,
+      title: "와라라랄 스터디",
+      elapsedDays: 5,
+      description: "자바스크립트 기초부터 같이 공부해요",
+      point: 50,
+      emojis: [],
+    },
+    {
+      id: 7,
+      title: "오메 스터디",
+      elapsedDays: 5,
+      description: "자바스크립트 기초부터 같이 공부해요",
+      point: 50,
+      emojis: [],
+    },
   ]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState("최근 순");
@@ -65,11 +105,19 @@ function MainPage() {
     "많은 포인트 순",
     "적은 포인트 순",
   ];
-  useEffect(() => {}, []);
+  const [visibleCount, setVisibleCount] = useState(6);
 
+  useEffect(() => {}, []);
+  //검색 핸들러
   const handleSearch = (e) => {
     setSearchKeyword(e.target.value);
   };
+
+  // 더보기 핸들러
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 6); // 더보기 버튼 누를때 마다 6개씩 증가
+  };
+
   //검색 필터링
   const filteredStudies = studies.filter((study) =>
     study.title.includes(searchKeyword),
@@ -89,6 +137,9 @@ function MainPage() {
         return 0;
     }
   });
+
+  // 더보기 개수 제한
+  const visibleStudies = sortedStudies.slice(0, visibleCount);
 
   return (
     <div className={styles.mainPage}>
@@ -141,24 +192,35 @@ function MainPage() {
           </div>
         </div>
 
-        {sortedStudies.length === 0 ? (
+        {visibleStudies.length === 0 ? (
           <div className={styles.emptyContainer}>
             <p className={styles.emptyMessage}>아직 둘러 볼 스터디가 없어요 </p>
           </div>
         ) : (
-          <div className={styles.studyCardGrid}>
-            {sortedStudies.map((study) => (
-              <StudyCard
-                key={study.id}
-                title={study.title}
-                elapsedDays={study.elapsedDays}
-                description={study.description}
-                point={study.point}
-                emojis={study.emojis}
-                onClick={() => console.log(study.id)}
-              />
-            ))}
-          </div>
+          <>
+            <div className={styles.studyCardGrid}>
+              {visibleStudies.map((study) => (
+                <StudyCard
+                  key={study.id}
+                  title={study.title}
+                  elapsedDays={study.elapsedDays}
+                  description={study.description}
+                  point={study.point}
+                  emojis={study.emojis}
+                  onClick={() => console.log(study.id)}
+                />
+              ))}
+            </div>
+            {/* 더보기 버튼: 더 보여줄 데이터가 있을때에 만 표시 */}
+            {visibleCount < sortedStudies.length && (
+              <button
+                className={styles.loadMoreButton}
+                onClick={handleLoadMore}
+              >
+                더보기
+              </button>
+            )}
+          </>
         )}
       </section>
     </div>
