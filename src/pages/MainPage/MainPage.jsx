@@ -162,7 +162,6 @@ function MainPage() {
   return (
     <div className={styles.mainPage}>
       {/*섹션 1: 최근 조회한 스터디*/}
-      {/* 스터디 카드 데이터 상세 페이지 이동 추가 필요 현재는 아이디만 받는중(166 - onClick)*/}
       <section className={styles.recentStudies}>
         <h2 className={styles.sectionTitle}>최근 조회한 스터디</h2>
         {recentStudies.length === 0 ? (
@@ -191,16 +190,19 @@ function MainPage() {
       <section className={styles.studyList}>
         <h2 className={styles.sectionTitle}>스터디 둘러보기</h2>
 
-        <div className={styles.searchBar}>
-          <div className={styles.searchInputWrapper}>
-            <img src={searchIcon} alt="검색" className={styles.searchIcon} />
-            <input
-              className={styles.searchInput}
-              type="text"
-              placeholder="검색"
-              value={searchKeyword}
-              onChange={handleSearch}
-            />
+        {/*서치바, 드롭다운 한번에 묶기*/}
+        <div className={styles.controlBar}>
+          <div className={styles.searchBar}>
+            <div className={styles.searchInputWrapper}>
+              <img src={searchIcon} alt="검색" className={styles.searchIcon} />
+              <input
+                className={styles.searchInput}
+                type="text"
+                placeholder="검색"
+                value={searchKeyword}
+                onChange={handleSearch}
+              />
+            </div>
           </div>
           <div className={styles.dropdownWrapper}>
             <Dropdown
@@ -210,7 +212,7 @@ function MainPage() {
             />
           </div>
         </div>
-        {/* 스터디 카드 데이터 상세 페이지 이동 추가 필요 현재는 아이디만 받는중(211 - onClick)*/}
+
         {visibleStudies.length === 0 ? (
           <div className={styles.emptyContainer}>
             <p className={styles.emptyMessage}>아직 둘러 볼 스터디가 없어요 </p>
