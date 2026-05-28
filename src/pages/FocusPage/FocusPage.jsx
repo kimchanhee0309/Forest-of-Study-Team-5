@@ -1,3 +1,5 @@
+import { useNavigate, useParams } from "react-router-dom";
+import GNB from "../../components/common/GNB/GNB";
 import Timer from "../../components/focus/Timer/Timer";
 import FocusPoint from "../../components/focus/FocusPoint/FocusPoint";
 import TimerButton from "../../components/common/TimerButton/TimerButton";
@@ -13,23 +15,25 @@ function FocusPage({
   studyDescription = "현재까지 획득한 포인트",
   targetTime = "00:10",
   totalPoint = 0,
-  onHabit,
-  onHome,
 }) {
+  const { studyId } = useParams();
+  const navigate = useNavigate();
   const { status, remainSeconds, toast, start, pause, restart, stop } =
     useFocusTimer(targetTime);
   return (
-    <div className={styles.wrapper}>
+    <>
+      <GNB showButton={false} />
+      <div className={styles.wrapper}>
       <div className={styles.container}>
         {/* 상단 스터디 정보 */}
         <div className={styles.studyInfo}>
           <div className={styles.studyHeader}>
             <h2 className={styles.studyName}>{nickname}의 {title}</h2>
             <div className={styles.navButtons}>
-              <button className={styles.navButton} onClick={onHabit}>
+              <button className={styles.navButton} onClick={() => navigate(`/studies/${studyId}/habits`)}>
                 오늘의 습관 <img src={arrowRightIcon} alt="arrow" className={styles.navIcon} />
               </button>
-              <button className={styles.navButton} onClick={onHome}>
+              <button className={styles.navButton} onClick={() => navigate("/")}>
                 홈 <img src={arrowRightIcon} alt="arrow" className={styles.navIcon} />
               </button>
             </div>
@@ -72,6 +76,7 @@ function FocusPage({
         )}
       </div>
     </div>
+    </>
   );
 }
 
