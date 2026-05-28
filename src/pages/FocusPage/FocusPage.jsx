@@ -14,12 +14,11 @@ function FocusPage({
   title = "스터디명",
   studyDescription = "현재까지 획득한 포인트",
   targetTime = "00:10",
-  totalPoint = 0,
 }) {
   const { studyId } = useParams();
   const navigate = useNavigate();
-  const { status, remainSeconds, toast, start, pause, restart, stop } =
-    useFocusTimer(targetTime);
+  const { status, remainSeconds, toast, totalPoint, start, pause, restart, stop } =
+    useFocusTimer(targetTime, studyId);
   return (
     <>
       <GNB showButton={false} />
