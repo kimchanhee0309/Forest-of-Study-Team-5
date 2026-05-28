@@ -44,12 +44,17 @@
   color: var(--black, #414141);
 }
 
-.searchBar {
+.controlBar {
   display: flex;
   max-width: 1120px;
-  align-items: center;
-
   justify-content: space-between;
+  align-items: center;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
   margin-top: 24px;
   margin-bottom: 24px;
 }
@@ -88,6 +93,7 @@
 }
 
 .dropdownWrapper {
+  display: flex;
   position: relative;
 }
 
