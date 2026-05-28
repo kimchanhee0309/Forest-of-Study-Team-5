@@ -3,6 +3,7 @@ import StudyCard from "../../components/study/StudyCard/StudyCard";
 import styles from "./MainPage.module.css";
 import searchIcon from "../../assets/icons/ic_search.png";
 import Dropdown from "../../components/common/Dropdown/Dropdown";
+import { useNavigate } from "react-router-dom";
 
 // 메인 페이지 기능
 // - 스터디 목록 불러오기
@@ -122,8 +123,8 @@ function MainPage() {
   //기초 세팅
   useEffect(() => {}, []);
 
-  //상세페이지 이동 추후 연결 필요
-  // const navigate = useNavigate();
+  //상세페이지 이동
+  const navigate = useNavigate();
 
   //검색 핸들러
   const handleSearch = (e) => {
@@ -180,7 +181,7 @@ function MainPage() {
                 description={study.description}
                 point={study.point}
                 emojis={study.emojis}
-                onClick={() => console.log(study.id)}
+                onClick={() => navigate(`/studies/${study.id}`)}
               />
             ))}
           </div>
@@ -225,7 +226,7 @@ function MainPage() {
                   description={study.description}
                   point={study.point}
                   emojis={study.emojis}
-                  onClick={() => console.log(study.id)}
+                  onClick={() => navigate(`/studies/${study.id}`)}
                 />
               ))}
             </div>
