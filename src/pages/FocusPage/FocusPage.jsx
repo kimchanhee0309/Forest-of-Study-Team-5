@@ -21,8 +21,9 @@ function FocusPage({
   const { status, remainSeconds, toast, start, pause, restart, stop } =
     useFocusTimer(targetTime);
   return (
-    <div className={styles.wrapper}>
+    <>
       <GNB showButton={false} />
+      <div className={styles.wrapper}>
       <div className={styles.container}>
         {/* 상단 스터디 정보 */}
         <div className={styles.studyInfo}>
@@ -75,6 +76,7 @@ function FocusPage({
         )}
       </div>
     </div>
+    </>
   );
 }
 
