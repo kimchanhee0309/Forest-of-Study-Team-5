@@ -1,12 +1,6 @@
-import GNB from "../../components/common/GNB/GNB.jsx";
 import StudyCreateForm from "../../components/study/StudyCreateForm/StudyCreateForm.jsx";
 function StudyCreatePage() {
-  return (
-    <>
-      <GNB />
-      <StudyCreateForm />
-    </>
-  );
+  return <StudyCreateForm />;
 }
 
 export default StudyCreatePage;
