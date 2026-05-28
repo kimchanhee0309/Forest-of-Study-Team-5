@@ -117,7 +117,7 @@ function StudyDetailPage() {
             {/* 스터디 이름 API 연동 필요 */}
             <div className={style.post_frame}>
               <div className={style.post_header}>
-                <span className={style.postTitle}>"연우"의 개발공장</span>
+                <span className={style.postTitle}>연우의 개발공장</span>
                 <div className={style.post_btn_frame}>
                   {/* 오늘의 습관, 집중을 눌렀을때 나타나는 모달구현 */}
                   {/* 페이지 이동 추가 필요 */}
