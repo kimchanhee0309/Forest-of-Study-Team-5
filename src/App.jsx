@@ -15,10 +15,10 @@ function App() {
       <Route path="/" element={<RootLayout />}>
         <Route index element={<MainPage />} />
         <Route path="studies/new" element={<StudyCreatePage />} />
-        <Route path="studies/:studyId" element={<StudyDetailPage />} />
-        <Route path="studies/:studyId/focus" element={<FocusPage />} />
       </Route>
       <Route path="studies/:studyId/habits" element={<HabitPage />} />
+      <Route path="studies/:studyId" element={<StudyDetailPage />} />
+      <Route path="studies/:studyId/focus" element={<FocusPage />} />
     </Routes>
   );
 }
