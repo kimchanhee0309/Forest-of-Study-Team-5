@@ -164,6 +164,15 @@
   cursor: pointer;
 }
 
+/* 글자수 카운터 */
+.charCount {
+  display: block;
+  text-align: right;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--gray-818181);
+}
+
 /* 생성 버튼 영역 */
 .submitButtonWrapper {
   margin-top: 24px;
