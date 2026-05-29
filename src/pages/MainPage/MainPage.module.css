@@ -15,7 +15,7 @@
   border-radius: 20px;
   background-color: #fff;
   margin-bottom: 48px;
-  padding: 40px;
+  padding: 30px;
 }
 
 .recentStudies {
@@ -32,7 +32,7 @@
   overflow: hidden;
   flex-wrap: nowrap;
 }
-.studyList.Empty {
+.studyListEmpty {
   min-height: 822px;
 }
 
@@ -93,33 +93,20 @@
 .dropdownWrapper {
   display: flex;
   position: relative;
-  /* font-size: var(--text-16, 16px);
-  font-weight: var(--weight-regular, 400); */
+  width: 180px;
 }
 
 .dropdownWrapper > div > button {
-  width: 180px;
-  max-height: 44px;
-  padding: 9px 20px;
-  border-radius: 15px;
   border: 1px solid var(--gray-dddddd, #dddddd);
-  background-color: #fff;
-  font-size: var(--text-16, 16px);
-  font-weight: var(--weight-regular, 400);
 }
 
 .dropdownWrapper > div > ul {
-  width: 180px;
   border: 1px solid var(--gray-dddddd, #dddddd);
-  border-radius: 15px;
-  background-color: #fff;
-  font-size: var(--text-16, 16px);
-  font-weight: var(--weight-regular, 400);
 }
 
 .studyCardGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
 }
 
@@ -164,9 +151,14 @@
 }  */
 
 /*태블릿*/
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .studyCardGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recentStudies,
+  .studyList {
+    padding: 20px;
   }
 
   .recentCardList {
@@ -174,14 +166,14 @@
     gap: 24px;
     overflow: hidden;
   }
-} */
+}
 
 /*모바일*/
-/* @media (max-width: 375px) {
+@media (max-width: 375px) {
   .studyCardGrid {
     grid-template-columns: 1fr;
   }
-} */
+}
 
 /* @media (max-wigth: 375px) {
   .searchBar {
