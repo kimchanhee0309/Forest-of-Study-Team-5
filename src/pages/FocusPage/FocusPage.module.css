@@ -100,6 +100,36 @@
   gap: 16px;
 }
 
+/* 타겟타임 입력 */
+.timeInput {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.minuteInput {
+  width: 80px;
+  height: 48px;
+  border: 1px solid var(--gray-dddddd);
+  border-radius: 10px;
+  text-align: center;
+  font-size: var(--text-24);
+  font-weight: var(--weight-bold);
+  color: var(--black);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.minuteInput:focus {
+  border-color: var(--brand);
+}
+
+.minuteLabel {
+  font-size: var(--text-18);
+  font-weight: var(--weight-medium);
+  color: var(--gray-818181);
+}
+
 /* 토스트 */
 .toastWrapper {
   position: fixed;
