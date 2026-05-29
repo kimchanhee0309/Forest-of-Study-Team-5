@@ -32,7 +32,7 @@
   overflow: hidden;
   flex-wrap: nowrap;
 }
-.studyList {
+.studyList.Empty {
   min-height: 822px;
 }
 
