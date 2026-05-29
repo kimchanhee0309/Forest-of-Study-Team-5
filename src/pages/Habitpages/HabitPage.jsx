@@ -46,7 +46,7 @@ function HabitPage() {
             </div>
 
             <div className={styles.navButtons}>
-              {/*  3. 백틱(`)을 사용 뽑아온 studyId 주소 중간 끼워넣기 */}
+              {/*  백틱(`)을 사용 뽑아온 studyId 주소 중간 끼워넣기 */}
               <Link
                 to={`/studies/${studyId}/focus`}
                 className={styles.navBtnActive}

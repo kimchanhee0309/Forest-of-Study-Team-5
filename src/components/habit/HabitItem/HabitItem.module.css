@@ -1,14 +1,14 @@
 /* 습관 텍스트랑 휴지통 묶어주는 컨테이너 */
 .wrapper {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px; /* 데스크탑 기본 */
   width: 100%;
   box-sizing: border-box;
 }
 
-/* 습관 회색 박스 (배경과 크기 틀만 담당) */
+/* 습관 회색 박스 */
 .item {
   width: 400px;
   height: 54px;
@@ -21,8 +21,10 @@
   cursor: pointer;
 }
 
-/* 우측 휴지통 버튼 */
+/* 우측 휴지통 버튼 (공중으로 띄워서 여백 계산에서 제외) */
 .deleteButton {
+  position: absolute;
+  left: calc(50% + 216px); /* 정중앙에서 우측 이동 */
   width: 48px !important;
   height: 48px !important;
   min-width: 48px !important;
@@ -46,11 +48,11 @@
 }
 
 /* ======================================================== */
-/* 아이패드 미니 사이즈 (Figma 규격 완벽 적용) */
+/* 아이패드 미니 사이즈 */
 /* ======================================================== */
 @media (min-width: 481px) and (max-width: 768px) {
-  .wrapper {
-    gap: 8px !important;
+  .deleteButton {
+    left: calc(50% + 208px); /* 정중앙 + 200px + 8px 간격 */
   }
   .item {
     width: 400px !important;
@@ -59,16 +61,21 @@
 }
 
 /* ======================================================== */
-/* 모바일 사이즈 (Figma 규격 완벽 적용) */
+/* 모바일 사이즈 */
 /* ======================================================== */
 @media (max-width: 480px) {
   .wrapper {
-    gap: 8px !important;
+    justify-content: flex-start;
+    gap: 8px !important; /* 모바일은 다시 일반적인 간격 사용 */
   }
   .item {
     width: 256px !important;
     min-width: 256px !important;
     height: 54px !important;
     margin: 0;
+  }
+  .deleteButton {
+    position: static; /* 모바일에서는 공중 띄우기 해제 */
+    left: auto;
   }
 }
