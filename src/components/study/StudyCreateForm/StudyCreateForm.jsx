@@ -10,6 +10,7 @@ function StudyCreateForm() {
   const {
     formData,
     errors,
+    MaxLength,
     selectedBackground,
     customBackgrounds,
     defaultBackgrounds,
@@ -34,7 +35,11 @@ function StudyCreateForm() {
             value={formData.nickname}
             onChange={handleChange}
             placeholder="닉네임을 입력해주세요"
+            autoComplete="off"
           />
+          <span className={styles.charCount}>
+            {formData.nickname.length}/{MaxLength.nickname}자
+          </span>
         </div>
 
         <div className={styles.field}>
@@ -45,7 +50,11 @@ function StudyCreateForm() {
             onChange={handleChange}
             placeholder="스터디 이름을 입력해주세요"
             error={errors.studyName}
+            autoComplete="off"
           />
+          <span className={styles.charCount}>
+            {formData.studyName.length}/{MaxLength.studyName}자
+          </span>
         </div>
 
         <div className={styles.field}>
@@ -57,6 +66,9 @@ function StudyCreateForm() {
             className={styles.textarea}
             placeholder="소개 멘트를 작성해주세요"
           />
+          <span className={styles.charCount}>
+            {formData.description.length}/{MaxLength.description}자
+          </span>
         </div>
 
         {/* 배경 선택 field */}
@@ -140,6 +152,8 @@ function StudyCreateForm() {
             onChange={handleChange}
             placeholder="비밀번호를 입력해주세요"
             error={errors.password}
+            maxLength={100}
+            autoComplete="new-password"
           />
         </div>
 
@@ -152,6 +166,8 @@ function StudyCreateForm() {
             onChange={handleChange}
             placeholder="비밀번호를 다시 입력해주세요"
             error={errors.passwordConfirm}
+            maxLength={100}
+            autoComplete="new-password"
           />
         </div>
 

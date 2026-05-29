@@ -4,6 +4,13 @@ import styles from "./StudyCreateForm.module.css";
 function useStudyCreateForm() {
   // ── 상태 관리
 
+  // MaxLength추가
+  const MaxLength = {
+    nickname: 30,
+    studyName: 50,
+    description: 200,
+  };
+
   // 폼 입력값 상태 (닉네임, 스터디이름, 소개, 비밀번호 등)
   const [formData, setFormData] = useState({
     nickname: "",
@@ -42,6 +49,9 @@ function useStudyCreateForm() {
   // input/textarea가 바뀔 때마다 formData 업데이트
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (MaxLength[name] && value.length > MaxLength[name]) return;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -132,6 +142,7 @@ function useStudyCreateForm() {
   return {
     formData, // 입력값 상태
     errors, // 에러 메시지 상태
+    MaxLength, //글자수
     selectedBackground, // 선택된 배경 id
     customBackgrounds, // 사용자 업로드 배경 목록
     defaultBackgrounds, // 기본 배경 목록
