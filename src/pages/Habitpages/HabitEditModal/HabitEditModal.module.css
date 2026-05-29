@@ -30,10 +30,10 @@
   margin: 0 0 30px 0;
 }
 
-/*  데스크탑 정렬 해결: ul 태그의 브라우저 기본 여백을 0으로 완전히 지우고, 스크롤바 고정 공간 예약 */
+/* 데스크탑 정렬 해결: 기본 여백 삭제 및 스크롤바 공간 확보 */
 .editList {
   width: 100%;
-  padding: 0 !important; /* 브라우저 기본 패딩-레프트 40px 완전 삭제 */
+  padding: 0 !important;
   margin: 0 !important;
   list-style: none !important;
   display: flex;
@@ -44,12 +44,10 @@
   overflow-x: hidden;
   flex-grow: 1;
   margin-bottom: 30px;
-
-  /*  데스크탑 핵심: 스크롤바가 생겨도 정중앙이 왼쪽으로 쏠리지 않도록 공간을 대칭으로 유지합니다. */
   scrollbar-gutter: stable;
 }
 
-/* 스크롤바 슬림 디자인 커스텀 */
+/* 스크롤바 디자인 */
 .editList::-webkit-scrollbar {
   width: 6px;
 }
@@ -65,11 +63,9 @@
   align-items: center;
 }
 
+/* 방해꾼이던 투명 여백 상자를 완전히 삭제 */
 .emptySpace {
-  width: 48px !important;
-  min-width: 48px !important;
-  height: 48px !important;
-  display: block;
+  display: none !important;
 }
 
 /* #818181 테마 밑줄 스타일 */
@@ -84,7 +80,7 @@
   text-decoration-thickness: 1.8px;
 }
 
-/* 빈 상자일 때 가운데 정렬 선 */
+/* 빈 상자 가운데 정렬 선 */
 .isEmpty {
   display: inline-block;
   width: 127.5px;
@@ -227,7 +223,7 @@
     width: 312px !important;
     gap: 8px !important;
     margin-bottom: 24px !important;
-    scrollbar-gutter: auto; /* 모바일 기기에서는 거터 확보 비활성화 */
+    scrollbar-gutter: auto;
   }
 
   .editItemText,
@@ -242,10 +238,6 @@
     width: 312px !important;
     height: 54px !important;
     margin-bottom: 24px !important;
-  }
-
-  .emptySpace {
-    display: none !important;
   }
 
   .modalActions {
