@@ -187,7 +187,9 @@ function MainPage() {
         )}
       </section>
 
-      <section className={styles.studyList}>
+      <section
+        className={`${styles.studyList} ${visibleStudies.length === 0 ? styles.studyListEmpty : ""}`}
+      >
         <h2 className={styles.sectionTitle}>스터디 둘러보기</h2>
 
         {/*서치바, 드롭다운 한번에 묶기*/}
