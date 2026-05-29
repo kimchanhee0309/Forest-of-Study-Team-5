@@ -3,26 +3,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 16px; /* 데스크탑 기본 */
   width: 100%;
   box-sizing: border-box;
 }
 
-/* 습관 회색 박스 */
+/* 습관 회색 박스 (배경과 크기 틀만 담당) */
 .item {
   width: 400px;
-  height: 56px;
-  background: var(--gray-eeeeee);
+  height: 54px;
+  background: var(--gray-eeeeee, #eee);
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--gray-818181);
-  font-size: var(--text-18);
-  font-weight: var(--weight-semibold);
   box-sizing: border-box;
-  text-decoration: underline !important;
-  text-underline-offset: 4px !important;
+  cursor: pointer;
 }
 
 /* 우측 휴지통 버튼 */
@@ -30,12 +26,9 @@
   width: 48px !important;
   height: 48px !important;
   min-width: 48px !important;
-  min-height: 48px !important;
-  max-width: 48px !important;
-  max-height: 48px !important;
   padding: 12px !important;
   border-radius: 35px !important;
-  background: var(--pink-bg);
+  background: var(--pink-bg, #fde0e9);
   border: none;
   cursor: pointer;
   display: flex;
@@ -48,31 +41,34 @@
 .icon {
   width: 24px !important;
   height: 24px !important;
-  min-width: 24px !important;
-  min-height: 24px !important;
   display: block;
   object-fit: contain;
-  background: transparent;
 }
 
 /* ======================================================== */
-/* 아이패드 미니 사이즈 */
+/* 아이패드 미니 사이즈 (Figma 규격 완벽 적용) */
 /* ======================================================== */
 @media (min-width: 481px) and (max-width: 768px) {
+  .wrapper {
+    gap: 8px !important;
+  }
   .item {
-    width: 400px;
-    height: 54px;
+    width: 400px !important;
+    height: 54px !important;
   }
 }
 
 /* ======================================================== */
-/* 모바일 사이즈 */
+/* 모바일 사이즈 (Figma 규격 완벽 적용) */
 /* ======================================================== */
 @media (max-width: 480px) {
+  .wrapper {
+    gap: 8px !important;
+  }
   .item {
-    width: 280px !important;
-    min-width: 280px !important;
+    width: 256px !important;
+    min-width: 256px !important;
     height: 54px !important;
-    margin: 0 auto;
+    margin: 0;
   }
 }
