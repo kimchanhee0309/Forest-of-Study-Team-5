@@ -1,7 +1,9 @@
 import { useState } from "react";
 import styles from "./StudyCreateForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 function useStudyCreateForm() {
+    const navigate = useNavigate();  // 생성 후 메인 페이지로 이동
   // ── 상태 관리
 
   // MaxLength추가
@@ -96,12 +98,34 @@ function useStudyCreateForm() {
   };
 
   // 만들기 버튼 클릭 시 실행 — 검사 통과해야만 API 요청
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const isValid = validateForm();
-
     if (!isValid) return;
 
-    // TODO: API 연동 시 스터디 생성 요청 연결
+    try {
+      const response = await fetch("/api/studies", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nickname: formData.nickname,
+          title: formData.title,
+          description: formData.description,
+          background: selectedBackground,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("스터디 생성 성공!", data);
+        navigate("/");  //성공 시 페이지 이동
+      } else {
+        console.log("실패", data);
+      }
+    } catch (error) {
+      console.error("네트워크 오류", error);
+    }
   };
 
   // ── 배경 로직
