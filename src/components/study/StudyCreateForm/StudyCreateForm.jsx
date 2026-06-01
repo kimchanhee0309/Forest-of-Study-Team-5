@@ -45,15 +45,15 @@ function StudyCreateForm() {
         <div className={styles.field}>
           <label className={styles.label}>스터디 이름</label>
           <Input
-            name="studyName"
-            value={formData.studyName}
+            name="title"
+            value={formData.title}
             onChange={handleChange}
             placeholder="스터디 이름을 입력해주세요"
-            error={errors.studyName}
+            error={errors.title}
             autoComplete="off"
           />
           <span className={styles.charCount}>
-            {formData.studyName.length}/{MaxLength.studyName}자
+            {formData.title.length}/{MaxLength.title}자
           </span>
         </div>
 

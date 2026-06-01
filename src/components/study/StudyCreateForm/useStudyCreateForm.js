@@ -1,20 +1,22 @@
 import { useState } from "react";
 import styles from "./StudyCreateForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 function useStudyCreateForm() {
+    const navigate = useNavigate();  // 생성 후 메인 페이지로 이동
   // ── 상태 관리
 
   // MaxLength추가
   const MaxLength = {
     nickname: 30,
-    studyName: 50,
+    title: 50,
     description: 200,
   };
 
   // 폼 입력값 상태 (닉네임, 스터디이름, 소개, 비밀번호 등)
   const [formData, setFormData] = useState({
     nickname: "",
-    studyName: "",
+    title: "",
     description: "",
     password: "",
     passwordConfirm: "",
@@ -22,7 +24,7 @@ function useStudyCreateForm() {
 
   // 유효성 검사 실패 시 보여줄 에러 메시지 상태
   const [errors, setErrors] = useState({
-    studyName: "",
+    title: "",
     description: "",
     password: "",
     passwordConfirm: "",
@@ -61,14 +63,14 @@ function useStudyCreateForm() {
   // 폼 제출 전 유효성 검사 — 문제 있으면 에러 메시지 세팅, 통과하면 true 반환
   const validateForm = () => {
     const nextErrors = {
-      studyName: "",
+      title: "",
       password: "",
       passwordConfirm: "",
     };
 
     // 스터디 이름이 비어있으면 에러
-    if (!formData.studyName.trim()) {
-      nextErrors.studyName = "*스터디 이름을 입력해주세요";
+    if (!formData.title.trim()) {
+      nextErrors.title = "*스터디 이름을 입력해주세요";
     }
 
     // 비밀번호가 비어있으면 에러
@@ -88,7 +90,7 @@ function useStudyCreateForm() {
 
     // 에러가 하나도 없으면 true, 하나라도 있으면 false
     return (
-      !nextErrors.studyName &&
+      !nextErrors.title &&
       !nextErrors.description &&
       !nextErrors.password &&
       !nextErrors.passwordConfirm
@@ -96,12 +98,34 @@ function useStudyCreateForm() {
   };
 
   // 만들기 버튼 클릭 시 실행 — 검사 통과해야만 API 요청
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const isValid = validateForm();
-
     if (!isValid) return;
 
-    // TODO: API 연동 시 스터디 생성 요청 연결
+    try {
+      const response = await fetch("/api/studies", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nickname: formData.nickname,
+          title: formData.title,
+          description: formData.description,
+          background: selectedBackground,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("스터디 생성 성공!", data);
+        navigate("/");  //성공 시 페이지 이동
+      } else {
+        console.log("실패", data);
+      }
+    } catch (error) {
+      console.error("네트워크 오류", error);
+    }
   };
 
   // ── 배경 로직
