@@ -110,6 +110,7 @@ function MainPage() {
     },
   ]);
   // 스터디 검색 기능, 정렬순, loadmore
+  const [inputValue, setInputValue] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState("최근 순");
   const sortOptions = [
@@ -127,8 +128,17 @@ function MainPage() {
   const navigate = useNavigate();
 
   //검색 핸들러
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    //입력값이 없어지면 검색어 초기화
+    if (e.target.value === "") {
+      setSearchKeyword("");
+    }
+  };
+
   const handleSearch = (e) => {
-    setSearchKeyword(e.target.value);
+    e.preventDefault();
+    setSearchKeyword(inputValue);
   };
 
   // 더보기 핸들러
@@ -194,18 +204,24 @@ function MainPage() {
 
         {/*서치바, 드롭다운 한번에 묶기*/}
         <div className={styles.controlBar}>
-          <div className={styles.searchBar}>
-            <div className={styles.searchInputWrapper}>
-              <img src={searchIcon} alt="검색" className={styles.searchIcon} />
-              <input
-                className={styles.searchInput}
-                type="text"
-                placeholder="검색"
-                value={searchKeyword}
-                onChange={handleSearch}
-              />
+          <form onSubmit={handleSearch}>
+            <div className={styles.searchBar}>
+              <div className={styles.searchInputWrapper}>
+                <img
+                  src={searchIcon}
+                  alt="검색"
+                  className={styles.searchIcon}
+                />
+                <input
+                  className={styles.searchInput}
+                  type="text"
+                  placeholder="검색"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
-          </div>
+          </form>
           <div className={styles.dropdownWrapper}>
             <Dropdown
               value={sortOrder}
