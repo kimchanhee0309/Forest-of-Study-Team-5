@@ -1,7 +1,7 @@
 import styles from "./HabitSection.module.css";
+import Chip from "../../../components/common/Chip/Chip";
 
-function HabitSection({ habits, onOpenEdit }) {
-  // 습관 목록이 비어있는지 확인
+function HabitSection({ habits, onOpenEdit, onToggle }) {
   const isEmpty = habits.length === 0;
 
   return (
@@ -13,7 +13,6 @@ function HabitSection({ habits, onOpenEdit }) {
         </button>
       </header>
 
-      {/* 습관이 없을 때 보여줄 안내 문구 */}
       {isEmpty ? (
         <div className={styles.emptyState}>
           <p>아직 습관이 없어요</p>
@@ -21,15 +20,14 @@ function HabitSection({ habits, onOpenEdit }) {
         </div>
       ) : (
         <ul className={styles.habitList}>
-          {/* 배열 돌면서 습관 리스트 화면에 그리기 */}
           {habits.map((habit) => (
-            <li
-              key={habit.id}
-              className={`${styles.habitItem} ${
-                habit.isCompleted ? styles.completed : styles.incomplete
-              }`}
-            >
-              {habit.title}
+            <li key={habit.id} className={styles.habitItem}>
+              <Chip
+                completed={habit.isCompleted}
+                onClick={() => onToggle(habit.id)}
+              >
+                {habit.title}
+              </Chip>
             </li>
           ))}
         </ul>

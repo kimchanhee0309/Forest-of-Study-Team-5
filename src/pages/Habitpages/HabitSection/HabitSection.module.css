@@ -49,28 +49,13 @@
   align-items: center;
 }
 
-/* 각 습관 박스 스타일 */
+/* 각 습관 박스 틀 (색상 및 디자인은 Chip 컴포넌트가 담당) */
 .habitItem {
   width: 400px;
   height: 54px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
-  font-size: var(--text-16);
-  font-weight: var(--weight-medium);
-}
-
-/* 완료된 습관 */
-.completed {
-  background: var(--brand);
-  color: #fff;
-}
-
-/* 아직 안한 습관 */
-.incomplete {
-  background: var(--gray-eeeeee);
-  color: var(--gray-818181);
 }
 
 /* ======================================================== */

@@ -1,20 +1,17 @@
 import { useState } from "react";
+//  1. 기존 Link에 더해서 'useParams'도 같이 불러오기
+import { Link, useParams } from "react-router-dom";
 import styles from "./HabitPage.module.css";
-
-// 공용 GNB 컴포넌트 불러오기
 import GNB from "../../components/common/GNB/GNB";
-
-// 하위 컴포넌트들
 import HabitSection from "./HabitSection/HabitSection";
 import HabitEditModal from "./HabitEditModal/HabitEditModal";
-
 import icArrowRight from "../../assets/icons/ic_arrow_right.png";
 
 function HabitPage() {
-  // 모달창 열림/닫힘 상태
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // 2. 현재 접속 주소창에서 스터디 번호(studyId) 뽑아내기.
+  const { studyId } = useParams();
 
-  // 습관 목록 데이터 (나중에 서버에서 받아오게 수정해야 함)
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [habits, setHabits] = useState([
     { id: 1, title: "미라클모닝 6시 기상", isCompleted: true },
     { id: 2, title: "아침 챙겨 먹기", isCompleted: true },
@@ -24,6 +21,14 @@ function HabitPage() {
     { id: 6, title: "사이드 프로젝트", isCompleted: false },
     { id: 7, title: "물 2L 먹기", isCompleted: false },
   ]);
+
+  const handleToggleHabit = (id) => {
+    setHabits((prevHabits) =>
+      prevHabits.map((habit) =>
+        habit.id === id ? { ...habit, isCompleted: !habit.isCompleted } : habit,
+      ),
+    );
+  };
 
   return (
     <div className={styles.layout}>
@@ -41,33 +46,39 @@ function HabitPage() {
             </div>
 
             <div className={styles.navButtons}>
-              <button className={styles.navBtnActive}>
+              {/*  백틱(`)을 사용 뽑아온 studyId 주소 중간 끼워넣기 */}
+              <Link
+                to={`/studies/${studyId}/focus`}
+                className={styles.navBtnActive}
+              >
                 오늘의 집중
                 <img
                   src={icArrowRight}
                   alt="이동"
                   className={styles.arrowIcon}
                 />
-              </button>
-              <button className={styles.navBtn}>
+              </Link>
+
+              {/* 메인 페이지는 루트("/")이므로 변수 없이 고정 */}
+              <Link to="/" className={styles.navBtn}>
                 홈
                 <img
                   src={icArrowRight}
                   alt="이동"
                   className={styles.arrowIcon}
                 />
-              </button>
+              </Link>
             </div>
           </header>
 
           <HabitSection
             habits={habits}
             onOpenEdit={() => setIsModalOpen(true)}
+            onToggle={handleToggleHabit}
           />
         </article>
       </main>
 
-      {/* 목록 수정 버튼 누르면 모달창 띄우기 */}
       {isModalOpen && (
         <HabitEditModal
           habits={habits}

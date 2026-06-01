@@ -9,62 +9,87 @@
   z-index: 1000;
 }
 
-/* 모달창 본체 */
+/* 모달창 본체 (데스크탑 기준) */
 .modal {
   width: 600px;
   max-width: 90vw;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px 24px;
-  gap: 30px;
   border-radius: 20px;
   background: #fff;
   box-sizing: border-box;
 }
 
+/* 데스크탑 모달 대제목 */
 .modalTitle {
   font-size: var(--text-24);
   font-weight: var(--weight-bold);
+  margin: 0 0 30px 0;
 }
 
+/* 데스크탑 정렬 해결: 기본 여백 삭제 및 스크롤바 공간 확보 */
 .editList {
   width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: center;
   overflow-y: auto;
+  overflow-x: hidden;
+  flex-grow: 1;
+  margin-bottom: 30px;
+  scrollbar-gutter: stable;
 }
 
-/* 습관 목록 간격 */
+/* 스크롤바 디자인 */
+.editList::-webkit-scrollbar {
+  width: 6px;
+}
+.editList::-webkit-scrollbar-thumb {
+  background: var(--gray-dddddd);
+  border-radius: 10px;
+}
+
 .editItemRow {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
 }
 
-/* 플러스 버튼 가운데 맞추려고 휴지통이랑 같은 크기로 만든 투명 여백 */
+/* 방해꾼이던 투명 여백 상자를 완전히 삭제 */
 .emptySpace {
-  width: 48px !important;
-  min-width: 48px !important;
-  height: 48px !important;
-  display: block;
+  display: none !important;
 }
 
-/* 수정 모드일 때 인풋 박스 */
-.inputWrapper {
-  width: 400px;
-  height: 54px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  background: var(--gray-eeeeee);
+/* #818181 테마 밑줄 스타일 */
+.editItemText {
+  font-size: var(--text-16, 16px);
+  font-weight: var(--weight-medium, 500);
+  color: var(--gray-818181, #818181) !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--gray-818181, #818181) !important;
+  text-underline-position: under;
+  text-underline-offset: 1px;
+  text-decoration-thickness: 1.8px;
 }
 
+/* 빈 상자 가운데 정렬 선 */
+.isEmpty {
+  display: inline-block;
+  width: 127.5px;
+  height: 1.8px;
+  background-color: var(--gray-818181, #818181) !important;
+  text-decoration: none !important;
+}
+
+/* 수정 모드 인풋창 */
 .editItemInput {
   width: 90%;
   height: 100%;
@@ -72,14 +97,9 @@
   outline: none;
   background: transparent;
   text-align: center;
-}
-
-.deleteBtn {
-  width: 48px;
-  height: 48px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
+  font-size: var(--text-16, 16px);
+  font-weight: var(--weight-medium, 500);
+  color: var(--gray-818181, #818181) !important;
 }
 
 /* 맨 아래 추가하는 플러스 버튼 */
@@ -90,10 +110,12 @@
   width: 400px !important;
   height: 54px;
   border-radius: 20px;
-  border: 2px solid var(--black);
+  border: 2px solid var(--black, #414141);
   background: transparent;
   cursor: pointer;
   padding: 0;
+  flex-shrink: 0;
+  margin-bottom: 30px;
 }
 
 .addIcon {
@@ -108,6 +130,7 @@
   gap: 16px;
   justify-content: center;
   width: 100%;
+  flex-shrink: 0;
 }
 
 /* 취소, 수정 완료 버튼 공통 속성 */
@@ -125,70 +148,103 @@
   cursor: pointer;
   text-align: center;
   font-family: "EF_jejudoldam", sans-serif !important;
-  font-size: var(--text-18) !important;
-  font-style: normal;
-  font-weight: var(--weight-regular) !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
   line-height: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .cancelBtn {
-  background: var(--gray-dddddd) !important;
-  color: var(--gray-818181) !important;
+  background: var(--gray-dddddd, #ddd) !important;
+  color: var(--gray-818181, #818181) !important;
 }
 
 .saveBtn {
-  background: var(--brand) !important;
+  background: var(--brand, #99c08e) !important;
   color: #fff !important;
 }
 
 /* ======================================================== */
-/* 아이패드 미니 사이즈 */
+/* 아이패드 미니 사이즈 (Figma 규격 완벽 적용) */
 /* ======================================================== */
 @media (min-width: 481px) and (max-width: 768px) {
   .modal {
-    width: 500px;
-    padding: 32px 20px;
+    width: 648px !important;
+    height: auto !important;
+    max-height: 861px !important;
+    padding: 40px 24px !important;
   }
-
-  .inputWrapper,
+  .modalTitle {
+    margin-bottom: 40px !important;
+  }
+  .editList {
+    gap: 20px !important;
+    margin-bottom: 40px !important;
+  }
   .addBtn {
-    width: 380px !important;
+    width: 400px !important;
+    margin-bottom: 40px !important;
   }
-
+  .modalActions {
+    gap: 24px !important;
+  }
   .cancelBtn,
   .saveBtn {
-    width: 210px !important;
-    height: 52px !important;
+    width: 288px !important;
   }
 }
 
 /* ======================================================== */
-/* 모바일 사이즈 */
+/* 모바일 사이즈 (Figma 규격 완벽 적용) */
 /* ======================================================== */
 @media (max-width: 480px) {
   .modal {
-    width: 344px;
-    padding: 24px 16px;
-    gap: 20px;
+    width: 344px !important;
+    height: auto !important;
+    max-height: 741px !important;
+    padding: 24px 16px !important;
   }
 
-  .inputWrapper {
-    width: 100%;
-    height: 54px;
+  .modalTitle {
+    width: 312px !important;
+    height: 29px !important;
+    color: var(--black, #414141) !important;
+    text-align: center !important;
+    font-family: "Pretendard", sans-serif !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    line-height: normal !important;
+    margin-bottom: 24px !important;
   }
 
-  /* 모바일에서 플러스 버튼 작아지게 적용 */
+  .editList {
+    width: 312px !important;
+    gap: 8px !important;
+    margin-bottom: 24px !important;
+    scrollbar-gutter: auto;
+  }
+
+  .editItemText,
+  .editItemInput {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: var(--gray-818181, #818181) !important;
+    text-decoration: underline !important;
+  }
+
   .addBtn {
-    width: 280px !important;
-    height: 54px;
+    width: 312px !important;
+    height: 54px !important;
+    margin-bottom: 24px !important;
   }
 
   .modalActions {
-    flex-direction: row !important;
-    gap: 12px;
+    width: 312px !important;
+    gap: 16px !important;
   }
 
-  /* 취소, 수정완료 모바일 140px 규격 */
   .cancelBtn,
   .saveBtn {
     width: 140px !important;

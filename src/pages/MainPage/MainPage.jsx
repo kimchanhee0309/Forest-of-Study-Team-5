@@ -3,6 +3,7 @@ import StudyCard from "../../components/study/StudyCard/StudyCard";
 import styles from "./MainPage.module.css";
 import searchIcon from "../../assets/icons/ic_search.png";
 import Dropdown from "../../components/common/Dropdown/Dropdown";
+import { useNavigate } from "react-router-dom";
 
 // 메인 페이지 기능
 // - 스터디 목록 불러오기
@@ -109,6 +110,7 @@ function MainPage() {
     },
   ]);
   // 스터디 검색 기능, 정렬순, loadmore
+  const [inputValue, setInputValue] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState("최근 순");
   const sortOptions = [
@@ -122,12 +124,21 @@ function MainPage() {
   //기초 세팅
   useEffect(() => {}, []);
 
-  //상세페이지 이동 추후 연결 필요
-  // const navigate = useNavigate();
+  //상세페이지 이동
+  const navigate = useNavigate();
 
   //검색 핸들러
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    //입력값이 없어지면 검색어 초기화
+    if (e.target.value === "") {
+      setSearchKeyword("");
+    }
+  };
+
   const handleSearch = (e) => {
-    setSearchKeyword(e.target.value);
+    e.preventDefault();
+    setSearchKeyword(inputValue);
   };
 
   // 더보기 핸들러
@@ -161,7 +172,6 @@ function MainPage() {
   return (
     <div className={styles.mainPage}>
       {/*섹션 1: 최근 조회한 스터디*/}
-      {/* 스터디 카드 데이터 상세 페이지 이동 추가 필요 현재는 아이디만 받는중(166 - onClick)*/}
       <section className={styles.recentStudies}>
         <h2 className={styles.sectionTitle}>최근 조회한 스터디</h2>
         {recentStudies.length === 0 ? (
@@ -180,27 +190,38 @@ function MainPage() {
                 description={study.description}
                 point={study.point}
                 emojis={study.emojis}
-                onClick={() => console.log(study.id)}
+                onClick={() => navigate(`/studies/${study.id}`)}
               />
             ))}
           </div>
         )}
       </section>
 
-      <section className={styles.studyList}>
+      <section
+        className={`${styles.studyList} ${visibleStudies.length === 0 ? styles.studyListEmpty : ""}`}
+      >
         <h2 className={styles.sectionTitle}>스터디 둘러보기</h2>
 
-        <div className={styles.searchBar}>
-          <div className={styles.searchInputWrapper}>
-            <img src={searchIcon} alt="검색" className={styles.searchIcon} />
-            <input
-              className={styles.searchInput}
-              type="text"
-              placeholder="검색"
-              value={searchKeyword}
-              onChange={handleSearch}
-            />
-          </div>
+        {/*서치바, 드롭다운 한번에 묶기*/}
+        <div className={styles.controlBar}>
+          <form onSubmit={handleSearch}>
+            <div className={styles.searchBar}>
+              <div className={styles.searchInputWrapper}>
+                <img
+                  src={searchIcon}
+                  alt="검색"
+                  className={styles.searchIcon}
+                />
+                <input
+                  className={styles.searchInput}
+                  type="text"
+                  placeholder="검색"
+                  value={inputValue}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
+          </form>
           <div className={styles.dropdownWrapper}>
             <Dropdown
               value={sortOrder}
@@ -209,7 +230,7 @@ function MainPage() {
             />
           </div>
         </div>
-        {/* 스터디 카드 데이터 상세 페이지 이동 추가 필요 현재는 아이디만 받는중(211 - onClick)*/}
+
         {visibleStudies.length === 0 ? (
           <div className={styles.emptyContainer}>
             <p className={styles.emptyMessage}>아직 둘러 볼 스터디가 없어요 </p>
@@ -225,7 +246,7 @@ function MainPage() {
                   description={study.description}
                   point={study.point}
                   emojis={study.emojis}
-                  onClick={() => console.log(study.id)}
+                  onClick={() => navigate(`/studies/${study.id}`)}
                 />
               ))}
             </div>

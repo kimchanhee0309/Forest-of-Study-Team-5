@@ -7,7 +7,7 @@
  * - 스터디 정보 조회
  * - 응원 이모지 조회 및 추가
  * - 공유 기능
- * - 수정/삭제 비밀번호 모달
+ * - 수정/삭제 비밀번호 모달 (토스트기능x)
  * - 습관 기록표 조회
  *
  * API 연동 예정:
@@ -16,7 +16,7 @@
  * - POST /studies/:id/emojis
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import pointIcon from "../../assets/icons/ic_point.png";
 import arrowIcon from "../../assets/icons/ic_arrow_right.png";
 import style from "./StudyDetail.module.css";
@@ -24,13 +24,13 @@ import EmojiReaction from "../../components/study/Emoji/EmojiReaction.jsx";
 import PasswordModal from "../../components/study/PasswordModal/PasswordModal.jsx";
 import HabitTable from "../../components/study/HabitTable/HabitTable.jsx";
 import Tag from "../../components/common/Tag/Tag.jsx";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function StudyDetailPage() {
   //현재 열려 있는 모달 상태
   const [openModal, setOpenModal] = useState(null);
 
-  /* 습관 기록표 API 가져오기 */
+  /* 습관 기록표 API 호출 */
   //   const [habits, setHabits] = useState([]);
 
   // useEffect(() => {
@@ -38,7 +38,7 @@ function StudyDetailPage() {
   // }, []);
 
   /* 오늘의 습관, 집중 버튼 홈페이지이동 */
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // [공유하기] 현재 페이지 URL 복사
   const handleShare = async () => {
@@ -51,6 +51,41 @@ function StudyDetailPage() {
 
       alert("복사에 실패했습니다.");
     }
+  };
+
+  // 게시글 연동 조회
+  const { studyId } = useParams();
+  // 게시글 API 호출 (현재 임시값)
+  const [study, setStudy] = useState(
+    {
+      id: 1,
+      title: "리액트 스터디",
+      elapsedDays: 10,
+      description: "리액트 기초부터 같이 공부해요",
+      point: 100,
+      emojis: [],
+    },
+    {
+      id: 2,
+      title: "자바스크립트 스터디",
+      elapsedDays: 5,
+      description: "자바스크립트 기초부터 같이 공부해요",
+      point: 50,
+      emojis: [],
+    },
+    // []
+  );
+
+  useEffect(() => {
+    fetchStudyDetail();
+  }, []);
+
+  const fetchStudyDetail = async () => {
+    const response = await fetch(`http://localhost:5173/studies/${studyId}`);
+
+    const data = await response.json();
+
+    setStudy(data);
   };
 
   //  임시 습관 기록표 값
@@ -117,7 +152,9 @@ function StudyDetailPage() {
             {/* 스터디 이름 API 연동 필요 */}
             <div className={style.post_frame}>
               <div className={style.post_header}>
-                <span className={style.postTitle}>연우의 개발공장</span>
+                <span className={style.postTitle}>
+                  {study.nickname}의 {study.title}
+                </span>
                 <div className={style.post_btn_frame}>
                   {/* 오늘의 습관, 집중을 눌렀을때 나타나는 모달구현 */}
                   {/* 페이지 이동 추가 필요 */}
@@ -155,16 +192,14 @@ function StudyDetailPage() {
                 {/* 소개, 포인트 등 API 연동 필요 */}
                 <div className={style.introduce}>
                   <span className={style.postGray}>소개</span>
-                  <span className={style.postBlack}>
-                    Slow And Steady Wins The Race! 다들 오늘 하루도 화이팅 :)
-                  </span>
+                  <span className={style.postBlack}>{study.description}</span>
                 </div>
                 <div className={style.point}>
                   <span className={style.postGray}>현재까지 획득한 포인트</span>
                   <Tag
                     variant="studyDetail"
                     size="studyDetailSize"
-                    children={"310P 획득"}
+                    children={study.point + "P 휙득"}
                     icon={
                       <img
                         src={pointIcon}
@@ -209,13 +244,13 @@ function StudyDetailPage() {
             //   console.log("삭제 API");
             // }
 
-            // if (openModal === "habit") {
-            //   navigate("/habit");
-            // }
+            if (openModal === "habit") {
+              navigate(`/studies/${study.id}/habits`);
+            }
 
-            // if (openModal === "focus") {
-            //   navigate("/focus");
-            // }
+            if (openModal === "focus") {
+              navigate(`/studies/${study.id}/focus`);
+            }
 
             setOpenModal(null);
           }}

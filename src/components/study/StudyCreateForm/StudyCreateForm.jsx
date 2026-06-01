@@ -1,130 +1,27 @@
-import { useState } from "react";
 import Input from "../../common/Input/Input.jsx";
 import Button from "../../common/Button/Button.jsx";
 import styles from "./StudyCreateForm.module.css";
-
-// 배경 선택시 스티커 이미지
 import sticker_gray from "../../../assets/sticker/sticker_gray.png";
 
+import useStudyCreateForm from "./useStudyCreateForm"; // ✅ 훅 import
+
 function StudyCreateForm() {
-  // form 입력값 상태 관리
-  const [formData, setFormData] = useState({
-    nickname: "",
-    studyName: "",
-    description: "",
-    password: "",
-    passwordConfirm: "",
-  });
+  // hook
+  const {
+    formData,
+    errors,
+    MaxLength,
+    selectedBackground,
+    customBackgrounds,
+    defaultBackgrounds,
+    handleChange,
+    handleSubmit,
+    handleSelectBackground,
+    handleAddCustomBackground,
+    handleDeleteCustomBackground,
+  } = useStudyCreateForm();
 
-  // 유효성 검사 에러 메세지 상태
-  const [errors, setErrors] = useState({
-    studyName: "",
-    description: "",
-    password: "",
-    passwordConfirm: "",
-  });
-
-  const validateForm = () => {
-    const nextErrors = {
-      studyName: "",
-      password: "",
-      passwordConfirm: "",
-    };
-
-    // 스터디 이름
-    if (!formData.studyName.trim()) {
-      nextErrors.studyName = "*스터디 이름을 입력해주세요";
-    }
-
-    // 비번 입력 안했을 때
-    if (!formData.password) {
-      nextErrors.password = "*비밀번호를 입력해주세요";
-    }
-
-    // 비번 확인 입력 안했을 때
-    if (!formData.passwordConfirm) {
-      nextErrors.passwordConfirm = "*비밀번호를 다시 입력해주세요";
-
-      // 비번 불일치
-    } else if (formData.password !== formData.passwordConfirm) {
-      nextErrors.passwordConfirm = "*비밀번호가 일치하지 않습니다";
-    }
-
-    setErrors(nextErrors);
-
-    return (
-      !nextErrors.studyName &&
-      !nextErrors.description &&
-      !nextErrors.password &&
-      !nextErrors.passwordConfirm
-    );
-  };
-
-  const handleSubmit = () => {
-    const isValid = validateForm();
-
-    if (!isValid) {
-      return;
-    }
-
-  // TODO: API 연동 시 스터디 생성 요청 연결
-  };
-
-  // input / textarea 공통 입력 변경 처리
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // UI 제공 기본 배경 id 관리
-  const [selectedBackground, setSelectedBackground] = useState("green");
-
-  // 배경 선택 시 선택 id 변경
-  const handleSelectBackground = (background) => {
-    setSelectedBackground(background);
-  };
-
-  // 기본 제공 배경 목록
-  const defaultBackgrounds = [
-    { id: "green", className: styles.bgGreen },
-    { id: "yellow", className: styles.bgYellow },
-    { id: "blue", className: styles.bgBlue },
-    { id: "pink", className: styles.bgPink },
-  ];
-
-  // 사용자가 업로드한 배경 이미지 목록
-  const [customBackgrounds, setCustomBackgrounds] = useState([]);
-
-  // 사용자 배경 이미지 추가
-  const handleAddCustomBackground = (e) => {
-    const file = e.target.files[0];
-
-    if (!file) return;
-    if (customBackgrounds.length >= 4) return;
-
-    const imageUrl = URL.createObjectURL(file);
-
-    setCustomBackgrounds((prev) => [...prev, imageUrl]);
-
-    e.target.value = "";
-  };
-
-  // 사용자 배경 이미지 삭제
-  const handleDeleteCustomBackground = (deleteIndex) => {
-    setCustomBackgrounds((prev) =>
-      prev.filter((_, index) => index !== deleteIndex),
-    );
-
-    // 삭제한 배경이 선택 중이면 기본 배경으로 초기화
-    if (selectedBackground === `custom-${deleteIndex}`) {
-      setSelectedBackground("green");
-    }
-  };
-
+  // 화면(UI) 담당
   return (
     <form className={styles.form}>
       {/* 스터디 생성 카드 영역 */}
@@ -138,7 +35,11 @@ function StudyCreateForm() {
             value={formData.nickname}
             onChange={handleChange}
             placeholder="닉네임을 입력해주세요"
+            autoComplete="off"
           />
+          <span className={styles.charCount}>
+            {formData.nickname.length}/{MaxLength.nickname}자
+          </span>
         </div>
 
         <div className={styles.field}>
@@ -149,7 +50,11 @@ function StudyCreateForm() {
             onChange={handleChange}
             placeholder="스터디 이름을 입력해주세요"
             error={errors.studyName}
+            autoComplete="off"
           />
+          <span className={styles.charCount}>
+            {formData.studyName.length}/{MaxLength.studyName}자
+          </span>
         </div>
 
         <div className={styles.field}>
@@ -161,6 +66,9 @@ function StudyCreateForm() {
             className={styles.textarea}
             placeholder="소개 멘트를 작성해주세요"
           />
+          <span className={styles.charCount}>
+            {formData.description.length}/{MaxLength.description}자
+          </span>
         </div>
 
         {/* 배경 선택 field */}
@@ -237,7 +145,6 @@ function StudyCreateForm() {
         {/* 비밀번호 입력 */}
         <div className={styles.field}>
           <label className={styles.label}>비밀번호</label>
-          {/* 공용 Input 사용 */}
           <Input
             type="password"
             name="password"
@@ -245,12 +152,13 @@ function StudyCreateForm() {
             onChange={handleChange}
             placeholder="비밀번호를 입력해주세요"
             error={errors.password}
+            maxLength={100}
+            autoComplete="new-password"
           />
         </div>
 
         <div className={styles.field}>
           <label className={styles.label}>비밀번호 확인</label>
-
           <Input
             type="password"
             name="passwordConfirm"
@@ -258,6 +166,8 @@ function StudyCreateForm() {
             onChange={handleChange}
             placeholder="비밀번호를 다시 입력해주세요"
             error={errors.passwordConfirm}
+            maxLength={100}
+            autoComplete="new-password"
           />
         </div>
 
