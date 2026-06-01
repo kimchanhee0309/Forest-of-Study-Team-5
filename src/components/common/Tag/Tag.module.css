@@ -9,6 +9,9 @@
   border-radius: 999px;
   font-weight: var(--weight-bold);
   line-height: 1;
+
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .dark {
