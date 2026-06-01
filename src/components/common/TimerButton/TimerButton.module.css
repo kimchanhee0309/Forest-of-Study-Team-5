@@ -26,11 +26,20 @@
 .small {
   width: 48px;
   height: 48px;
+  min-width: 48px;
+  min-height: 48px;
   font-size: var(--font-18);
 
   top: 20px;
   left: 102px;
   opacity: 1;
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .active {

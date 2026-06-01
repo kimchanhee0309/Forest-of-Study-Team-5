@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import GNB from "../../components/common/GNB/GNB";
 import Timer from "../../components/focus/Timer/Timer";
@@ -20,6 +20,13 @@ function FocusPage({
   const navigate = useNavigate();
   const [inputMinutes, setInputMinutes] = useState(25);
   const [inputSeconds, setInputSeconds] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 375);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 375);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const targetTime = `${String(inputMinutes).padStart(2, "0")}:${String(inputSeconds).padStart(2, "0")}`;
   const { status, remainSeconds, toast, start, pause, restart, stop } =
     useFocusTimer(targetTime);
@@ -81,9 +88,9 @@ function FocusPage({
 
           {(status === "running" || status === "paused") && (
             <div className={styles.iconButtons}>
-              <TimerButton type="pause" size="large" onClick={pause} />
+              <TimerButton type="pause" size={isMobile ? "small" : "large"} onClick={pause} />
               <StartStopButton variant="inactive" onClick={start} />
-              <TimerButton type="restart" size="large" onClick={restart} />
+              <TimerButton type="restart" size={isMobile ? "small" : "large"} onClick={restart} />
             </div>
           )}
 
