@@ -7,14 +7,14 @@ function useStudyCreateForm() {
   // MaxLength추가
   const MaxLength = {
     nickname: 30,
-    studyName: 50,
+    title: 50,
     description: 200,
   };
 
   // 폼 입력값 상태 (닉네임, 스터디이름, 소개, 비밀번호 등)
   const [formData, setFormData] = useState({
     nickname: "",
-    studyName: "",
+    title: "",
     description: "",
     password: "",
     passwordConfirm: "",
@@ -22,7 +22,7 @@ function useStudyCreateForm() {
 
   // 유효성 검사 실패 시 보여줄 에러 메시지 상태
   const [errors, setErrors] = useState({
-    studyName: "",
+    title: "",
     description: "",
     password: "",
     passwordConfirm: "",
@@ -61,14 +61,14 @@ function useStudyCreateForm() {
   // 폼 제출 전 유효성 검사 — 문제 있으면 에러 메시지 세팅, 통과하면 true 반환
   const validateForm = () => {
     const nextErrors = {
-      studyName: "",
+      title: "",
       password: "",
       passwordConfirm: "",
     };
 
     // 스터디 이름이 비어있으면 에러
-    if (!formData.studyName.trim()) {
-      nextErrors.studyName = "*스터디 이름을 입력해주세요";
+    if (!formData.title.trim()) {
+      nextErrors.title = "*스터디 이름을 입력해주세요";
     }
 
     // 비밀번호가 비어있으면 에러
@@ -88,7 +88,7 @@ function useStudyCreateForm() {
 
     // 에러가 하나도 없으면 true, 하나라도 있으면 false
     return (
-      !nextErrors.studyName &&
+      !nextErrors.title &&
       !nextErrors.description &&
       !nextErrors.password &&
       !nextErrors.passwordConfirm
