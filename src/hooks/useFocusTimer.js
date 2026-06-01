@@ -8,6 +8,13 @@ function useFocusTimer(targetTime = "00:10", studyId) {
 
   const [status, setStatus] = useState("idle");
   const [remainSeconds, setRemainSeconds] = useState(totalSeconds);
+
+  // targetTime 변경 시 remainSeconds 업데이트 (idle 상태일 때만)
+  useEffect(() => {
+    if (status === "idle") {
+      setRemainSeconds(totalSeconds);
+    }
+  }, [totalSeconds]);
   const [toast, setToast] = useState(null);
   const [totalPoint, setTotalPoint] = useState(0);
   const intervalRef = useRef(null);

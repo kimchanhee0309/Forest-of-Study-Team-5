@@ -36,3 +36,9 @@
 .idle     { color: var(--black); }
 .running  { color: var(--red); }
 .negative { color: var(--gray-818181); }
+
+@media (max-width: 375px) {
+  .timer {
+    font-size: 80px;
+  }
+}
