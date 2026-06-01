@@ -16,14 +16,19 @@
   border-radius: 50px;
   background: rgba(0, 0, 0, 0.3);
 }
+.pickerframe {
+  position: relative;
+}
 .picker {
   position: absolute;
-  margin-top: 35px;
-  margin-left: 265px;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
   border-radius: 12px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: var(--gray-light-gray-00, #fff);
   filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.08));
+  z-index: 100;
 }
 .emoji_n_frame {
   display: flex;
