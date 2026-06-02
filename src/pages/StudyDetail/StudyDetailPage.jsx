@@ -125,7 +125,7 @@ function StudyDetailPage() {
           <div className={style.top_frame}>
             {/* 이모지와 공유하기, 수정하기 라인 */}
             <div className={style.action_frame}>
-              <EmojiReaction />
+              <EmojiReaction studyId={study.id} />
               <div className={style.edit_frame}>
                 <button onClick={handleShare} className="edit-btn">
                   <span className={style.editGreen}>공유하기</span>
@@ -237,9 +237,9 @@ function StudyDetailPage() {
           onClose={() => setOpenModal(null)}
           onSubmit={(password) => {
             console.log(password);
-            // if (openModal === "edit") {
-            //   navigate("/study/edit/1");
-            // }
+            if (openModal === "edit") {
+              navigate(`/studies/${study.id}/update`);
+            }
             // if (openModal === "delete") {
             //   console.log("삭제 API");
             // }
