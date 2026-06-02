@@ -1,20 +1,25 @@
 import { useState } from "react";
 import styles from "./UpdateStudyForm.module.css";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { BASE_URL } from "../../../constants/api.js";
 
 function useUpdateStudyForm() {
+  const { studyId } = useParams();
+  const navigate = useNavigate(); // 생성 후 메인 페이지로 이동
   // 상태 관리
 
   // MaxLength 추가
   const MaxLength = {
     nickname: 30,
-    studyName: 50,
+    title: 50,
     description: 200,
   };
 
   // 폼 입력값 상태(닉네임, 스터디이름, 소개, 비밀번호 등)
   const [formData, setFormData] = useState({
     nickname: "",
-    studyName: "",
+    title: "",
     description: "",
     password: "",
     passwordConfirm: "",
@@ -22,7 +27,7 @@ function useUpdateStudyForm() {
 
   // 유효성 검사 실패 시 보여줄 에러 메시지 상태
   const [errors, setErrors] = useState({
-    studyName: "",
+    title: "",
     description: "",
     password: "",
     passwordConfirm: "",
@@ -58,14 +63,15 @@ function useUpdateStudyForm() {
   // 폼 제출 전 유효성 검사 - 문제 있으면 에러 메시지 발생, 통과하면 true 반환
   const validateForm = () => {
     const nextErrors = {
-      studyName: "",
+      title: "",
+      description: "",
       password: "",
       passwordConfirm: "",
     };
 
     // 스터디 이름이 비어있으면 에러
-    if (!formData.studyName.trim()) {
-      nextErrors.studyName = "*스터디 이름을 입력해주세요";
+    if (!formData.title.trim()) {
+      nextErrors.title = "*스터디 이름을 입력해주세요";
     }
 
     // 비밀번호가 비어있으면 에러
@@ -78,14 +84,14 @@ function useUpdateStudyForm() {
       nextErrors.passwordConfirm = "*비밀번호를 다시 입력해주세요";
     } else if (formData.password !== formData.passwordConfirm) {
       // 비밀번호 확인이 입력됐지만 불일치하면 에러
-      nextErrors.passq = "*비밀번호가 일치하지 않습니다";
+      nextErrors.passwordConfirm = "*비밀번호가 일치하지 않습니다";
     }
 
     setErrors(nextErrors);
 
     // 에러가 하나도 없으면 true, 하나라도 있으면 false
     return (
-      !nextErrors.studyName &&
+      !nextErrors.title &&
       !nextErrors.description &&
       !nextErrors.password &&
       !nextErrors.passwordConfirm
@@ -93,12 +99,36 @@ function useUpdateStudyForm() {
   };
 
   // 수정하기 버튼 클릭 시 실행 - 검사 통과해야만 API 요청
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const isValid = validateForm();
 
     if (!isValid) return;
 
     // TODO: API 연동 시 스터디 수정 요청 연결
+    try {
+      const response = await fetch(`${BASE_URL}/api/studies/${studyId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nickname: formData.nickname,
+          title: formData.title,
+          description: formData.description,
+          background: selectedBackground,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("스터디 수정 성공!", data);
+        navigate("/"); // 성공 시 페이지 이동
+      } else {
+        console.log("실패", data);
+      }
+    } catch (error) {
+      console.error("네크워크 오류", error);
+    }
   };
 
   // 배경 로직
