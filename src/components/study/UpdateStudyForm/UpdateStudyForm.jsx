@@ -171,13 +171,13 @@ function UpdateStudyForm({ studyId }) {
           />
         </div>
 
-        {/* 생성 버튼 */}
+        {/* 수정 버튼 */}
         <div className={styles.submitButtonWrapper}>
           <Button
             type="button"
             size="content-large"
             fullWidth
-            onclick={handleSubmit}
+            onClick={handleSubmit}
           >
             수정하기
           </Button>

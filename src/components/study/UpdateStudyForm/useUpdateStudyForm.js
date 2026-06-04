@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./UpdateStudyForm.module.css";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../../../constants/api.js";
 
 function useUpdateStudyForm() {
@@ -46,6 +45,32 @@ function useUpdateStudyForm() {
     { id: "blue", className: styles.bgBlue },
     { id: "pink", className: styles.bgPink },
   ];
+
+  useEffect(() => {
+    async function fetchStudy() {
+      try {
+        const response = await fetch(`${BASE_URL}/studies/${studyId}`);
+
+        if (!response.ok) throw new Error("스터디 조회 실패");
+
+        const result = await response.json();
+        const study = result.data ?? result;
+
+        setFormData((prev) => ({
+          ...prev,
+          nickname: study.nickname ?? "",
+          title: study.title ?? "",
+          description: study.description ?? "",
+        }));
+
+        setSelectedBackground(study.background ?? "green");
+      } catch (error) {
+        console.error("스터디 조회 오류", error);
+      }
+    }
+
+    if (studyId) fetchStudy();
+  }, [studyId]);
 
   // 폼 로직
   // input/textarea가 바뀔 때마다 formData 업데이트

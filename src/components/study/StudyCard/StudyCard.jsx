@@ -9,10 +9,20 @@ function StudyCard({
   description,
   point,
   emojis = [],
+  background,
   onClick,
 }) {
+  const backgroundClassMap = {
+    green: styles.bgGreen,
+    yellow: styles.bgYellow,
+    blue: styles.bgBlue,
+    pink: styles.bgPink,
+  };
   return (
-    <article className={styles.card} onClick={onClick}>
+    <article
+      className={`${styles.card} ${backgroundClassMap[background]}`}
+      onClick={onClick}
+    >
       <div className={styles.header}>
         <div className={styles.titleBox}>
           <h3 className={styles.title}>{title}</h3>
