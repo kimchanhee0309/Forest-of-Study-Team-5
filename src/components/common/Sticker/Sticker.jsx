@@ -53,7 +53,7 @@ function Sticker({
     : STICKER_IMAGES.empty;
 
   return (
-    <button
+    <div
       type="button"
       className={`${styles.sticker} ${styles[size]}`}
       onClick={onClick}
@@ -63,7 +63,7 @@ function Sticker({
         alt={checked ? "완료 스티커" : "미완료 스티커"}
         className={styles.image}
       />
-    </button>
+    </div>
   );
 }
 
