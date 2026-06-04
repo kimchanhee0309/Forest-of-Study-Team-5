@@ -31,7 +31,7 @@ function FocusPage() {
     fetch(`${BASE_URL}/studies/${studyId}`)
       .then((res) => res.ok ? res.json() : null)
       .then((data) => {
-        if (data) setStudyInfo({ nickname: data.data.nickname, title: data.data.title });
+        if (data) setStudyInfo({ nickname: data.nickname, title: data.title });
       })
       .catch(() => {});
   }, [studyId]);
