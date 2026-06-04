@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useStudies } from "../../hooks/useStudies";
 import StudyCard from "../../components/study/StudyCard/StudyCard";
 import styles from "./MainPage.module.css";
 import searchIcon from "../../assets/icons/ic_search.png";
@@ -7,109 +8,33 @@ import { useNavigate } from "react-router-dom";
 
 // 메인 페이지 기능
 // - 스터디 목록 불러오기
-// - 검색 기능 (필터)
+// - 검색 기능 (필터) 백엔드에서 데이터 받아오기
 // - 드롭다운 버튼 (최근 순, 오래된 순, 포인트 많은 순, 포인트 적은 순)
 // - Loadmore 더보기 버튼 (데이터 없을시에는 보이지 않음 확인 완료)
 
-//API 연동 필요
-//- GET / studies
+//로컬스토리지
+
+const RECENT_STUDIES_KEY = "recentStudies";
+const MAX_RECENT = 3;
+
+//백엔드랑 드롭다운 매핑
+const SORT_MAP = {
+  "최근 순": "recent",
+  "오래된 순": "oldest",
+  "많은 포인트 순": "point_desc",
+  "적은 포인트 순": "point_asc",
+};
 
 function MainPage() {
-  //최근 목록 조회 및 테스트 데이터
-  const [recentStudies, setRecentStudies] = useState([
-    {
-      id: 1,
-      title: "리액트 스터디",
-      elapsedDays: 10,
-      description: "리액트 기초부터 같이 공부해요",
-      point: 100,
-      emojis: [],
-    },
-    {
-      id: 2,
-      title: "자바스크립트 스터디",
-      elapsedDays: 5,
-      description: "자바스크립트 기초부터 같이 공부해요",
-      point: 50,
-      emojis: [],
-    },
-    {
-      id: 3,
-      title: "백엔드 스터디",
-      elapsedDays: 3,
-      description: "백엔드 기초부터 같이 공부해요",
-      point: 30,
-      emojis: [],
-    },
-    {
-      id: 4,
-      title: "풀스택 스터디",
-      elapsedDays: 20,
-      description: "풀스택 기초부터 같이 공부해요",
-      point: 200,
-      emojis: [],
-    },
-  ]);
-  //스터디 둘러보기 목록 및 테스트 데이터
-  const [studies, setStudies] = useState([
-    {
-      id: 1,
-      title: "리액트 스터디",
-      elapsedDays: 10,
-      description: "리액트 기초부터 같이 공부해요",
-      point: 100,
-      emojis: [],
-    },
-    {
-      id: 2,
-      title: "자바스크립트 스터디",
-      elapsedDays: 5,
-      description: "자바스크립트 기초부터 같이 공부해요",
-      point: 50,
-      emojis: [],
-    },
-    {
-      id: 3,
-      title: "테스트 스터디",
-      elapsedDays: 5,
-      description: "자바스크립트 기초부터 같이 공부해요",
-      point: 50,
-      emojis: [],
-    },
-    {
-      id: 4,
-      title: "이얍 스터디",
-      elapsedDays: 5,
-      description: "자바스크립트 기초부터 같이 공부해요",
-      point: 50,
-      emojis: [],
-    },
-    {
-      id: 5,
-      title: "자바스크립트 스터디",
-      elapsedDays: 5,
-      description: "자바스크립트 기초부터 같이 공부해요",
-      point: 50,
-      emojis: [],
-    },
-    {
-      id: 6,
-      title: "와라라랄 스터디",
-      elapsedDays: 5,
-      description: "자바스크립트 기초부터 같이 공부해요",
-      point: 50,
-      emojis: [],
-    },
-    {
-      id: 7,
-      title: "오메 스터디",
-      elapsedDays: 5,
-      description: "자바스크립트 기초부터 같이 공부해요",
-      point: 50,
-      emojis: [],
-    },
-  ]);
+  //최근 조회 스터디 (연동 필요)
+
+  const [recentStudies, setRecentStudies] = useState(() => {
+    const saved = localStorage.getItem(RECENT_STUDIES_KEY);
+    return saved ? JSON.parse(saved) : [];
+  });
+
   // 스터디 검색 기능, 정렬순, loadmore
+
   const [inputValue, setInputValue] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sortOrder, setSortOrder] = useState("최근 순");
@@ -119,55 +44,72 @@ function MainPage() {
     "많은 포인트 순",
     "적은 포인트 순",
   ];
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [page, setPage] = useState(1);
 
-  //기초 세팅
-  useEffect(() => {}, []);
+  const params = {
+    keyword: searchKeyword,
+    sort: SORT_MAP[sortOrder],
+    page,
+    limit: 6,
+  };
+
+  //hook 호출
+  const { studies, totalCount, isLoading, error } = useStudies(params);
 
   //상세페이지 이동
   const navigate = useNavigate();
+
+  // 카드 클릭시 로컬스토리지 핸들러
+  const handleStudyClick = (study) => {
+    const filtered = recentStudies.filter((s) => s.id !== study.id);
+    const updated = [study, ...filtered].slice(0, MAX_RECENT);
+    localStorage.setItem(RECENT_STUDIES_KEY, JSON.stringify(updated));
+    setRecentStudies(updated);
+    navigate(`/studies/${study.id}`);
+  };
 
   //검색 핸들러
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
     //입력값이 없어지면 검색어 초기화
     if (e.target.value === "") {
+      setPage(1);
       setSearchKeyword("");
     }
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
+
+    setPage(1);
     setSearchKeyword(inputValue);
   };
 
   // 더보기 핸들러
   const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 6); // 더보기 버튼 누를때 마다 6개씩 증가
+    setPage((prev) => prev + 1);
   };
 
+  // 서버로 받는다
   //검색 필터링
-  const filteredStudies = studies.filter((study) =>
-    study.title.includes(searchKeyword),
-  );
+  // const filteredStudies = studies.filter((study) =>
+  //   study.title.includes(searchKeyword),
+  // );
   //정렬
-  const sortedStudies = [...filteredStudies].sort((a, b) => {
-    switch (sortOrder) {
-      case "최근 순":
-        return a.elapsedDays - b.elapsedDays;
-      case "오래된 순":
-        return b.elapsedDays - a.elapsedDays;
-      case "많은 포인트 순":
-        return b.point - a.point;
-      case "적은 포인트 순":
-        return a.point - b.point;
-      default:
-        return 0;
-    }
-  });
-
-  // 더보기 개수 제한
-  const visibleStudies = sortedStudies.slice(0, visibleCount);
+  // const sortedStudies = [...filteredStudies].sort((a, b) => {
+  //   switch (sortOrder) {
+  //     case "최근 순":
+  //       return a.elapsedDays - b.elapsedDays;
+  //     case "오래된 순":
+  //       return b.elapsedDays - a.elapsedDays;
+  //     case "많은 포인트 순":
+  //       return b.point - a.point;
+  //     case "적은 포인트 순":
+  //       return a.point - b.point;
+  //     default:
+  //       return 0;
+  //   }
+  // });
 
   return (
     <div className={styles.mainPage}>
@@ -188,9 +130,9 @@ function MainPage() {
                 title={study.title}
                 elapsedDays={study.elapsedDays}
                 description={study.description}
-                point={study.point}
-                emojis={study.emojis}
-                onClick={() => navigate(`/studies/${study.id}`)}
+                point={study.totalPoint}
+                emojis={study.studyEmojis}
+                onClick={() => handleStudyClick(study)}
               />
             ))}
           </div>
@@ -198,7 +140,7 @@ function MainPage() {
       </section>
 
       <section
-        className={`${styles.studyList} ${visibleStudies.length === 0 ? styles.studyListEmpty : ""}`}
+        className={`${styles.studyList} ${studies.length === 0 ? styles.studyListEmpty : ""}`}
       >
         <h2 className={styles.sectionTitle}>스터디 둘러보기</h2>
 
@@ -226,32 +168,38 @@ function MainPage() {
             <Dropdown
               value={sortOrder}
               options={sortOptions}
-              onChange={(selected) => setSortOrder(selected)}
+              onChange={(selected) => {
+                setPage(1);
+                setSortOrder(selected);
+              }}
             />
           </div>
         </div>
-
-        {visibleStudies.length === 0 ? (
+        {isLoading ? (
+          <p>불러오는 중...</p>
+        ) : error ? (
+          <p>에러: {error}</p>
+        ) : studies.length === 0 ? (
           <div className={styles.emptyContainer}>
             <p className={styles.emptyMessage}>아직 둘러 볼 스터디가 없어요 </p>
           </div>
         ) : (
           <>
             <div className={styles.studyCardGrid}>
-              {visibleStudies.map((study) => (
+              {studies.map((study) => (
                 <StudyCard
                   key={study.id}
                   title={study.title}
                   elapsedDays={study.elapsedDays}
                   description={study.description}
-                  point={study.point}
-                  emojis={study.emojis}
-                  onClick={() => navigate(`/studies/${study.id}`)}
+                  point={study.totalPoint}
+                  emojis={study.studyEmojis}
+                  onClick={() => handleStudyClick(study)}
                 />
               ))}
             </div>
             {/* 더보기 버튼: 더 보여줄 데이터가 있을때에 만 표시 */}
-            {visibleCount < sortedStudies.length && (
+            {studies.length < totalCount && (
               <button
                 className={styles.loadMoreButton}
                 onClick={handleLoadMore}
