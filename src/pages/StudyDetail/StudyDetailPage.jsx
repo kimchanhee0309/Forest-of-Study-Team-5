@@ -1,13 +1,11 @@
 /**
- * StudyDetailPage
- *
  * 스터디 상세 페이지
  *
  * 기능:
  * - 스터디 정보 조회
  * - 응원 이모지 조회 및 추가
  * - 공유 기능
- * - 수정/삭제 비밀번호 모달 (토스트기능x)
+ * - 수정/삭제/부가기능 비밀번호 모달
  * - 습관 기록표 조회
  *
  */
@@ -24,14 +22,16 @@ import Toast from "../../components/common/Toast/Toast.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 import { verifyPassword, deleteStudy } from "../../api/modal.js";
 
+const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+
 function StudyDetailPage() {
-  //현재 열려 있는 모달 상태
+  // [모달] 활성화, 비활성화
   const [openModal, setOpenModal] = useState(null);
 
-  //토스트
+  // [토스트] 비밀번호 실패 여부
   const [toastMessage, setToastMessage] = useState("");
 
-  /* 오늘의 습관, 집중 버튼 홈페이지이동 */
+  // 홈페이지 이동 함수 선언
   const navigate = useNavigate();
 
   // [공유하기] 현재 페이지 URL 복사
@@ -49,12 +49,12 @@ function StudyDetailPage() {
 
   // 스터디 연동 조회
   const { studyId } = useParams();
+
   // 스터디 API 호출
   const [study, setStudy] = useState(null);
-
   const fetchStudyDetail = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/studies/${studyId}`);
+      const response = await fetch(`${BASE_URL}/studies/${studyId}`);
 
       if (!response.ok) {
         throw new Error("조회 실패");
@@ -72,9 +72,10 @@ function StudyDetailPage() {
   }, [studyId]);
 
   if (!study) {
-    return <div>로딩중...</div>;
+    return <span className={style.error404}>404 Not Found</span>;
   }
-  /* 습관 기록표 API 호출 */
+
+  // 습관 기록표 API 호출
   const habits =
     study?.habits?.map((habit) => ({
       id: habit.id,
@@ -94,7 +95,7 @@ function StudyDetailPage() {
                 <button onClick={handleShare} className="edit-btn">
                   <span className={style.editGreen}>공유하기</span>
                 </button>
-                {/* 페이지 이동 추가 필요 */}
+                {/* [모달] 페이지 복사, 이동, 삭제 */}
                 <span className={style.editGreen}>|</span>
                 <button
                   onClick={() => setOpenModal("edit")}
@@ -112,16 +113,14 @@ function StudyDetailPage() {
               </div>
             </div>
 
-            {/* 스터디 게시글 API 라인 */}
-            {/* 스터디 이름 API 연동 필요 */}
+            {/* 스터디 기본정보 API 라인 */}
             <div className={style.post_frame}>
               <div className={style.post_header}>
                 <span className={style.postTitle}>
                   {study.nickname}의 {study.title}
                 </span>
                 <div className={style.post_btn_frame}>
-                  {/* 오늘의 습관, 집중을 눌렀을때 나타나는 모달구현 */}
-                  {/* 페이지 이동 추가 필요 */}
+                  {/* [모달] 오늘의 습관, 오늘의 집중 페이지 이동*/}
                   <button
                     onClick={() => setOpenModal("habit")}
                     className={style.post_btn}
@@ -153,7 +152,7 @@ function StudyDetailPage() {
                 </div>
               </div>
               <div className={style.post_main}>
-                {/* 소개, 포인트 등 API 연동 필요 */}
+                {/* 소개, 포인트 등 API 연동 */}
                 <div className={style.introduce}>
                   <span className={style.postGray}>소개</span>
                   <span className={style.postBlack}>{study.description}</span>
@@ -231,6 +230,8 @@ function StudyDetailPage() {
           }}
         />
       )}
+
+      {/* [토스트] 비밀번호 틀렸을 시 */}
       {toastMessage && (
         <div className={style.toast}>
           <Toast type="warning" message={toastMessage} />
