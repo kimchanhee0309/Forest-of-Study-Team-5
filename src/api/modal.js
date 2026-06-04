@@ -1,7 +1,8 @@
+const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 // 비밀번호 검증
 export const verifyPassword = async (studyId, password) => {
   const response = await fetch(
-    `http://localhost:3000/studies/${studyId}/verify-password`,
+    `${BASE_URL}/studies/${studyId}/verify-password`,
     {
       method: "POST",
       headers: {
@@ -22,7 +23,7 @@ export const verifyPassword = async (studyId, password) => {
 
 // 스터디 삭제
 export const deleteStudy = async (studyId) => {
-  const response = await fetch(`http://localhost:3000/studies/${studyId}`, {
+  const response = await fetch(`${BASE_URL}/studies/${studyId}`, {
     method: "DELETE",
   });
 

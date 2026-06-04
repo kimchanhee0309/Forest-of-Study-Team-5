@@ -22,6 +22,8 @@ import Toast from "../../components/common/Toast/Toast.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 import { verifyPassword, deleteStudy } from "../../api/modal.js";
 
+const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+
 function StudyDetailPage() {
   // [모달] 활성화, 비활성화
   const [openModal, setOpenModal] = useState(null);
@@ -52,7 +54,7 @@ function StudyDetailPage() {
   const [study, setStudy] = useState(null);
   const fetchStudyDetail = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/studies/${studyId}`);
+      const response = await fetch(`${BASE_URL}/studies/${studyId}`);
 
       if (!response.ok) {
         throw new Error("조회 실패");
