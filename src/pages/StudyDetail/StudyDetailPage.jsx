@@ -20,11 +20,16 @@ import EmojiReaction from "../../components/study/Emoji/EmojiReaction.jsx";
 import PasswordModal from "../../components/study/PasswordModal/PasswordModal.jsx";
 import HabitTable from "../../components/study/HabitTable/HabitTable.jsx";
 import Tag from "../../components/common/Tag/Tag.jsx";
+import Toast from "../../components/common/Toast/Toast.jsx";
 import { useParams, useNavigate } from "react-router-dom";
+import { verifyPassword, deleteStudy } from "../../api/modal.js";
 
 function StudyDetailPage() {
   //현재 열려 있는 모달 상태
   const [openModal, setOpenModal] = useState(null);
+
+  //토스트
+  const [toastMessage, setToastMessage] = useState("");
 
   /* 오늘의 습관, 집중 버튼 홈페이지이동 */
   const navigate = useNavigate();
@@ -194,26 +199,42 @@ function StudyDetailPage() {
           }
           // [모달] 페이지 이동 코드
           onClose={() => setOpenModal(null)}
-          onSubmit={(password) => {
-            console.log(password);
-            if (openModal === "edit") {
-              navigate(`/studies/${study.id}/update`);
-            }
-            // if (openModal === "delete") {
-            //   console.log("삭제 API");
-            // }
+          onSubmit={async (password) => {
+            try {
+              await verifyPassword(study.id, password);
 
-            if (openModal === "habit") {
-              navigate(`/studies/${study.id}/habits`);
-            }
+              if (openModal === "edit") {
+                navigate(`/studies/${study.id}/update`);
+              }
 
-            if (openModal === "focus") {
-              navigate(`/studies/${study.id}/focus`);
-            }
+              if (openModal === "delete") {
+                await deleteStudy(study.id);
+                alert("스터디가 삭제되었습니다.");
+                navigate("/");
+              }
 
-            setOpenModal(null);
+              if (openModal === "habit") {
+                navigate(`/studies/${study.id}/habits`);
+              }
+
+              if (openModal === "focus") {
+                navigate(`/studies/${study.id}/focus`);
+              }
+
+              setOpenModal(null);
+            } catch (error) {
+              setToastMessage("🚨 비밀번호가 일치하지 않습니다.");
+              setTimeout(() => {
+                setToastMessage("");
+              }, 2222);
+            }
           }}
         />
+      )}
+      {toastMessage && (
+        <div className={style.toast}>
+          <Toast type="warning" message={toastMessage} />
+        </div>
       )}
     </div>
   );
