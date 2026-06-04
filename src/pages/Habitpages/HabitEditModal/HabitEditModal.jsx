@@ -7,23 +7,21 @@ function HabitEditModal({ habits, onClose, onSave }) {
   const [editHabits, setEditHabits] = useState(habits);
   const [editingId, setEditingId] = useState(null);
 
-  // 1. 습관 삭제 (모달 내 UI 리스트에서만 제거)
   const handleDelete = (id) => {
     setEditHabits((prev) => prev.filter((habit) => habit.id !== id));
   };
 
-  // 2. 신규 습관 추가 (임시 식별자 생성)
   const handleAdd = () => {
     const newHabit = {
-      id: `new-${Date.now()}`, // DB 생성 전 식별을 위한 임시 ID 접두사 부여
+      // 💡 여기서 "new-"를 붙여줘야 나중에 저장할 때 POST(생성) API로 골라낼 수 있습니다!
+      id: `new-${Date.now()}`,
       title: "",
-      habitLogs: [{ isChecked: false }], // 백엔드 필드명 통일
+      habitLogs: [{ isChecked: false }],
     };
     setEditHabits((prev) => [...prev, newHabit]);
     setEditingId(newHabit.id);
   };
 
-  // 3. 습관 이름 수정 업데이트
   const handleChange = (id, newTitle) => {
     setEditHabits((prev) =>
       prev.map((habit) =>

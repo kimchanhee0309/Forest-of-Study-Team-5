@@ -23,7 +23,8 @@ function HabitSection({ habits, onOpenEdit, onToggle }) {
           {habits.map((habit) => (
             <li key={habit.id} className={styles.habitItem}>
               <Chip
-                completed={habit.isCompleted}
+                // 백엔드 구조에 맞춰서 안전하게 옵셔널 체이닝(?.) 적용!
+                completed={habit.habitLogs?.[0]?.isChecked || false}
                 onClick={() => onToggle(habit.id)}
               >
                 {habit.title}
