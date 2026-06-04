@@ -169,3 +169,11 @@
   font-weight: var(--weight-extrabold);
   line-height: normal;
 }
+.toast {
+  position: fixed;
+  top: 85%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 9999;
+}

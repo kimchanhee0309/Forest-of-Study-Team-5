@@ -1,12 +1,11 @@
 import Input from "../../common/Input/Input.jsx";
 import Button from "../../common/Button/Button.jsx";
-import styles from "./StudyCreateForm.module.css";
+import styles from "./UpdateStudyForm.module.css";
 import sticker_gray from "../../../assets/sticker/sticker_gray.png";
 
-import useStudyCreateForm from "./useStudyCreateForm"; // ✅ 훅 import
+import useUpdateStudyForm from "./useUpdateStudyForm";
 
-function StudyCreateForm() {
-  // hook
+function UpdateStudyForm({ studyId }) {
   const {
     formData,
     errors,
@@ -19,14 +18,13 @@ function StudyCreateForm() {
     handleSelectBackground,
     handleAddCustomBackground,
     handleDeleteCustomBackground,
-  } = useStudyCreateForm();
+  } = useUpdateStudyForm(studyId);
 
-  // 화면(UI) 담당
   return (
     <form className={styles.form}>
-      {/* 스터디 생성 카드 영역 */}
+      {/*스터디 수정 카드 영역 */}
       <div className={styles.card}>
-        <h1 className={styles.title}>스터디 만들기</h1>
+        <h1 className={styles.title}>스터디 수정하기</h1>
 
         <div className={styles.field}>
           <label className={styles.label}>닉네임</label>
@@ -37,6 +35,7 @@ function StudyCreateForm() {
             placeholder="닉네임을 입력해주세요"
             autoComplete="off"
           />
+
           <span className={styles.charCount}>
             {formData.nickname.length}/{MaxLength.nickname}자
           </span>
@@ -52,6 +51,7 @@ function StudyCreateForm() {
             error={errors.title}
             autoComplete="off"
           />
+
           <span className={styles.charCount}>
             {formData.title.length}/{MaxLength.title}자
           </span>
@@ -105,7 +105,7 @@ function StudyCreateForm() {
                 <img
                   src={imageUrl}
                   alt="사용자 추가 배경"
-                  className={styles.customBackgroundImage}
+                  className={styles.customBackgroundItem}
                 />
 
                 {selectedBackground === `custom-${index}` && (
@@ -177,9 +177,9 @@ function StudyCreateForm() {
             type="button"
             size="content-large"
             fullWidth
-            onClick={handleSubmit}
+            onclick={handleSubmit}
           >
-            만들기
+            수정하기
           </Button>
         </div>
       </div>
@@ -187,4 +187,4 @@ function StudyCreateForm() {
   );
 }
 
-export default StudyCreateForm;
+export default UpdateStudyForm;

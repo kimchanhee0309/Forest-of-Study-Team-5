@@ -1,4 +1,3 @@
-/* 모달창 뒤에 깔리는 어두운 배경 */
 .overlay {
   position: fixed;
   inset: 0;
@@ -9,7 +8,6 @@
   z-index: 1000;
 }
 
-/* 모달창 본체 (데스크탑 기준) */
 .modal {
   width: 600px;
   max-width: 90vw;
@@ -23,18 +21,19 @@
   box-sizing: border-box;
 }
 
-/* 데스크탑 모달 대제목 */
+/* 수정한 부분: 모달 텍스트가 항상 중앙을 유지하도록 고정 */
 .modalTitle {
+  width: 100%;
   font-size: var(--text-24);
   font-weight: var(--weight-bold);
   margin: 0 0 30px 0;
+  text-align: center;
 }
 
-/* 데스크탑 정렬 해결: 기본 여백 삭제 및 스크롤바 공간 확보 */
 .editList {
   width: 100%;
   padding: 0 !important;
-  margin: 0 !important;
+  margin: 0 0 24px 0 !important;
   list-style: none !important;
   display: flex;
   flex-direction: column;
@@ -43,17 +42,13 @@
   overflow-y: auto;
   overflow-x: hidden;
   flex-grow: 1;
-  margin-bottom: 30px;
-  scrollbar-gutter: stable;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* 스크롤바 디자인 */
 .editList::-webkit-scrollbar {
-  width: 6px;
-}
-.editList::-webkit-scrollbar-thumb {
-  background: var(--gray-dddddd);
-  border-radius: 10px;
+  display: none !important;
 }
 
 .editItemRow {
@@ -63,33 +58,26 @@
   align-items: center;
 }
 
-/* 방해꾼이던 투명 여백 상자를 완전히 삭제 */
-.emptySpace {
-  display: none !important;
-}
-
-/* #818181 테마 밑줄 스타일 */
 .editItemText {
   font-size: var(--text-16, 16px);
   font-weight: var(--weight-medium, 500);
   color: var(--gray-818181, #818181) !important;
-  text-decoration: underline !important;
-  text-decoration-color: var(--gray-818181, #818181) !important;
-  text-underline-position: under;
-  text-underline-offset: 1px;
-  text-decoration-thickness: 1.8px;
+  text-decoration: none !important;
+  display: inline-block;
+  border-bottom: 1.5px solid var(--gray-818181, #818181);
+  line-height: 1.1;
+  padding-bottom: 0px;
 }
 
-/* 빈 상자 가운데 정렬 선 */
 .isEmpty {
   display: inline-block;
   width: 127.5px;
-  height: 1.8px;
-  background-color: var(--gray-818181, #818181) !important;
+  height: 0px;
+  border-bottom: 1.5px solid var(--gray-818181, #818181) !important;
+  background-color: transparent !important;
   text-decoration: none !important;
 }
 
-/* 수정 모드 인풋창 */
 .editItemInput {
   width: 90%;
   height: 100%;
@@ -102,7 +90,6 @@
   color: var(--gray-818181, #818181) !important;
 }
 
-/* 맨 아래 추가하는 플러스 버튼 */
 .addBtn {
   display: flex !important;
   justify-content: center !important;
@@ -115,7 +102,7 @@
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .addIcon {
@@ -133,7 +120,6 @@
   flex-shrink: 0;
 }
 
-/* 취소, 수정 완료 버튼 공통 속성 */
 .cancelBtn,
 .saveBtn {
   display: flex;
@@ -151,9 +137,6 @@
   font-size: 18px !important;
   font-weight: 400 !important;
   line-height: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 .cancelBtn {
@@ -167,7 +150,7 @@
 }
 
 /* ======================================================== */
-/* 아이패드 미니 사이즈 (Figma 규격 완벽 적용) */
+/* 아이패드 미니 사이즈 (태블릿) */
 /* ======================================================== */
 @media (min-width: 481px) and (max-width: 768px) {
   .modal {
@@ -177,15 +160,16 @@
     padding: 40px 24px !important;
   }
   .modalTitle {
-    margin-bottom: 40px !important;
+    margin-bottom: 24px !important;
+    text-align: center !important;
   }
   .editList {
-    gap: 20px !important;
-    margin-bottom: 40px !important;
+    gap: 24px !important;
+    margin-bottom: 24px !important;
   }
   .addBtn {
     width: 400px !important;
-    margin-bottom: 40px !important;
+    margin-bottom: 24px !important;
   }
   .modalActions {
     gap: 24px !important;
@@ -197,7 +181,7 @@
 }
 
 /* ======================================================== */
-/* 모바일 사이즈 (Figma 규격 완벽 적용) */
+/* 모바일 사이즈 */
 /* ======================================================== */
 @media (max-width: 480px) {
   .modal {
@@ -206,24 +190,18 @@
     max-height: 741px !important;
     padding: 24px 16px !important;
   }
-
   .modalTitle {
-    width: 312px !important;
-    height: 29px !important;
-    color: var(--black, #414141) !important;
-    text-align: center !important;
-    font-family: "Pretendard", sans-serif !important;
+    width: 100% !important;
+    height: auto !important;
     font-size: 20px !important;
-    font-weight: 800 !important;
-    line-height: normal !important;
     margin-bottom: 24px !important;
+    text-align: center !important;
   }
 
   .editList {
     width: 312px !important;
     gap: 8px !important;
     margin-bottom: 24px !important;
-    scrollbar-gutter: auto;
   }
 
   .editItemText,
@@ -231,7 +209,6 @@
     font-size: 16px !important;
     font-weight: 500 !important;
     color: var(--gray-818181, #818181) !important;
-    text-decoration: underline !important;
   }
 
   .addBtn {

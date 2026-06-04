@@ -10,9 +10,42 @@ function HabitPage() {
   const { studyId } = useParams();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [habits, setHabits] = useState([]); // 가짜 데이터 지우고 빈 배열로 시작!
+  const [habits, setHabits] = useState([]);
+  const [studyInfo, setStudyInfo] = useState({ nickname: "", title: "" });
 
-  // 1. 당일 습관 조회 (GET) - 백엔드에서 데이터 가져오기
+  const [currentTime, setCurrentTime] = useState("");
+
+  const formatCurrentTime = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const ampm = hours >= 12 ? "오후" : "오전";
+
+    hours = hours % 12 || 12;
+    return `${year}-${month}-${day} ${ampm} ${hours}:${minutes}`;
+  };
+
+  const fetchStudyInfo = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/studies/${studyId}`,
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setStudyInfo({
+          nickname: data.nickname || "",
+          title: data.title || "",
+        });
+      }
+    } catch (error) {
+      console.error("스터디 정보 불러오기 실패:", error);
+    }
+  };
+
   const fetchHabits = async () => {
     try {
       const response = await fetch(
@@ -23,17 +56,24 @@ function HabitPage() {
         setHabits(data);
       }
     } catch (error) {
-      console.error("데이터 불러오기 실패:", error);
+      console.error("습관 데이터 불러오기 실패:", error);
     }
   };
 
-  // 페이지 켜지면 무조건 한 번 데이터 가져오기
   useEffect(() => {
-    if (studyId) fetchHabits();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (studyId) {
+      fetchStudyInfo();
+      fetchHabits();
+    }
+
+    setCurrentTime(formatCurrentTime());
+    const timer = setInterval(() => {
+      setCurrentTime(formatCurrentTime());
+    }, 60000);
+
+    return () => clearInterval(timer);
   }, [studyId]);
 
-  // 2. 당일 습관 달성(체크) 업데이트 (PATCH)
   const handleToggleHabit = async (habitId) => {
     const targetHabit = habits.find((h) => h.id === habitId);
     if (
@@ -56,7 +96,6 @@ function HabitPage() {
       );
 
       if (response.ok) {
-        // 백엔드 성공하면 화면(프론트)도 실시간으로 체크 상태 뒤집어주기
         setHabits((prev) =>
           prev.map((h) =>
             h.id === habitId
@@ -73,15 +112,11 @@ function HabitPage() {
     }
   };
 
-  // 3. 모달에서 수정 완료 시 (추가/수정/삭제) 일괄 처리
   const handleSaveHabits = async (editHabits) => {
-    // 삭제된 애들 (기존엔 있었는데 editHabits엔 없는 놈)
     const deleted = habits.filter(
       (h) => !editHabits.find((e) => e.id === h.id),
     );
-    // 새로 추가된 애들 (id가 "new-" 로 시작하는 임시 놈)
     const added = editHabits.filter((e) => String(e.id).startsWith("new-"));
-    // 이름이 수정된 애들
     const modified = editHabits.filter((e) => {
       if (String(e.id).startsWith("new-")) return false;
       const original = habits.find((h) => h.id === e.id);
@@ -89,7 +124,6 @@ function HabitPage() {
     });
 
     try {
-      // 삭제 API (PATCH - end)
       await Promise.all(
         deleted.map((h) =>
           fetch(`http://localhost:3000/api/habits/${h.id}/end`, {
@@ -97,7 +131,6 @@ function HabitPage() {
           }),
         ),
       );
-      // 추가 API (POST)
       await Promise.all(
         added.map((h) =>
           fetch(`http://localhost:3000/api/studies/${studyId}/habits`, {
@@ -107,7 +140,6 @@ function HabitPage() {
           }),
         ),
       );
-      // 수정 API (PATCH - name)
       await Promise.all(
         modified.map((h) =>
           fetch(`http://localhost:3000/api/habits/${h.id}/name`, {
@@ -118,7 +150,6 @@ function HabitPage() {
         ),
       );
 
-      // 다 끝났으면 최신 데이터로 새로고침!
       await fetchHabits();
       setIsModalOpen(false);
     } catch (error) {
@@ -134,10 +165,14 @@ function HabitPage() {
         <article className={styles.card}>
           <header className={styles.header}>
             <div className={styles.titleGroup}>
-              <h1 className={styles.title}>연우의 개발공장</h1>
+              <h1 className={styles.title}>
+                {studyInfo.nickname && studyInfo.title
+                  ? `${studyInfo.nickname}의 ${studyInfo.title}`
+                  : "스터디 정보를 불러오는 중..."}
+              </h1>
               <div className={styles.timeInfo}>
                 <span className={styles.timeLabel}>현재 시간</span>
-                <span className={styles.timeValue}>2024-01-04 오후 3:06</span>
+                <div className={styles.timeValue}>{currentTime}</div>
               </div>
             </div>
 

@@ -10,10 +10,6 @@
  * - 수정/삭제 비밀번호 모달 (토스트기능x)
  * - 습관 기록표 조회
  *
- * API 연동 예정:
- * - GET /studies/:id
- * - GET /studies/:id/habits
- * - POST /studies/:id/emojis
  */
 
 import { useEffect, useState } from "react";
@@ -24,18 +20,16 @@ import EmojiReaction from "../../components/study/Emoji/EmojiReaction.jsx";
 import PasswordModal from "../../components/study/PasswordModal/PasswordModal.jsx";
 import HabitTable from "../../components/study/HabitTable/HabitTable.jsx";
 import Tag from "../../components/common/Tag/Tag.jsx";
+import Toast from "../../components/common/Toast/Toast.jsx";
 import { useParams, useNavigate } from "react-router-dom";
+import { verifyPassword, deleteStudy } from "../../api/modal.js";
 
 function StudyDetailPage() {
   //현재 열려 있는 모달 상태
   const [openModal, setOpenModal] = useState(null);
 
-  /* 습관 기록표 API 호출 */
-  //   const [habits, setHabits] = useState([]);
-
-  // useEffect(() => {
-  //   fetchHabits();
-  // }, []);
+  //토스트
+  const [toastMessage, setToastMessage] = useState("");
 
   /* 오늘의 습관, 집중 버튼 홈페이지이동 */
   const navigate = useNavigate();
@@ -53,71 +47,41 @@ function StudyDetailPage() {
     }
   };
 
-  // 게시글 연동 조회
+  // 스터디 연동 조회
   const { studyId } = useParams();
-  // 게시글 API 호출 (현재 임시값)
-  const [study, setStudy] = useState(
-    {
-      id: 1,
-      title: "리액트 스터디",
-      elapsedDays: 10,
-      description: "리액트 기초부터 같이 공부해요",
-      point: 100,
-      emojis: [],
-    },
-    {
-      id: 2,
-      title: "자바스크립트 스터디",
-      elapsedDays: 5,
-      description: "자바스크립트 기초부터 같이 공부해요",
-      point: 50,
-      emojis: [],
-    },
-    // []
-  );
-
-  useEffect(() => {
-    fetchStudyDetail();
-  }, []);
+  // 스터디 API 호출
+  const [study, setStudy] = useState(null);
 
   const fetchStudyDetail = async () => {
-    const response = await fetch(`http://localhost:5173/studies/${studyId}`);
+    try {
+      const response = await fetch(`http://localhost:3000/studies/${studyId}`);
 
-    const data = await response.json();
+      if (!response.ok) {
+        throw new Error("조회 실패");
+      }
 
-    setStudy(data);
+      const data = await response.json();
+
+      setStudy(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  useEffect(() => {
+    fetchStudyDetail();
+  }, [studyId]);
 
-  //  임시 습관 기록표 값
-  const habits = [
-    {
-      id: 1,
-      title: "미라클모닝 6시 기상",
+  if (!study) {
+    return <div>로딩중...</div>;
+  }
+  /* 습관 기록표 API 호출 */
+  const habits =
+    study?.habits?.map((habit) => ({
+      id: habit.id,
+      title: habit.title,
+      logs: habit.habitLogs.map((log) => log.isChecked),
+    })) || [];
 
-      logs: [true, false, true, true, false, true, false],
-    },
-
-    {
-      id: 2,
-      title: "아침 챙겨 먹기",
-
-      logs: [true, true, false, false, false, false, false],
-    },
-
-    {
-      id: 3,
-      title: "React 스터디 챕 1션 읽기",
-
-      logs: [true, false, false, false, false, false, false],
-    },
-
-    {
-      id: 4,
-      title: "스트레칭",
-
-      logs: [false, false, false, false, false, false, false],
-    },
-  ];
   return (
     <div className={style.page}>
       <div className={style.container}>
@@ -125,7 +89,7 @@ function StudyDetailPage() {
           <div className={style.top_frame}>
             {/* 이모지와 공유하기, 수정하기 라인 */}
             <div className={style.action_frame}>
-              <EmojiReaction />
+              <EmojiReaction studyId={study.id} />
               <div className={style.edit_frame}>
                 <button onClick={handleShare} className="edit-btn">
                   <span className={style.editGreen}>공유하기</span>
@@ -199,7 +163,7 @@ function StudyDetailPage() {
                   <Tag
                     variant="studyDetail"
                     size="studyDetailSize"
-                    children={study.point + "P 휙득"}
+                    children={`${study.totalPoint}P 획득`}
                     icon={
                       <img
                         src={pointIcon}
@@ -235,26 +199,42 @@ function StudyDetailPage() {
           }
           // [모달] 페이지 이동 코드
           onClose={() => setOpenModal(null)}
-          onSubmit={(password) => {
-            console.log(password);
-            // if (openModal === "edit") {
-            //   navigate("/study/edit/1");
-            // }
-            // if (openModal === "delete") {
-            //   console.log("삭제 API");
-            // }
+          onSubmit={async (password) => {
+            try {
+              await verifyPassword(study.id, password);
 
-            if (openModal === "habit") {
-              navigate(`/studies/${study.id}/habits`);
+              if (openModal === "edit") {
+                navigate(`/studies/${study.id}/update`);
+              }
+
+              if (openModal === "delete") {
+                await deleteStudy(study.id);
+                alert("스터디가 삭제되었습니다.");
+                navigate("/");
+              }
+
+              if (openModal === "habit") {
+                navigate(`/studies/${study.id}/habits`);
+              }
+
+              if (openModal === "focus") {
+                navigate(`/studies/${study.id}/focus`);
+              }
+
+              setOpenModal(null);
+            } catch (error) {
+              setToastMessage("🚨 비밀번호가 일치하지 않습니다.");
+              setTimeout(() => {
+                setToastMessage("");
+              }, 2222);
             }
-
-            if (openModal === "focus") {
-              navigate(`/studies/${study.id}/focus`);
-            }
-
-            setOpenModal(null);
           }}
         />
+      )}
+      {toastMessage && (
+        <div className={style.toast}>
+          <Toast type="warning" message={toastMessage} />
+        </div>
       )}
     </div>
   );

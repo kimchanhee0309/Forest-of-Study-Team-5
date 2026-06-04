@@ -10,13 +10,12 @@
 .studyList {
   max-width: 1200px;
   width: 100%;
-
   margin: 0 auto;
   margin-top: 40px;
   border-radius: 20px;
   background-color: #fff;
   margin-bottom: 48px;
-  padding: 40px;
+  padding: 30px;
 }
 
 .recentStudies {
@@ -33,7 +32,7 @@
   overflow: hidden;
   flex-wrap: nowrap;
 }
-.studyList {
+.studyListEmpty {
   min-height: 822px;
 }
 
@@ -54,7 +53,6 @@
 .searchBar {
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   margin-top: 24px;
   margin-bottom: 24px;
 }
@@ -95,26 +93,20 @@
 .dropdownWrapper {
   display: flex;
   position: relative;
+  width: 180px;
 }
 
 .dropdownWrapper > div > button {
-  width: 180px;
-  padding: 9px 20px;
-  border-radius: 15px;
   border: 1px solid var(--gray-dddddd, #dddddd);
-  background-color: #fff;
 }
 
 .dropdownWrapper > div > ul {
-  width: 180px;
   border: 1px solid var(--gray-dddddd, #dddddd);
-  border-radius: 15px;
-  background-color: #fff;
 }
 
 .studyCardGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
 }
 
@@ -139,7 +131,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 100%;
   height: 100%;
 }
@@ -150,20 +141,39 @@
   font-weight: var(--weight-medium, 500);
 }
 
-/*반응형 구현 다시 할 예정*/
+/* 반응형 구현 */
 
-/*태블릿*/
-/* @media (max-width: 768px) {
+/* 768~1024px size
+@media (max-width: 1024px) {
   .studyCardGrid {
     grid-template-columns: repeat(2, 1fr);
   }
+}  */
+
+/*태블릿*/
+@media (max-width: 768px) {
+  .studyCardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recentStudies,
+  .studyList {
+    padding: 20px;
+  }
+
+  .recentCardList {
+    width: 100%;
+    gap: 24px;
+    overflow: hidden;
+  }
 }
+
 /*모바일*/
-/* @media (max-width: 375px) {
+@media (max-width: 375px) {
   .studyCardGrid {
     grid-template-columns: 1fr;
   }
-} */
+}
 
 /* @media (max-wigth: 375px) {
   .searchBar {

@@ -13,7 +13,6 @@ function HabitEditModal({ habits, onClose, onSave }) {
 
   const handleAdd = () => {
     const newHabit = {
-      // 💡 여기서 "new-"를 붙여줘야 나중에 저장할 때 POST(생성) API로 골라낼 수 있습니다!
       id: `new-${Date.now()}`,
       title: "",
       habitLogs: [{ isChecked: false }],
@@ -63,14 +62,12 @@ function HabitEditModal({ habits, onClose, onSave }) {
               </HabitItem>
             </li>
           ))}
-
-          <li className={styles.editItemRow}>
-            <button type="button" className={styles.addBtn} onClick={handleAdd}>
-              <img src={icAdd} alt="추가" className={styles.addIcon} />
-            </button>
-            <div className={styles.emptySpace}></div>
-          </li>
         </ul>
+
+        {/* 간격을 명확하게 주기 위해 ul 바깥으로 버튼을 분리 */}
+        <button type="button" className={styles.addBtn} onClick={handleAdd}>
+          <img src={icAdd} alt="추가" className={styles.addIcon} />
+        </button>
 
         <div className={styles.modalActions}>
           <button type="button" className={styles.cancelBtn} onClick={onClose}>
