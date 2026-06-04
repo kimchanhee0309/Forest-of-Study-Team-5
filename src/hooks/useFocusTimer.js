@@ -27,7 +27,7 @@ function useFocusTimer(targetTime = "00:10", studyId) {
       .then((res) => res.ok ? res.json() : null)
       .then((data) => {
         if (data) {
-          setTotalPoint(data.totalPoint ?? 0);
+          setTotalPoint(data.data.total_point ?? 0);
         }
       })
       .catch(() => {});
@@ -49,11 +49,11 @@ function useFocusTimer(targetTime = "00:10", studyId) {
         const res = await fetch(`${BASE_URL}/api/focus/${studyId}`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ targetTime }),
+          body: JSON.stringify({ targetMinutes: mm }),
         });
         if (res.ok) {
-          const data = await res.json();
-          focusIdRef.current = data.id;
+          const json = await res.json();
+          focusIdRef.current = json.data.id;
         }
       } catch (e) {}
       setStatus("running");
@@ -89,8 +89,8 @@ function useFocusTimer(targetTime = "00:10", studyId) {
         method: "PATCH",
       });
       if (res.ok) {
-        const data = await res.json();
-        earnedPoint = data.earnedPoint ?? 0;
+        const json = await res.json();
+        earnedPoint = json.data.earned_point ?? 0;
         setTotalPoint((prev) => prev + earnedPoint);
       }
     } catch (e) {}
