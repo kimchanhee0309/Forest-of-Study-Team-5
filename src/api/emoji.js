@@ -1,17 +1,34 @@
-import axiosInstance from "./axiosInstance";
-
 // 이모지 추가
 export const addEmojiReaction = async (studyId, emoji) => {
-  const response = await axiosInstance.post(`/studies/${studyId}/reactions`, {
-    emoji,
-  });
+  const response = await fetch(
+    `http://localhost:3000/studies/${studyId}/reactions`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emoji,
+      }),
+    },
+  );
 
-  return response.data;
+  if (!response.ok) {
+    throw new Error("이모지 추가 실패");
+  }
+
+  return response.json();
 };
 
 // 이모지 목록 조회
 export const getStudyEmojis = async (studyId) => {
-  const response = await axiosInstance.get(`/studies/${studyId}/reactions`);
+  const response = await fetch(
+    `http://localhost:3000/studies/${studyId}/reactions`,
+  );
 
-  return response.data;
+  if (!response.ok) {
+    throw new Error("이모지 조회 실패");
+  }
+
+  return response.json();
 };

@@ -1,19 +1,34 @@
-import axiosInstance from "./axiosInstance";
-
+// 비밀번호 검증
 export const verifyPassword = async (studyId, password) => {
-  const response = await axiosInstance.post(
-    `/studies/${studyId}/verify-password`,
+  const response = await fetch(
+    `http://localhost:3000/studies/${studyId}/verify-password`,
     {
-      password,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password,
+      }),
     },
   );
 
-  return response.data;
+  if (!response.ok) {
+    throw new Error("비밀번호 검증 실패");
+  }
+
+  return response.json();
 };
 
-// 삭제
+// 스터디 삭제
 export const deleteStudy = async (studyId) => {
-  const response = await axiosInstance.delete(`/studies/${studyId}`);
+  const response = await fetch(`http://localhost:3000/studies/${studyId}`, {
+    method: "DELETE",
+  });
 
-  return response.data;
+  if (!response.ok) {
+    throw new Error("스터디 삭제 실패");
+  }
+
+  return response.json();
 };
