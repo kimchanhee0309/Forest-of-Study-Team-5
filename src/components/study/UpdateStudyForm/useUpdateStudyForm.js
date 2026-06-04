@@ -106,7 +106,7 @@ function useUpdateStudyForm() {
 
     // TODO: API 연동 시 스터디 수정 요청 연결
     try {
-      const response = await fetch(`${BASE_URL}/api/studies/${studyId}`, {
+      const response = await fetch(`${BASE_URL}/studies/${studyId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

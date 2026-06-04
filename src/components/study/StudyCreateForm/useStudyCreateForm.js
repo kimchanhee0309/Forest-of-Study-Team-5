@@ -3,7 +3,7 @@ import styles from "./StudyCreateForm.module.css";
 import { useNavigate } from "react-router-dom";
 
 function useStudyCreateForm() {
-    const navigate = useNavigate();  // 생성 후 메인 페이지로 이동
+  const navigate = useNavigate(); // 생성 후 메인 페이지로 이동
   // ── 상태 관리
 
   // MaxLength추가
@@ -103,7 +103,7 @@ function useStudyCreateForm() {
     if (!isValid) return;
 
     try {
-      const response = await fetch("/api/studies", {
+      const response = await fetch("http://localhost:3000/studies", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -119,7 +119,7 @@ function useStudyCreateForm() {
 
       if (response.ok) {
         console.log("스터디 생성 성공!", data);
-        navigate("/");  //성공 시 페이지 이동
+        navigate("/"); //성공 시 페이지 이동
       } else {
         console.log("실패", data);
       }

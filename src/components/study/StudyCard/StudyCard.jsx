@@ -32,7 +32,7 @@ function StudyCard({
 
       <div className={styles.emojiList}>
         {emojis.slice(0, 3).map((emoji) => (
-          <Tag key={emoji.id} variant="gray" size="small" icon={emoji.icon}>
+          <Tag key={emoji.id} variant="gray" size="small" icon={emoji.emoji}>
             {emoji.count}
           </Tag>
         ))}
