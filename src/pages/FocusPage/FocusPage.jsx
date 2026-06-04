@@ -10,26 +10,35 @@ import arrowRightIcon from "../../assets/icons/ic_arrow_right.png";
 import useFocusTimer from "../../hooks/useFocusTimer";
 import styles from "./FocusPage.module.css";
 
-function FocusPage({
-  nickname = "닉네임",
-  title = "스터디명",
-  studyDescription = "현재까지 획득한 포인트",
-  totalPoint = 0,
-}) {
+const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+
+function FocusPage() {
   const { studyId } = useParams();
   const navigate = useNavigate();
   const [inputMinutes, setInputMinutes] = useState(25);
   const [inputSeconds, setInputSeconds] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 375);
+  const [studyInfo, setStudyInfo] = useState({ nickname: "", title: "" });
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 375);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    if (!studyId) return;
+    fetch(`${BASE_URL}/studies/${studyId}`)
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (data) setStudyInfo({ nickname: data.data.nickname, title: data.data.title });
+      })
+      .catch(() => {});
+  }, [studyId]);
+
   const targetTime = `${String(inputMinutes).padStart(2, "0")}:${String(inputSeconds).padStart(2, "0")}`;
-  const { status, remainSeconds, toast, start, pause, restart, stop } =
-    useFocusTimer(targetTime);
+  const { status, remainSeconds, toast, totalPoint, start, pause, restart, stop } =
+    useFocusTimer(targetTime, studyId);
   return (
     <>
       <GNB showButton={false} />
@@ -38,7 +47,7 @@ function FocusPage({
         {/* 상단 스터디 정보 */}
         <div className={styles.studyInfo}>
           <div className={styles.studyHeader}>
-            <h2 className={styles.studyName}>{nickname}의 {title}</h2>
+            <h2 className={styles.studyName}>{studyInfo.nickname}의 {studyInfo.title}</h2>
             <div className={styles.navButtons}>
               <button className={styles.navButton} onClick={() => navigate(`/studies/${studyId}/habits`)}>
                 오늘의 습관 <img src={arrowRightIcon} alt="arrow" className={styles.navIcon} />
@@ -48,7 +57,7 @@ function FocusPage({
               </button>
             </div>
           </div>
-          <p className={styles.studyDescription}>{studyDescription}</p>
+          <p className={styles.studyDescription}>현재까지 획득한 포인트</p>
           <FocusPoint totalPoint={totalPoint} />
         </div>
 
