@@ -1,5 +1,4 @@
-import { useState } from "react";
-//  1. 기존 Link에 더해서 'useParams'도 같이 불러오기
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from "./HabitPage.module.css";
 import GNB from "../../components/common/GNB/GNB";
@@ -8,26 +7,136 @@ import HabitEditModal from "./HabitEditModal/HabitEditModal";
 import icArrowRight from "../../assets/icons/ic_arrow_right.png";
 
 function HabitPage() {
-  // 2. 현재 접속 주소창에서 스터디 번호(studyId) 뽑아내기.
   const { studyId } = useParams();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [habits, setHabits] = useState([
-    { id: 1, title: "미라클모닝 6시 기상", isCompleted: true },
-    { id: 2, title: "아침 챙겨 먹기", isCompleted: true },
-    { id: 3, title: "React 스터디 책 1챕터 읽기", isCompleted: false },
-    { id: 4, title: "스트레칭", isCompleted: false },
-    { id: 5, title: "영양제 챙겨 먹기", isCompleted: false },
-    { id: 6, title: "사이드 프로젝트", isCompleted: false },
-    { id: 7, title: "물 2L 먹기", isCompleted: false },
-  ]);
+  // 1. 프론트엔드 하드코딩 데이터 제거 및 초기값 빈 배열 설정
+  const [habits, setHabits] = useState([]);
 
-  const handleToggleHabit = (id) => {
-    setHabits((prevHabits) =>
-      prevHabits.map((habit) =>
-        habit.id === id ? { ...habit, isCompleted: !habit.isCompleted } : habit,
-      ),
+  // 2. 당일 습관 조회 API 연동 (GET)
+  const fetchHabits = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/studies/${studyId}/habits`,
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setHabits(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 3. 페이지 최초 렌더링 시 습관 목록 불러오기
+  useEffect(() => {
+    if (studyId) {
+      fetchHabits();
+    }
+  }, [studyId]);
+
+  // 4. 당일 습관 달성 상태 업데이트 API 연동 (PATCH)
+  const handleToggleHabit = async (habitId) => {
+    // 4-1. 클릭한 습관의 현재 로그 데이터 찾기
+    const targetHabit = habits.find((h) => h.id === habitId);
+    if (
+      !targetHabit ||
+      !targetHabit.habitLogs ||
+      targetHabit.habitLogs.length === 0
+    )
+      return;
+
+    // 백엔드 필드명 통일: isCompleted -> isChecked
+    const targetLog = targetHabit.habitLogs[0];
+    const newIsChecked = !targetLog.isChecked;
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/habits/${habitId}/logs`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ isChecked: newIsChecked }),
+        },
+      );
+
+      if (response.ok) {
+        // 4-2. 서버 통신 성공 시 로컬 상태 업데이트
+        setHabits((prevHabits) =>
+          prevHabits.map((habit) =>
+            habit.id === habitId
+              ? {
+                  ...habit,
+                  habitLogs: [
+                    { ...habit.habitLogs[0], isChecked: newIsChecked },
+                  ],
+                }
+              : habit,
+          ),
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 5. 모달 수정 완료 시 일괄 API 처리 로직
+  const handleSaveHabits = async (editHabits) => {
+    // 5-1. 삭제된 습관 찾기 (기존 habits에는 있으나 editHabits에는 없는 객체)
+    const deletedHabits = habits.filter(
+      (h) => !editHabits.find((e) => e.id === h.id),
     );
+
+    // 5-2. 새로 추가된 습관 찾기 (임시 ID 식별자를 가진 객체)
+    const addedHabits = editHabits.filter((e) =>
+      String(e.id).startsWith("new-"),
+    );
+
+    // 5-3. 이름이 수정된 습관 찾기 (임시 ID가 아니며 기존과 title이 다른 객체)
+    const modifiedHabits = editHabits.filter((e) => {
+      if (String(e.id).startsWith("new-")) return false;
+      const original = habits.find((h) => h.id === e.id);
+      return original && original.title !== e.title;
+    });
+
+    try {
+      // 5-4. 습관 종료 API 호출 (PATCH)
+      await Promise.all(
+        deletedHabits.map((h) =>
+          fetch(`http://localhost:3000/api/habits/${h.id}/end`, {
+            method: "PATCH",
+          }),
+        ),
+      );
+
+      // 5-5. 신규 습관 생성 API 호출 (POST)
+      await Promise.all(
+        addedHabits.map((h) =>
+          fetch(`http://localhost:3000/api/studies/${studyId}/habits`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title: h.title }),
+          }),
+        ),
+      );
+
+      // 5-6. 습관 이름 수정 API 호출 (PATCH)
+      await Promise.all(
+        modifiedHabits.map((h) =>
+          fetch(`http://localhost:3000/api/habits/${h.id}/name`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title: h.title }),
+          }),
+        ),
+      );
+
+      // 5-7. 모든 통신 완료 후 최신 데이터 재조회 및 모달 닫기
+      await fetchHabits();
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -46,7 +155,6 @@ function HabitPage() {
             </div>
 
             <div className={styles.navButtons}>
-              {/*  백틱(`)을 사용 뽑아온 studyId 주소 중간 끼워넣기 */}
               <Link
                 to={`/studies/${studyId}/focus`}
                 className={styles.navBtnActive}
@@ -58,8 +166,6 @@ function HabitPage() {
                   className={styles.arrowIcon}
                 />
               </Link>
-
-              {/* 메인 페이지는 루트("/")이므로 변수 없이 고정 */}
               <Link to="/" className={styles.navBtn}>
                 홈
                 <img
@@ -83,10 +189,7 @@ function HabitPage() {
         <HabitEditModal
           habits={habits}
           onClose={() => setIsModalOpen(false)}
-          onSave={(updatedHabits) => {
-            setHabits(updatedHabits);
-            setIsModalOpen(false);
-          }}
+          onSave={handleSaveHabits}
         />
       )}
     </div>
