@@ -67,3 +67,32 @@
 
   cursor: pointer;
 }
+
+@media (max-width: 743px) {
+  .modal {
+    display: grid;
+    grid-template-areas:
+      "title"
+      "content"
+      "close";
+    max-width: 344px;
+    padding: 23px 16px;
+  }
+  .title {
+    grid-area: title;
+    font-size: var(--text-18);
+  }
+  .content {
+    grid-area: content;
+  }
+
+  .closeButton {
+    grid-area: close;
+    position: static;
+    transform: none;
+
+    margin-top: 16px;
+
+    justify-self: center;
+  }
+}

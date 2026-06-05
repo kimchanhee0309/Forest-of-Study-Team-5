@@ -19,6 +19,7 @@ import PasswordModal from "../../components/study/PasswordModal/PasswordModal.js
 import HabitTable from "../../components/study/HabitTable/HabitTable.jsx";
 import Tag from "../../components/common/Tag/Tag.jsx";
 import Toast from "../../components/common/Toast/Toast.jsx";
+import GNB from "../../components/common/GNB/GNB";
 import { useParams, useNavigate } from "react-router-dom";
 import { verifyPassword, deleteStudy } from "../../api/modal.js";
 
@@ -72,7 +73,7 @@ function StudyDetailPage() {
   }, [studyId]);
 
   if (!study) {
-    return <span className={style.error404}>404 Not Found</span>;
+    return <span className={style.loding}>로딩중..</span>;
   }
 
   // 습관 기록표 API 호출
@@ -85,6 +86,7 @@ function StudyDetailPage() {
 
   return (
     <div className={style.page}>
+      <GNB showButton={false} />
       <div className={style.container}>
         <div className={style.container_inner}>
           <div className={style.top_frame}>
@@ -187,6 +189,7 @@ function StudyDetailPage() {
       {/* [모달] 값에 따른 버튼 이름 배치 */}
       {openModal && (
         <PasswordModal
+          title={`${study.nickname}의 ${study.title}`}
           buttonText={
             openModal === "edit"
               ? "수정하러 가기"
