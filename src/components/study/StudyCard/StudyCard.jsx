@@ -18,9 +18,23 @@ function StudyCard({
     blue: styles.bgBlue,
     pink: styles.bgPink,
   };
+
+  const isImageBackground =
+    background?.startsWith("data:image") || background?.startsWith("http");
+
   return (
     <article
-      className={`${styles.card} ${backgroundClassMap[background]}`}
+      className={`${styles.card} ${isImageBackground ? "" : (backgroundClassMap[background] ?? styles.bgGreen)}`}
+      style={
+        isImageBackground
+          ? {
+              backgroundImage: `url(${background})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }
+          : undefined
+      }
       onClick={onClick}
     >
       <div className={styles.header}>
