@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useStudies } from "../../hooks/useStudies";
 import StudyCard from "../../components/study/StudyCard/StudyCard";
 import styles from "./MainPage.module.css";
@@ -28,11 +28,12 @@ const SORT_MAP = {
 function MainPage() {
   //최근 조회 스터디 (연동 필요)
 
-  const [recentStudies, setRecentStudies] = useState(() => {
+  const [recentStudyIds, setRecentStudyIds] = useState(() => {
     const saved = localStorage.getItem(RECENT_STUDIES_KEY);
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [recentStudies, setRecentStudies] = useState([]);
   // 스터디 검색 기능, 정렬순, loadmore
 
   const [inputValue, setInputValue] = useState("");
@@ -61,10 +62,10 @@ function MainPage() {
 
   // 카드 클릭시 로컬스토리지 핸들러
   const handleStudyClick = (study) => {
-    const filtered = recentStudies.filter((s) => s.id !== study.id);
-    const updated = [study, ...filtered].slice(0, MAX_RECENT);
+    const filtered = recentStudyIds.filter((id) => id !== study.id);
+    const updated = [study.id, ...filtered].slice(0, MAX_RECENT);
     localStorage.setItem(RECENT_STUDIES_KEY, JSON.stringify(updated));
-    setRecentStudies(updated);
+    setRecentStudyIds(updated);
     navigate(`/studies/${study.id}`);
   };
 
@@ -90,7 +91,32 @@ function MainPage() {
     setPage((prev) => prev + 1);
   };
 
-  ////
+  useEffect(() => {
+    async function fetchRecentStudies() {
+      try {
+        const results = await Promise.all(
+          recentStudyIds.map(async (id) => {
+            const response = await fetch(`http://localhost:3000/studies/${id}`);
+
+            if (!response.ok) return null;
+
+            const result = await response.json();
+            return result.data ?? result;
+          }),
+        );
+
+        setRecentStudies(results.filter(Boolean));
+      } catch (error) {
+        console.error("최근 조회 스터디 불러오기 실패", error);
+      }
+    }
+
+    if (recentStudyIds.length > 0) {
+      fetchRecentStudies();
+    } else {
+      setRecentStudies([]);
+    }
+  }, [recentStudyIds]);
 
   return (
     <div className={styles.mainPage}>
