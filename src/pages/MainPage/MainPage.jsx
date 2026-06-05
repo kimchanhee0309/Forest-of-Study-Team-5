@@ -132,6 +132,7 @@ function MainPage() {
                 description={study.description}
                 point={study.totalPoint}
                 emojis={study.studyEmojis}
+                background={study.background}
                 onClick={() => handleStudyClick(study)}
               />
             ))}
@@ -194,6 +195,7 @@ function MainPage() {
                   description={study.description}
                   point={study.totalPoint}
                   emojis={study.studyEmojis}
+                  background={study.background}
                   onClick={() => handleStudyClick(study)}
                 />
               ))}
