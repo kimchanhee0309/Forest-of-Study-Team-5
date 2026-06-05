@@ -142,6 +142,7 @@ function MainPage() {
                 emojis={study.studyEmojis}
                 background={study.background}
                 onClick={() => handleStudyClick(study)}
+                type="recent"
               />
             ))}
           </div>
@@ -205,6 +206,7 @@ function MainPage() {
                   emojis={study.studyEmojis}
                   background={study.background}
                   onClick={() => handleStudyClick(study)}
+                  type="list"
                 />
               ))}
             </div>

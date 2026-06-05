@@ -11,6 +11,7 @@ function StudyCard({
   emojis = [],
   background,
   onClick,
+  type = "list",
 }) {
   const backgroundClassMap = {
     green: styles.bgGreen,
@@ -24,14 +25,14 @@ function StudyCard({
 
   return (
     <article
-      className={`${styles.card} ${isImageBackground ? "" : (backgroundClassMap[background] ?? styles.bgGreen)}`}
+      className={`${styles.card} ${styles[type]} ${isImageBackground ? styles.imageCard : (backgroundClassMap[background] ?? styles.bgGreen)}`}
       style={
         isImageBackground
           ? {
               backgroundImage: `url(${background})`,
-              backgroundSize: "cover",
+              /* backgroundSize: "cover",
               backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
+              backgroundRepeat: "no-repeat",*/
             }
           : undefined
       }
