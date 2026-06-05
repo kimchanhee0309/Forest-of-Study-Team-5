@@ -21,13 +21,13 @@
   box-sizing: border-box;
 }
 
-/* 수정한 부분: 모달 텍스트가 항상 중앙을 유지하도록 고정 */
 .modalTitle {
   width: 100%;
   font-size: var(--text-24);
   font-weight: var(--weight-bold);
   margin: 0 0 30px 0;
   text-align: center;
+  color: var(--black);
 }
 
 .editList {
@@ -43,12 +43,16 @@
   overflow-x: hidden;
   flex-grow: 1;
 
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  /* 스크롤바 디자인 완전 숨김 처리 (기능 정상 작동 보장) */
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
 .editList::-webkit-scrollbar {
   display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
 
 .editItemRow {
@@ -58,13 +62,14 @@
   align-items: center;
 }
 
+/* 요소 간의 공백을 제거하고 디자인 시안과 맞추기 위해 border-bottom 속성으로 밑줄 구현 */
 .editItemText {
-  font-size: var(--text-16, 16px);
-  font-weight: var(--weight-medium, 500);
-  color: var(--gray-818181, #818181) !important;
+  font-size: var(--text-16);
+  font-weight: var(--weight-medium);
+  color: var(--gray-818181) !important;
   text-decoration: none !important;
   display: inline-block;
-  border-bottom: 1.5px solid var(--gray-818181, #818181);
+  border-bottom: 1.5px solid var(--gray-818181);
   line-height: 1.1;
   padding-bottom: 0px;
 }
@@ -73,7 +78,7 @@
   display: inline-block;
   width: 127.5px;
   height: 0px;
-  border-bottom: 1.5px solid var(--gray-818181, #818181) !important;
+  border-bottom: 1.5px solid var(--gray-818181) !important;
   background-color: transparent !important;
   text-decoration: none !important;
 }
@@ -85,9 +90,9 @@
   outline: none;
   background: transparent;
   text-align: center;
-  font-size: var(--text-16, 16px);
-  font-weight: var(--weight-medium, 500);
-  color: var(--gray-818181, #818181) !important;
+  font-size: var(--text-16);
+  font-weight: var(--weight-medium);
+  color: var(--gray-818181) !important;
 }
 
 .addBtn {
@@ -97,7 +102,7 @@
   width: 400px !important;
   height: 54px;
   border-radius: 20px;
-  border: 2px solid var(--black, #414141);
+  border: 2px solid var(--black);
   background: transparent;
   cursor: pointer;
   padding: 0;
@@ -134,23 +139,23 @@
   cursor: pointer;
   text-align: center;
   font-family: "EF_jejudoldam", sans-serif !important;
-  font-size: 18px !important;
-  font-weight: 400 !important;
+  font-size: var(--text-18) !important;
+  font-weight: var(--weight-regular) !important;
   line-height: normal;
 }
 
 .cancelBtn {
-  background: var(--gray-dddddd, #ddd) !important;
-  color: var(--gray-818181, #818181) !important;
+  background: var(--gray-dddddd) !important;
+  color: var(--gray-818181) !important;
 }
 
 .saveBtn {
-  background: var(--brand, #99c08e) !important;
+  background: var(--brand) !important;
   color: #fff !important;
 }
 
 /* ======================================================== */
-/* 아이패드 미니 사이즈 (태블릿) */
+/* 태블릿 뷰포트 레이아웃 분기 처리 */
 /* ======================================================== */
 @media (min-width: 481px) and (max-width: 768px) {
   .modal {
@@ -181,7 +186,7 @@
 }
 
 /* ======================================================== */
-/* 모바일 사이즈 */
+/* 모바일 뷰포트 레이아웃 분기 처리 및 스크롤바 제어 */
 /* ======================================================== */
 @media (max-width: 480px) {
   .modal {
@@ -193,7 +198,7 @@
   .modalTitle {
     width: 100% !important;
     height: auto !important;
-    font-size: 20px !important;
+    font-size: var(--text-20) !important;
     margin-bottom: 24px !important;
     text-align: center !important;
   }
@@ -202,13 +207,23 @@
     width: 312px !important;
     gap: 8px !important;
     margin-bottom: 24px !important;
+
+    /* 모바일 환경 사이드 스크롤바 마스킹 기법 적용 */
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+
+  .editList::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   .editItemText,
   .editItemInput {
-    font-size: 16px !important;
-    font-weight: 500 !important;
-    color: var(--gray-818181, #818181) !important;
+    font-size: var(--text-16) !important;
+    font-weight: var(--weight-medium) !important;
+    color: var(--gray-818181) !important;
   }
 
   .addBtn {

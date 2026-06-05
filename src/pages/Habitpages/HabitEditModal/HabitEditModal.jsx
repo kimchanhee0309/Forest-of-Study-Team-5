@@ -4,24 +4,29 @@ import HabitItem from "../../../components/habit/HabitItem/HabitItem";
 import icAdd from "../../../assets/icons/ic_plus.png";
 
 function HabitEditModal({ habits, onClose, onSave }) {
+  // 모달 내부에서 취소를 누르면 원본 데이터가 바뀌면 안 되기 때문에, 프론트에서 임시 복사본 상태를 만들어 사용
   const [editHabits, setEditHabits] = useState(habits);
   const [editingId, setEditingId] = useState(null);
 
   const handleDelete = (id) => {
+    // filter를 사용해 선택한 id를 제외한 나머지 배열만 남겨서 삭제 구현
     setEditHabits((prev) => prev.filter((habit) => habit.id !== id));
   };
 
   const handleAdd = () => {
+    // DB에 들어가기 전이므로 식별할 고유값이 없음. Date.now()를 사용하여 임시 고유 ID 생성
     const newHabit = {
       id: `new-${Date.now()}`,
       title: "",
       habitLogs: [{ isChecked: false }],
     };
+    // 스프레드 연산자를 사용하여 기존 배열에 새 객체를 추가
     setEditHabits((prev) => [...prev, newHabit]);
     setEditingId(newHabit.id);
   };
 
   const handleChange = (id, newTitle) => {
+    // map을 돌면서 수정 중인 아이템의 title만 업데이트
     setEditHabits((prev) =>
       prev.map((habit) =>
         habit.id === id ? { ...habit, title: newTitle } : habit,
@@ -41,12 +46,14 @@ function HabitEditModal({ habits, onClose, onSave }) {
                 onClickItem={() => setEditingId(habit.id)}
                 onDelete={() => handleDelete(habit.id)}
               >
+                {/* editingId와 현재 렌더링 중인 아이템 id가 같으면 input 태그를 보여주어 수정 모드로 전환 */}
                 {editingId === habit.id ? (
                   <input
                     type="text"
                     className={styles.editItemInput}
                     value={habit.title}
                     onChange={(e) => handleChange(habit.id, e.target.value)}
+                    // onBlur 이벤트를 사용해 인풋 바깥을 클릭하면 수정 모드를 종료함
                     onBlur={() => setEditingId(null)}
                     autoFocus
                   />
@@ -64,7 +71,7 @@ function HabitEditModal({ habits, onClose, onSave }) {
           ))}
         </ul>
 
-        {/* 간격을 명확하게 주기 위해 ul 바깥으로 버튼을 분리 */}
+        {/* 플러스 버튼을 리스트 흐름과 분리하여 간격을 통제하기 위해 ul 태그 바깥에 배치 */}
         <button type="button" className={styles.addBtn} onClick={handleAdd}>
           <img src={icAdd} alt="추가" className={styles.addIcon} />
         </button>

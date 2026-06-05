@@ -1,3 +1,4 @@
+/* 자식 컨테이너 렌더링 규칙 정의 */
 .sectionContainer {
   width: 100%;
   max-width: 1168px;
@@ -11,7 +12,17 @@
   border: 1px solid var(--gray-dddddd);
   background: #fff;
   box-sizing: border-box;
+
+  /* 리스트가 길어질 경우를 대비해 스크롤 속성 부여 */
   overflow-y: auto;
+
+  /* 컨테이너 내부의 못생긴 스크롤바 디자인을 기능만 남기고 마스킹 처리 */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sectionContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .sectionHeader {
@@ -60,7 +71,6 @@
   align-items: center;
 }
 
-/* 수정한 부분: width: 100% 를 추가하여 중앙 정렬이 풀리지 않게 고정 */
 .emptyState {
   width: 100%;
   flex-grow: 1;
@@ -69,12 +79,12 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
-  color: var(--gray-818181, #818181);
+  color: var(--gray-818181);
   text-align: center;
   font-family: "Pretendard", sans-serif;
   font-size: 20px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: var(--weight-medium);
   line-height: normal;
 }
 
@@ -83,26 +93,22 @@
 }
 
 /* ======================================================== */
-/* 아이패드 미니 사이즈 (태블릿) */
+/* 아이패드 미니 (태블릿) 뷰포트 처리 */
 /* ======================================================== */
 @media (min-width: 481px) and (max-width: 768px) {
   .sectionContainer {
-    width: 648px;
-    height: 631px;
-    display: flex;
+    width: 100%;
+    /* 부모 레이아웃의 남은 공간을 동적으로 꽉 채우도록 flex-grow 할당 */
+    flex-grow: 1;
+    height: auto;
     padding: 40px 24px;
-    flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    border-radius: 20px;
-    border: 1px solid var(--gray-dddddd, #ddd);
-    background: #fff;
-    box-sizing: border-box;
+    border: 1px solid var(--gray-dddddd);
   }
 
   .sectionHeader {
     justify-content: center;
-    width: 100%;
   }
 
   .habitItem {
@@ -118,19 +124,23 @@
 }
 
 /* ======================================================== */
-/* 모바일 사이즈 */
+/* 모바일 뷰포트 최적화 처리 */
 /* ======================================================== */
 @media (max-width: 480px) {
   .sectionContainer {
     display: flex;
-    width: 312px;
-    height: 551px;
-    padding: 24px 16px;
+    /* 부모(HabitPage의 .card)에서 정확한 패딩 값을 제어하고 있으므로, 
+      본 컴포넌트는 width 100%와 flex-grow: 1을 주어 자연스럽게 내부 공간을 채우도록 구조화함.
+      이를 통해 위 205, 아래 25, 좌우 16 등의 요구사항 패딩 조건이 충족됨.
+    */
+    width: 100% !important;
+    flex-grow: 1 !important;
+    height: auto !important;
+    padding: 24px 16px !important;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
-    border-radius: 20px;
-    border: 1px solid var(--gray-dddddd, #ddd);
+    border: 1px solid var(--gray-dddddd);
     background: #fff;
     box-sizing: border-box;
   }
@@ -153,7 +163,6 @@
     width: 100%;
     max-width: 280px;
     height: 54px;
-    font-size: var(--text-16);
   }
 
   .editButton {
@@ -164,6 +173,7 @@
   }
 
   .emptyState {
+    width: 100%;
     font-size: 16px;
   }
 }

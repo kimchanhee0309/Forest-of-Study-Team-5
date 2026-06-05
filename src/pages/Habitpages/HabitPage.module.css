@@ -1,3 +1,22 @@
+/* 전역 스크롤바 제어 구역
+  global.css를 건드리지 않고, :global 가상 선택자를 활용해 본 페이지가 렌더링될 때만 브라우저 기본 스크롤바를 마스킹합니다.
+*/
+:global(html),
+:global(body) {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+:global(html::-webkit-scrollbar),
+:global(body::-webkit-scrollbar) {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* 페이지 전체 레이아웃
+  height: 100vh 고정 시 자식 요소인 GNB가 수축(flex-shrink)되어 찌그러지는 현상을 방지하기 위해 min-height로 유연성을 부여했습니다.
+*/
 .layout {
   min-height: 100vh;
   background-color: var(--bg);
@@ -23,7 +42,7 @@
   width: 100%;
   max-width: 1248px;
   min-height: 863px;
-  padding: 40px;
+  padding: 40px; /* 데스크탑 기준 하얀색 카드 내부 패딩 */
   border-radius: 20px;
   background: #fff;
   box-sizing: border-box;
@@ -61,7 +80,6 @@
   font-size: var(--text-14);
 }
 
-/* 수정한 부분: 세로로 늘어나는 문제 해결, 가로로 텍스트에 맞게 펼쳐짐 */
 .timeValue {
   display: flex;
   width: fit-content;
@@ -115,29 +133,21 @@
   height: 24px;
 }
 
-.listSection {
-  width: 100%;
-  padding: 40px 24px;
-  box-sizing: border-box;
-}
-
 /* ======================================================== */
-/* 아이패드 미니 사이즈 (태블릿) */
+/* 아이패드 미니 규격 적용 구역 */
 /* ======================================================== */
 @media (min-width: 481px) and (max-width: 768px) {
   .main {
-    padding: 24px 24px 79px;
+    /* 전체 레이아웃 아래에서 79px 여백 유지 */
+    padding: 0 0 79px 0 !important;
   }
 
   .card {
-    width: 696px;
-    height: 847px;
-    display: flex;
-    padding: 24px;
-    align-items: flex-start;
-    gap: 10px;
-    border-radius: 20px;
-    background: #fff;
+    /* 요구사항에 따른 크기 및 여백 완벽 고정 */
+    width: 696px !important;
+    height: 847px !important;
+    margin-top: 16px !important; /* GNB 헤더에서 16px 여백 */
+    padding: 24px !important; /* 하얀색 카드 안 레이아웃 Padding 24 여백 */
     box-sizing: border-box;
   }
 
@@ -152,31 +162,51 @@
 }
 
 /* ======================================================== */
-/* 모바일 사이즈 */
+/* 모바일 규격 적용 구역 */
 /* ======================================================== */
 @media (max-width: 480px) {
   .main {
-    padding: 205px 16px 25px 16px;
-  }
-
-  .card {
-    width: 344px;
-    height: 781px;
+    width: 100vw;
+    /* GNB 찌그러짐과 붕 뜨는 현상 방지를 위해 외부 패딩 초기화 */
+    padding: 0 !important;
     display: flex;
-    flex-direction: column;
-    padding: 24px 16px;
-    border-radius: 20px;
-    background: #fff;
+    justify-content: center;
+    align-items: flex-start;
     box-sizing: border-box;
   }
 
+  .card {
+    /* 마진으로 외부 여백 컨트롤: GNB 하단 20px, 화면 하단 141px */
+    margin-top: 20px !important;
+    margin-bottom: 141px !important;
+    width: 344px !important;
+    height: 781px !important;
+
+    /* 하얀색 카드안 레이아웃 패딩 고정: 좌 우 16, 아래 25, 상단 24(헤더 여백용) */
+    padding: 24px 16px 25px 16px !important;
+
+    border-radius: 20px;
+    background: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 절대 위치(absolute) 렌더링 방식을 폐기하고 flex 레이아웃으로 변경하여,
+    헤더와 하단 회색 레이아웃 간의 동적 여백(24px)을 완벽하게 계산합니다. 
+  */
   .header {
+    position: static;
+    width: 100%;
     flex-direction: column;
     gap: 16px;
+    margin-bottom: 24px !important; /* 현재시간 div와 하단 섹션 간격 24px 구현 */
+    align-items: flex-start;
   }
 
   .titleGroup {
     gap: 16px;
+    width: 100%;
   }
 
   .title {
@@ -200,9 +230,5 @@
   .navBtn {
     width: 58px;
     height: 40px;
-  }
-
-  .listSection {
-    padding: 24px 0 0;
   }
 }
