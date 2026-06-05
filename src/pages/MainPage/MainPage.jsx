@@ -118,27 +118,6 @@ function MainPage() {
     }
   }, [recentStudyIds]);
 
-  // 서버로 받는다
-  //검색 필터링
-  // const filteredStudies = studies.filter((study) =>
-  //   study.title.includes(searchKeyword),
-  // );
-  //정렬
-  // const sortedStudies = [...filteredStudies].sort((a, b) => {
-  //   switch (sortOrder) {
-  //     case "최근 순":
-  //       return a.elapsedDays - b.elapsedDays;
-  //     case "오래된 순":
-  //       return b.elapsedDays - a.elapsedDays;
-  //     case "많은 포인트 순":
-  //       return b.point - a.point;
-  //     case "적은 포인트 순":
-  //       return a.point - b.point;
-  //     default:
-  //       return 0;
-  //   }
-  // });
-
   return (
     <div className={styles.mainPage}>
       {/*섹션 1: 최근 조회한 스터디*/}

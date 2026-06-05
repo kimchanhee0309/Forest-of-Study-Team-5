@@ -1,6 +1,8 @@
 .mainPage {
   background-color: var(--bg, #f6f4ef);
   display: flex;
+  max-width: 1920px;
+  width: 100%;
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
@@ -141,17 +143,8 @@
   font-weight: var(--weight-medium, 500);
 }
 
-/* 반응형 구현 */
-
-/* 768~1024px size
-@media (max-width: 1024px) {
-  .studyCardGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}  */
-
 /*태블릿*/
-@media (max-width: 768px) {
+@media (max-width: 744px) {
   .studyCardGrid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -175,10 +168,9 @@
   }
 }
 
-/* @media (max-wigth: 375px) {
+@media (max-wigth: 375px) {
   .searchBar {
     flex-direction: column;
     align-items: stretch;
-    
   }
-}  */
+}
