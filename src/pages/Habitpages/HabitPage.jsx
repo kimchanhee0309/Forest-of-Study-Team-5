@@ -197,8 +197,8 @@ function HabitPage() {
                   className={styles.arrowIcon}
                 />
               </Link>
-              <Link to="/" className={styles.navBtn}>
-                홈
+              <Link to={`/studies/${studyId}`} className={styles.navBtnActive}>
+                돌아가기
                 <img
                   src={icArrowRight}
                   alt="이동"
