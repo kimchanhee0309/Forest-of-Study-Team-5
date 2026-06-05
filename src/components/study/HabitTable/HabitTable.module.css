@@ -80,7 +80,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 743px) {
   .table_header,
   .table_row {
     min-width: 600px;

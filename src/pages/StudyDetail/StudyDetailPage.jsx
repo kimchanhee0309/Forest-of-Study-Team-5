@@ -19,6 +19,7 @@ import PasswordModal from "../../components/study/PasswordModal/PasswordModal.js
 import HabitTable from "../../components/study/HabitTable/HabitTable.jsx";
 import Tag from "../../components/common/Tag/Tag.jsx";
 import Toast from "../../components/common/Toast/Toast.jsx";
+import GNB from "../../components/common/GNB/GNB";
 import { useParams, useNavigate } from "react-router-dom";
 import { verifyPassword, deleteStudy } from "../../api/modal.js";
 
@@ -85,6 +86,7 @@ function StudyDetailPage() {
 
   return (
     <div className={style.page}>
+      <GNB showButton={false} />
       <div className={style.container}>
         <div className={style.container_inner}>
           <div className={style.top_frame}>
