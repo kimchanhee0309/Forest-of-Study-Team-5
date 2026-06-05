@@ -96,6 +96,9 @@
   .habit_table {
     overflow-x: auto;
   }
+  .empty_state {
+    font-size: var(--text-16);
+  }
   .habitTitle,
   .day {
     font-size: var(--text-14);
