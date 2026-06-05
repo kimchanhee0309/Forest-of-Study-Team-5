@@ -189,7 +189,7 @@ function StudyDetailPage() {
       {/* [모달] 값에 따른 버튼 이름 배치 */}
       {openModal && (
         <PasswordModal
-          title={study.title}
+          title={`${study.nickname}의 ${study.title}`}
           buttonText={
             openModal === "edit"
               ? "수정하러 가기"
