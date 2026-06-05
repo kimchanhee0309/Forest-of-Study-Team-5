@@ -70,23 +70,34 @@
   background: #fff;
 }
 @media (max-width: 1199px) {
-  .habit_table {
-    padding: 24px;
-  }
   .table_header,
   .table_row {
     display: grid;
     grid-template-columns: 160px repeat(7, 1fr);
   }
+  .empty_state {
+    font-size: var(--text-20);
+  }
 }
 
-@media (max-width: 695px) {
-  .habit_table {
-    padding: 0px;
+@media (max-width: 767px) {
+  .table_header,
+  .table_row {
+    min-width: 600px;
+    grid-template-columns: 122px repeat(7, 1fr);
   }
-
-  /* .table_row {
-    display: grid;
-    grid-template-columns: 122px repeat(3, 1fr);
-  } */
+  .table_title {
+    max-width: 122px;
+    padding: 0px 16px;
+  }
+  .empty_cell {
+    width: 120px;
+  }
+  .habit_table {
+    overflow-x: auto;
+  }
+  .habitTitle,
+  .day {
+    font-size: var(--text-14);
+  }
 }

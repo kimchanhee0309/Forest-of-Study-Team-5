@@ -72,7 +72,7 @@ function StudyDetailPage() {
   }, [studyId]);
 
   if (!study) {
-    return <span className={style.error404}>404 Not Found</span>;
+    return <span className={style.loding}>로딩중..</span>;
   }
 
   // 습관 기록표 API 호출
@@ -187,6 +187,7 @@ function StudyDetailPage() {
       {/* [모달] 값에 따른 버튼 이름 배치 */}
       {openModal && (
         <PasswordModal
+          title={study.title}
           buttonText={
             openModal === "edit"
               ? "수정하러 가기"
