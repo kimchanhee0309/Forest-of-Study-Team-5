@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import { BASE_URL } from "../../constants/api.js";
+import { BASE_URL } from "../constants/api.js";
 
 function useFocusTimer(targetTime = "00:10", studyId) {
   const [mm, ss] = targetTime.split(":").map(Number);

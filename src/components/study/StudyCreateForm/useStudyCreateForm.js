@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./StudyCreateForm.module.css";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../constants/api.js";
+import { BASE_URL } from "../../../constants/api.js";
 
 function useStudyCreateForm() {
   const navigate = useNavigate(); // 생성 후 메인 페이지로 이동

@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../constants/api.js";
+import { BASE_URL } from "../constants/api.js";
 
 // 이모지 추가
 export const addEmojiReaction = async (studyId, emoji) => {

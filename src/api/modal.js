@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../constants/api.js";
+import { BASE_URL } from "../constants/api.js";
 
 // 비밀번호 검증
 export const verifyPassword = async (studyId, password) => {
