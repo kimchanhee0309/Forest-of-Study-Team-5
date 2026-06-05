@@ -139,6 +139,20 @@
 }
 
 /* ============================
+   태블릿 (max-width: 744px)
+   ============================ */
+@media (max-width: 744px) {
+  .wrapper {
+    padding-bottom: 216px;
+    gap: 16px;
+  }
+
+  .container {
+    padding: 24px;
+  }
+}
+
+/* ============================
    모바일 (max-width: 375px)
    ============================ */
 @media (max-width: 375px) {
