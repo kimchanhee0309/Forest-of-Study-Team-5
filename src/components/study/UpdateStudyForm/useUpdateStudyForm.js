@@ -123,6 +123,14 @@ function useUpdateStudyForm() {
     );
   };
 
+  const getBackgroundValue = () => {
+    if (selectedBackground.startsWith("custom")) {
+      const index = Number(selectedBackground.replace("custom-", ""));
+      return customBackgrounds[index];
+    }
+
+    return selectedBackground;
+  };
   // 수정하기 버튼 클릭 시 실행 - 검사 통과해야만 API 요청
   const handleSubmit = async () => {
     const isValid = validateForm();
@@ -138,7 +146,7 @@ function useUpdateStudyForm() {
           nickname: formData.nickname,
           title: formData.title,
           description: formData.description,
-          background: selectedBackground,
+          background: getBackgroundValue(),
           password: formData.password,
         }),
       });
@@ -167,12 +175,23 @@ function useUpdateStudyForm() {
     const file = e.target.files[0];
 
     if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert("이미지는 2MB 이하만 업로드할 수 있어요");
+      return;
+    }
     if (customBackgrounds.length >= 4) return;
 
-    const imageUrl = URL.createObjectURL(file);
+    const reader = new FileReader();
 
-    setCustomBackgrounds((prev) => [...prev, imageUrl]);
+    reader.onloadend = () => {
+      const imageBase64 = reader.result;
 
+      setCustomBackgrounds((prev) => [...prev, imageBase64]);
+      setSelectedBackground(`custom-${customBackgrounds.length}`);
+    };
+
+    reader.readAsDataURL(file);
     e.target.value = "";
   };
 

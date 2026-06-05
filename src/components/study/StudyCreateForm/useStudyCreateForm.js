@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./StudyCreateForm.module.css";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../constants/api.js";
 
 function useStudyCreateForm() {
   const navigate = useNavigate(); // 생성 후 메인 페이지로 이동
@@ -111,7 +112,7 @@ function useStudyCreateForm() {
     if (!isValid) return;
 
     try {
-      const response = await fetch("http://localhost:3000/studies", {
+      const response = await fetch(`${BASE_URL}/studies`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -165,7 +166,6 @@ function useStudyCreateForm() {
       setSelectedBackground(`custom-${customBackgrounds.length}`);
     };
 
-    /*const imageUrl = URL.createObjectURL(file);*/
     reader.readAsDataURL(file);
     e.target.value = "";
   };

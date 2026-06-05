@@ -5,6 +5,7 @@ import GNB from "../../components/common/GNB/GNB";
 import HabitSection from "./HabitSection/HabitSection";
 import HabitEditModal from "./HabitEditModal/HabitEditModal";
 import icArrowRight from "../../assets/icons/ic_arrow_right.png";
+import { BASE_URL } from "../../constants/api.js";
 
 function HabitPage() {
   // react-router-dom의 useParams 훅을 사용하여 URL 파라미터에서 스터디 고유 ID를 추출
@@ -37,9 +38,7 @@ function HabitPage() {
   // 백엔드 REST API를 호출하여 스터디방의 기본 정보(닉네임, 타이틀)를 가져오는 비동기 함수
   const fetchStudyInfo = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/studies/${studyId}`,
-      );
+      const response = await fetch(`${BASE_URL}/studies/${studyId}`);
       if (response.ok) {
         const data = await response.json();
         setStudyInfo({
@@ -55,9 +54,7 @@ function HabitPage() {
   // 현재 진행 중인 습관 목록 데이터를 가져오는 비동기 함수
   const fetchHabits = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/studies/${studyId}/habits`,
-      );
+      const response = await fetch(`${BASE_URL}/studies/${studyId}/habits`);
       if (response.ok) {
         const data = await response.json();
         setHabits(data);
@@ -96,14 +93,11 @@ function HabitPage() {
     const currentCheck = targetHabit.habitLogs[0].isChecked;
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/habits/${habitId}/logs`,
-        {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ isChecked: !currentCheck }),
-        },
-      );
+      const response = await fetch(`${BASE_URL}/habits/${habitId}/logs`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isChecked: !currentCheck }),
+      });
 
       // 서버 요청이 성공 시 프론트엔드의 상태도 즉시 업데이트 UX 구현
       if (response.ok) {
@@ -140,14 +134,14 @@ function HabitPage() {
       // Promise.all을 활용 다수의 비동기 네트워크 요청 병렬로 처리 응답 대기 시간 최소화
       await Promise.all(
         deleted.map((h) =>
-          fetch(`http://localhost:3000/api/habits/${h.id}/end`, {
+          fetch(`${BASE_URL}/habits/${h.id}/end`, {
             method: "PATCH",
           }),
         ),
       );
       await Promise.all(
         added.map((h) =>
-          fetch(`http://localhost:3000/api/studies/${studyId}/habits`, {
+          fetch(`${BASE_URL}/studies/${studyId}/habits`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ title: h.title }),
@@ -156,7 +150,7 @@ function HabitPage() {
       );
       await Promise.all(
         modified.map((h) =>
-          fetch(`http://localhost:3000/api/habits/${h.id}/name`, {
+          fetch(`${BASE_URL}/habits/${h.id}/name`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ title: h.title }),

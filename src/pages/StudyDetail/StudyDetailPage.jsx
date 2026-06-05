@@ -22,8 +22,7 @@ import Toast from "../../components/common/Toast/Toast.jsx";
 import GNB from "../../components/common/GNB/GNB";
 import { useParams, useNavigate } from "react-router-dom";
 import { verifyPassword, deleteStudy } from "../../api/modal.js";
-
-const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+import { BASE_URL } from "../../constants/api.js";
 
 function StudyDetailPage() {
   // [모달] 활성화, 비활성화

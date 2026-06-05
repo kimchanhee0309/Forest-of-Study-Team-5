@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const BASE_URL = "http://localhost:3000";
+import { BASE_URL } from "../../constants/api.js";
 
 export function useStudies({ keyword, sort, page, limit }) {
   const [studies, setStudies] = useState([]);

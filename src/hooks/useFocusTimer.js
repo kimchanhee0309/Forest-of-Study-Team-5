@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+import { BASE_URL } from "../../constants/api.js";
 
 function useFocusTimer(targetTime = "00:10", studyId) {
   const [mm, ss] = targetTime.split(":").map(Number);

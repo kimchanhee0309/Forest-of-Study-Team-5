@@ -1,4 +1,5 @@
-const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+import { BASE_URL } from "../../constants/api.js";
+
 // 비밀번호 검증
 export const verifyPassword = async (studyId, password) => {
   const response = await fetch(

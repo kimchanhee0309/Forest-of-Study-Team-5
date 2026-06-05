@@ -5,6 +5,7 @@ import styles from "./MainPage.module.css";
 import searchIcon from "../../assets/icons/ic_search.png";
 import Dropdown from "../../components/common/Dropdown/Dropdown";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../constants/api.js";
 
 // 메인 페이지 기능
 // - 스터디 목록 불러오기
@@ -96,7 +97,7 @@ function MainPage() {
       try {
         const results = await Promise.all(
           recentStudyIds.map(async (id) => {
-            const response = await fetch(`http://localhost:3000/studies/${id}`);
+            const response = await fetch(`${BASE_URL}/studies/${id}`);
 
             if (!response.ok) return null;
 
