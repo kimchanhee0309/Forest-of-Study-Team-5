@@ -4,12 +4,10 @@ import HabitItem from "../../../components/habit/HabitItem/HabitItem";
 import icAdd from "../../../assets/icons/ic_plus.png";
 
 function HabitEditModal({ habits, onClose, onSave }) {
-  // 모달 내부에서 취소를 누르면 원본 데이터가 바뀌면 안 되기 때문에, 프론트에서 임시 복사본 상태를 만들어 사용
   const [editHabits, setEditHabits] = useState(habits);
   const [editingId, setEditingId] = useState(null);
 
   const handleDelete = (id) => {
-    // filter를 사용해 선택한 id를 제외한 나머지 배열만 남겨서 삭제 구현
     setEditHabits((prev) => prev.filter((habit) => habit.id !== id));
   };
 

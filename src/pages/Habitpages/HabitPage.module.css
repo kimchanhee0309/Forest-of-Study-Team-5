@@ -1,6 +1,3 @@
-/* 전역 스크롤바 제어 구역
-  global.css를 건드리지 않고, :global 가상 선택자를 활용해 본 페이지가 렌더링될 때만 브라우저 기본 스크롤바를 마스킹합니다.
-*/
 :global(html),
 :global(body) {
   -ms-overflow-style: none !important;
@@ -14,9 +11,6 @@
   height: 0 !important;
 }
 
-/* 페이지 전체 레이아웃
-  height: 100vh 고정 시 자식 요소인 GNB가 수축(flex-shrink)되어 찌그러지는 현상을 방지하기 위해 min-height로 유연성을 부여했습니다.
-*/
 .layout {
   min-height: 100vh;
   background-color: var(--bg);
@@ -42,7 +36,7 @@
   width: 100%;
   max-width: 1248px;
   min-height: 863px;
-  padding: 40px; /* 데스크탑 기준 하얀색 카드 내부 패딩 */
+  padding: 40px;
   border-radius: 20px;
   background: #fff;
   box-sizing: border-box;
@@ -136,18 +130,17 @@
 /* ======================================================== */
 /* 아이패드 미니 규격 적용 구역 */
 /* ======================================================== */
+
 @media (min-width: 481px) and (max-width: 768px) {
   .main {
-    /* 전체 레이아웃 아래에서 79px 여백 유지 */
     padding: 0 0 79px 0 !important;
   }
 
   .card {
-    /* 요구사항에 따른 크기 및 여백 완벽 고정 */
     width: 696px !important;
     height: 847px !important;
-    margin-top: 16px !important; /* GNB 헤더에서 16px 여백 */
-    padding: 24px !important; /* 하얀색 카드 안 레이아웃 Padding 24 여백 */
+    margin-top: 16px !important;
+    padding: 24px !important;
     box-sizing: border-box;
   }
 
@@ -164,10 +157,10 @@
 /* ======================================================== */
 /* 모바일 규격 적용 구역 */
 /* ======================================================== */
+
 @media (max-width: 480px) {
   .main {
     width: 100vw;
-    /* GNB 찌그러짐과 붕 뜨는 현상 방지를 위해 외부 패딩 초기화 */
     padding: 0 !important;
     display: flex;
     justify-content: center;
@@ -176,13 +169,10 @@
   }
 
   .card {
-    /* 마진으로 외부 여백 컨트롤: GNB 하단 20px, 화면 하단 141px */
     margin-top: 20px !important;
     margin-bottom: 141px !important;
     width: 344px !important;
     height: 781px !important;
-
-    /* 하얀색 카드안 레이아웃 패딩 고정: 좌 우 16, 아래 25, 상단 24(헤더 여백용) */
     padding: 24px 16px 25px 16px !important;
 
     border-radius: 20px;
@@ -192,9 +182,6 @@
     flex-direction: column;
   }
 
-  /* 절대 위치(absolute) 렌더링 방식을 폐기하고 flex 레이아웃으로 변경하여,
-    헤더와 하단 회색 레이아웃 간의 동적 여백(24px)을 완벽하게 계산합니다. 
-  */
   .header {
     position: static;
     width: 100%;

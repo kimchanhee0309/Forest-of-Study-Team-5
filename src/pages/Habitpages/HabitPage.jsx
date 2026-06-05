@@ -7,7 +7,7 @@ import HabitEditModal from "./HabitEditModal/HabitEditModal";
 import icArrowRight from "../../assets/icons/ic_arrow_right.png";
 
 function HabitPage() {
-  // react-router-dom의 useParams 훅을 사용하여 URL 파라미터에서 스터디 고유 ID를 추출합니다.
+  // react-router-dom의 useParams 훅을 사용하여 URL 파라미터에서 스터디 고유 ID를 추출
   const { studyId } = useParams();
 
   // 모달창의 활성화 상태와 API로 받아올 데이터를 상태(State)로 관리합니다.
@@ -15,10 +15,10 @@ function HabitPage() {
   const [habits, setHabits] = useState([]);
   const [studyInfo, setStudyInfo] = useState({ nickname: "", title: "" });
 
-  // 클라이언트 측에서 렌더링할 현재 시간 상태입니다.
+  // 클라이언트 측에서 렌더링할 현재 시간 상태
   const [currentTime, setCurrentTime] = useState("");
 
-  // 자바스크립트 내장 객체인 Date를 활용하여 현재 시간을 특정 포맷(YYYY-MM-DD 오전/오후 HH:MM)으로 가공하는 유틸 함수입니다.
+  // 자바스크립트 내장 객체인 Date를 활용하여 현재 시간을 특정 포맷(YYYY-MM-DD 오전/오후 HH:MM)으로 가공하는 유틸 함수
   const formatCurrentTime = () => {
     const now = new Date();
     const year = now.getFullYear();
@@ -29,12 +29,12 @@ function HabitPage() {
     const minutes = String(now.getMinutes()).padStart(2, "0");
     const ampm = hours >= 12 ? "오후" : "오전";
 
-    // 12시간제 표기를 위한 나머지 연산 처리입니다.
+    // 12시간제 표기를 위한 나머지 연산 처리
     hours = hours % 12 || 12;
     return `${year}-${month}-${day} ${ampm} ${hours}:${minutes}`;
   };
 
-  // 백엔드 REST API를 호출하여 스터디방의 기본 정보(닉네임, 타이틀)를 가져오는 비동기 함수입니다.
+  // 백엔드 REST API를 호출하여 스터디방의 기본 정보(닉네임, 타이틀)를 가져오는 비동기 함수
   const fetchStudyInfo = async () => {
     try {
       const response = await fetch(
@@ -52,7 +52,7 @@ function HabitPage() {
     }
   };
 
-  // 현재 진행 중인 습관 목록 데이터를 가져오는 비동기 함수입니다.
+  // 현재 진행 중인 습관 목록 데이터를 가져오는 비동기 함수
   const fetchHabits = async () => {
     try {
       const response = await fetch(
@@ -67,7 +67,7 @@ function HabitPage() {
     }
   };
 
-  // 컴포넌트 마운트 시점에 데이터를 초기화하고, setInterval을 활용해 1분마다 현재 시간을 갱신합니다.
+  // 컴포넌트 마운트 시점에 데이터를 초기화하고, setInterval을 활용해 1분마다 현재 시간을 갱신
   useEffect(() => {
     if (studyId) {
       fetchStudyInfo();
@@ -79,11 +79,11 @@ function HabitPage() {
       setCurrentTime(formatCurrentTime());
     }, 60000);
 
-    // 컴포넌트 언마운트 시 타이머가 계속 동작하는 메모리 누수(Memory Leak)를 방지하기 위해 클린업 함수를 반환합니다.
+    // 컴포넌트 언마운트 시 타이머가 계속 동작하는 메모리 누수(Memory Leak)를 방지하기 위해 클린업 함수를 반환
     return () => clearInterval(timer);
   }, [studyId]);
 
-  // 습관 완료 체크박스 클릭 시 실행되며, 백엔드 상태를 업데이트하는 PATCH 요청 함수입니다.
+  // 습관 완료 체크박스 클릭 시 실행되며, 백엔드 상태를 업데이트하는 PATCH 요청 함수
   const handleToggleHabit = async (habitId) => {
     const targetHabit = habits.find((h) => h.id === habitId);
     if (
@@ -105,7 +105,7 @@ function HabitPage() {
         },
       );
 
-      // 서버 요청이 성공하면 프론트엔드의 상태도 즉시 업데이트하여 빠른 사용자 경험(UX)을 제공합니다.
+      // 서버 요청이 성공 시 프론트엔드의 상태도 즉시 업데이트 UX 구현
       if (response.ok) {
         setHabits((prev) =>
           prev.map((h) =>
@@ -123,9 +123,9 @@ function HabitPage() {
     }
   };
 
-  // 모달창에서 변경된 습관 데이터(추가, 수정, 삭제)를 백엔드에 일괄 동기화하는 함수입니다.
+  // 모달창에서 변경된 습관 데이터(추가, 수정, 삭제)를 백엔드에 일괄 동기화하는 함수
   const handleSaveHabits = async (editHabits) => {
-    // Array.prototype.filter를 사용하여 기존 배열과 수정된 배열을 비교해 상태 변화를 감지합니다.
+    // Array.prototype.filter 사용 기존 배열과 수정된 배열을 비교해 상태 변화를 감지
     const deleted = habits.filter(
       (h) => !editHabits.find((e) => e.id === h.id),
     );
@@ -137,7 +137,7 @@ function HabitPage() {
     });
 
     try {
-      // Promise.all을 활용하여 다수의 비동기 네트워크 요청을 병렬로 처리함으로써 응답 대기 시간을 최소화합니다.
+      // Promise.all을 활용 다수의 비동기 네트워크 요청 병렬로 처리 응답 대기 시간 최소화
       await Promise.all(
         deleted.map((h) =>
           fetch(`http://localhost:3000/api/habits/${h.id}/end`, {
@@ -164,7 +164,7 @@ function HabitPage() {
         ),
       );
 
-      // 데이터베이스 동기화가 완료되면 최신 목록을 다시 불러오고 모달을 닫습니다.
+      // 데이터베이스 동기화 완료시 최신 목록을 다시 불러오고 모달 닫음
       await fetchHabits();
       setIsModalOpen(false);
     } catch (error) {
@@ -214,7 +214,7 @@ function HabitPage() {
             </div>
           </header>
 
-          {/* 자식 컴포넌트인 HabitSection에 데이터와 이벤트 핸들러를 Props로 전달합니다. */}
+          {/* 자식 컴포넌트인 HabitSection에 데이터와 이벤트 핸들러를 Props로 전달 */}
           <HabitSection
             habits={habits}
             onOpenEdit={() => setIsModalOpen(true)}
@@ -223,7 +223,7 @@ function HabitPage() {
         </article>
       </main>
 
-      {/* 논리 연산자(&&)를 이용한 조건부 렌더링으로, 상태가 true일 때만 모달 컴포넌트를 마운트합니다. */}
+      {/* 논리 연산자(&&)를 이용한 조건부 렌더링으로, 상태가 true일 때만 모달 컴포넌트를 마운트 */}
       {isModalOpen && (
         <HabitEditModal
           habits={habits}

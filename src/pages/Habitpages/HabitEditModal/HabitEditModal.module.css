@@ -43,7 +43,7 @@
   overflow-x: hidden;
   flex-grow: 1;
 
-  /* 스크롤바 디자인 완전 숨김 처리 (기능 정상 작동 보장) */
+  /* 스크롤바 디자인 완전 숨김 처리 (기능 정상 작동) */
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
 }
@@ -208,7 +208,6 @@
     gap: 8px !important;
     margin-bottom: 24px !important;
 
-    /* 모바일 환경 사이드 스크롤바 마스킹 기법 적용 */
     -ms-overflow-style: none !important;
     scrollbar-width: none !important;
   }
