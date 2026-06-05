@@ -21,7 +21,6 @@
   max-width: 1200px;
 }
 
-/* 상단: 스터디 정보 */
 .studyInfo {
   display: flex;
   flex-direction: column;
@@ -156,5 +155,3 @@
     font-size: 16px;
   }
 }
-
-

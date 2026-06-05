@@ -4,30 +4,27 @@ import HabitItem from "../../../components/habit/HabitItem/HabitItem";
 import icAdd from "../../../assets/icons/ic_plus.png";
 
 function HabitEditModal({ habits, onClose, onSave }) {
-  // 모달 안에서만 수정하고, 저장 눌렀을 때만 반영하려고 복사본 만듦
   const [editHabits, setEditHabits] = useState(habits);
-
-  // 지금 어떤 습관을 클릭해서 수정 중인지 id 저장
   const [editingId, setEditingId] = useState(null);
 
-  // 휴지통 눌렀을 때 리스트에서 빼는 함수
   const handleDelete = (id) => {
     setEditHabits((prev) => prev.filter((habit) => habit.id !== id));
   };
 
-  // + 버튼 눌렀을 때 새 습관 추가하는 함수
   const handleAdd = () => {
+    // DB에 들어가기 전이므로 식별할 고유값이 없음. Date.now()를 사용하여 임시 고유 ID 생성
     const newHabit = {
-      id: Date.now(), // 겹치지 않게 시간으로 임시 id 줌
+      id: `new-${Date.now()}`,
       title: "",
-      isCompleted: false,
+      habitLogs: [{ isChecked: false }],
     };
+    // 스프레드 연산자를 사용하여 기존 배열에 새 객체를 추가
     setEditHabits((prev) => [...prev, newHabit]);
     setEditingId(newHabit.id);
   };
 
-  // 인풋창에 글씨 쓸 때마다 업데이트
   const handleChange = (id, newTitle) => {
+    // map을 돌면서 수정 중인 아이템의 title만 업데이트
     setEditHabits((prev) =>
       prev.map((habit) =>
         habit.id === id ? { ...habit, title: newTitle } : habit,
@@ -43,19 +40,19 @@ function HabitEditModal({ habits, onClose, onSave }) {
         <ul className={styles.editList}>
           {editHabits.map((habit) => (
             <li key={habit.id} className={styles.editItemRow}>
-              {/* 공용 컴포넌트 재사용 */}
               <HabitItem
                 onClickItem={() => setEditingId(habit.id)}
                 onDelete={() => handleDelete(habit.id)}
               >
-                {/* 현재 클릭한 놈이면 input을 보여주고 아니면 그냥 글씨 보여줌 */}
+                {/* editingId와 현재 렌더링 중인 아이템 id가 같으면 input 태그를 보여주어 수정 모드로 전환 */}
                 {editingId === habit.id ? (
                   <input
                     type="text"
                     className={styles.editItemInput}
                     value={habit.title}
                     onChange={(e) => handleChange(habit.id, e.target.value)}
-                    onBlur={() => setEditingId(null)} // 바깥 클릭하면 수정 끝남
+                    // onBlur 이벤트를 사용해 인풋 바깥을 클릭하면 수정 모드를 종료함
+                    onBlur={() => setEditingId(null)}
                     autoFocus
                   />
                 ) : (
@@ -70,15 +67,12 @@ function HabitEditModal({ habits, onClose, onSave }) {
               </HabitItem>
             </li>
           ))}
-
-          <li className={styles.editItemRow}>
-            <button type="button" className={styles.addBtn} onClick={handleAdd}>
-              <img src={icAdd} alt="추가" className={styles.addIcon} />
-            </button>
-            {/* 플러스 버튼을 가운데 맞추기 위해 휴지통 크기만큼 투명 여백 넣음 */}
-            <div className={styles.emptySpace}></div>
-          </li>
         </ul>
+
+        {/* 플러스 버튼을 리스트 흐름과 분리하여 간격을 통제하기 위해 ul 태그 바깥에 배치 */}
+        <button type="button" className={styles.addBtn} onClick={handleAdd}>
+          <img src={icAdd} alt="추가" className={styles.addIcon} />
+        </button>
 
         <div className={styles.modalActions}>
           <button type="button" className={styles.cancelBtn} onClick={onClose}>

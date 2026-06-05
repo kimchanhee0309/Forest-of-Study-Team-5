@@ -88,6 +88,22 @@
   object-fit: contain;
 }
 
+.bgGreen {
+  background: #e1edde;
+}
+
+.bgYellow {
+  background: #fff1cc;
+}
+
+.bgBlue {
+  background: #e0f1f5;
+}
+
+.bgPink {
+  background: #fde0e9;
+}
+
 /* Tablet */
 @media (max-width: 768px) {
   .card {
