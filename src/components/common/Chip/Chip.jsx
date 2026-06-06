@@ -1,4 +1,4 @@
-import styles from "./chip.module.css";
+import styles from "./Chip.module.css";
 
 function chip({ children, completed = false, onClick }) {
   return (
