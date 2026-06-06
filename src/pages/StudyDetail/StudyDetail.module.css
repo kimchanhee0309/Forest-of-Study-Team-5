@@ -1,0 +1,245 @@
+.page {
+  display: flex;
+  max-width: 1920px;
+  padding-bottom: 73px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  background: #f6f4ef;
+  margin: 0 auto;
+}
+.container {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 20px;
+  background: #fff;
+}
+.container_inner {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+.top_frame {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+.action_frame {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+.edit_frame {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.post_frame {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.post_header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.post_btn_frame {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.post_btn {
+  width: 144px;
+  height: 48px;
+  border-radius: 15px;
+  border: 1px solid var(--gray-gray_DDDDDD, #ddd);
+  background: #fff;
+}
+.post_btn_inner {
+  display: inline-flex;
+  align-items: center;
+  margin: 12px 16px 12px 24px;
+  gap: 4px;
+}
+.post_main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+.introduce {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.point {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.pointIcon {
+  width: 19px;
+  height: 19px;
+}
+.arrowIcon {
+  width: 24px;
+  height: 24px;
+}
+.bottom_frame {
+  width: 100%;
+  height: 511px;
+}
+.bottom_inner {
+  display: flex;
+  width: 100%;
+  height: 511px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  border-radius: 20px;
+  border: 1px solid var(--gray-gray_DDDDDD, #ddd);
+  background: #fff;
+}
+
+.postTitle {
+  color: var(--black);
+  font-family: Pretendard;
+  font-size: var(--text-32);
+  font-style: normal;
+  font-weight: var(--weight-extrabold);
+  line-height: normal;
+}
+.editGreen {
+  color: var(--green-green_text_578246, #578246);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: var(--text-16);
+  font-style: normal;
+  font-weight: var(--weight-medium);
+  line-height: normal;
+}
+.editGray,
+.btnGray {
+  color: var(--gray-818181);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: var(--text-16);
+  font-style: normal;
+  font-weight: var(--weight-medium);
+  line-height: normal;
+}
+.postGray {
+  color: var(--gray-818181);
+  font-family: Pretendard;
+  font-size: var(--text-18);
+  font-style: normal;
+  font-weight: var(--weight-regular);
+  line-height: normal;
+}
+.postBlack {
+  color: var(--black);
+  font-family: Pretendard;
+  font-size: var(--text-18);
+  font-style: normal;
+  font-weight: var(--weight-medium);
+  line-height: 26px; /* 144.444% */
+}
+.bottomBlack {
+  color: var(--black);
+  text-align: right;
+  font-family: Pretendard;
+  font-size: var(--text-24);
+  font-style: normal;
+  font-weight: var(--weight-extrabold);
+  line-height: normal;
+}
+.toast {
+  position: fixed;
+  max-width: 349px;
+  top: 85%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 9999;
+}
+.loding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #0002;
+  position: fixed;
+}
+
+@media (max-width: 1199px) {
+  .container {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 743px) {
+  .container {
+    padding: 16px;
+  }
+  .top_frame {
+    display: contents;
+    flex-direction: column;
+  }
+  .action_frame {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .post_header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .edit_frame {
+    align-items: center;
+    align-self: flex-end;
+    order: -1;
+  }
+  .bottom_inner {
+    padding: 16px;
+  }
+  .postTitle {
+    font-size: var(--text-24);
+  }
+  .bottomBlack {
+    font-size: var(--text-18);
+  }
+  .postGray {
+    font-size: var(--text-16);
+  }
+  .postBlack {
+    font-size: var(--text-14);
+  }
+  .editGreen,
+  .editGray {
+    font-size: var(--text-12);
+  }
+}

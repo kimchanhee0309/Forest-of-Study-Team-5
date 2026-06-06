@@ -1,0 +1,89 @@
+.wrapper {
+  width: 100%;
+  max-width: 600px;
+}
+
+.inputBox {
+  width: 100%;
+  max-width: 600px;
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+
+  background: #ffffff;
+
+  border: 1px solid var(--gray-dddddd);
+  border-radius: 16px;
+
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.errorBox {
+  border: 2px solid var(--error);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  border-radius: 16px;
+
+  padding: 0 20px;
+
+  color: var(--black);
+  font-size: var(--font-16);
+  font-weight: var(--weight-medium);
+
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: var(--gray-818181);
+}
+
+.eyeButton {
+  width: 52px;
+  height: 100%;
+
+  border: none;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.eyeIcon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.errorText {
+  margin: 8px 0 0;
+  color: var(--error);
+  font-size: var(--text-14);
+  font-weight: var(--weight-semibold);
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  -webkit-text-fill-color: var(--black);
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.inputBox:has(.input:-webkit-autofill) {
+  background: #ffffff;
+}

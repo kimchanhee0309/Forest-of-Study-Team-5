@@ -1,0 +1,50 @@
+:root {
+  /* font */
+  --font-main: "Pretendard", sans-serif;
+
+  --text-150: 150px;
+  --text-120: 120px;
+  --text-80: 80px;
+
+  --text-32: 32px;
+  --text-24: 24px;
+  --text-20: 20px;
+  --text-18: 18px;
+  --text-16: 16px;
+  --text-14: 14px;
+  --text-12: 12px;
+  --text-10: 10px;
+
+  /* font weight */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* color */
+  --black: #414141;
+
+  --gray-818181: #818181;
+  --gray-dddddd: #dddddd;
+  --gray-eeeeee: #eeeeee;
+
+  --bg: #f6f4ef;
+  --brand: #99c08e;
+
+  --error: #c41013;
+  --red: #f50e0e;
+  --error-bg: #ffa3a5;
+
+  --green-bg: #e1edde;
+  --green-text: #578246;
+
+  --yellow-bg: #fff1cc;
+  --yellow-text: #c18e1b;
+
+  --blue-bg: #e0f1f5;
+  --blue-text: #418099;
+
+  --pink-bg: #fde0e9;
+  --pink-text: #bc3c6a;
+}

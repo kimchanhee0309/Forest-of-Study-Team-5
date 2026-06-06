@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "EF_jejudoldam";
+  src: url("../../src/fonts/EF_jejudoldam\(TTF\).ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Pretendard", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--black);
+
+  min-height: 100vh;
+}

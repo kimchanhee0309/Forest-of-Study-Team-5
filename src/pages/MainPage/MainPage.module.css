@@ -1,0 +1,176 @@
+.mainPage {
+  background-color: var(--bg, #f6f4ef);
+  display: flex;
+  max-width: 1920px;
+  width: 100%;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.recentStudies,
+.studyList {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 40px;
+  border-radius: 20px;
+  background-color: #fff;
+  margin-bottom: 48px;
+  padding: 30px;
+}
+
+.recentStudies {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-height: 382px;
+}
+
+.recentCardList {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  overflow: hidden;
+  flex-wrap: nowrap;
+}
+.studyListEmpty {
+  min-height: 822px;
+}
+
+.sectionTitle {
+  align-items: center;
+  font-size: var(--text-24, 24px);
+  font-weight: var(--weight-extrabold, 800);
+  color: var(--black, #414141);
+}
+
+.controlBar {
+  display: flex;
+  max-width: 1120px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.searchInputWrapper {
+  width: 337px;
+  max-width: 337px;
+  max-width: 100%;
+  height: 44px;
+  padding: 12px 20px;
+  border: 1px solid var(--gray-dddddd, #dddddd);
+  border-radius: 15px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding-left: 20px;
+  background-color: #fff;
+  display: flex;
+  color: var(--gray-818181, #818181);
+  font-size: var(--text-16, 16px);
+  font-weight: var(--weight-regular, 400);
+}
+
+.dropdownWrapper {
+  display: flex;
+  position: relative;
+  width: 180px;
+}
+
+.dropdownWrapper > div > button {
+  border: 1px solid var(--gray-dddddd, #dddddd);
+}
+
+.dropdownWrapper > div > ul {
+  border: 1px solid var(--gray-dddddd, #dddddd);
+}
+
+.studyCardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.loadMoreButton {
+  display: flex;
+  width: 280px;
+  max-width: 280px;
+  height: 53px;
+  margin: 60px auto 0;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--gray-dddddd, #dddddd);
+  border-radius: 20px;
+  background-color: #fff;
+  color: var(--green-text, #578246);
+  text-align: center;
+  font-size: var(--text-16, 16px);
+  font-weight: var(--weight-medium, 500);
+}
+
+.emptyContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.emptyMessage {
+  color: var(--gray-818181, #818181);
+  font-size: var(--text-20, 20px);
+  font-weight: var(--weight-medium, 500);
+}
+
+/*태블릿*/
+@media (max-width: 744px) {
+  .studyCardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recentStudies,
+  .studyList {
+    padding: 20px;
+  }
+
+  .recentCardList {
+    width: 100%;
+    gap: 24px;
+    overflow: hidden;
+  }
+}
+
+/*모바일*/
+@media (max-width: 375px) {
+  .studyCardGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-wigth: 375px) {
+  .searchBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

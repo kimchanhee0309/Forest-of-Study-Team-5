@@ -1,0 +1,26 @@
+.chip {
+  width: 100%;
+  max-width: 400px;
+  height: 54px;
+
+  border: none;
+  border-radius: 20px;
+
+  background: var(--gray-eeeeee);
+  color: var(--gray-818181);
+
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+
+  cursor: pointer;
+
+  top: 20px;
+  left: 20px;
+  opacity: 1;
+  gap: 10px;
+}
+
+.completed {
+  background: var(--brand);
+  color: white;
+}

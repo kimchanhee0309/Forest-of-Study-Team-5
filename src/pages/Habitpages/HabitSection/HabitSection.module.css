@@ -1,0 +1,170 @@
+.sectionContainer {
+  width: 100%;
+  max-width: 1168px;
+  height: 631px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  border-radius: 20px;
+  border: 1px solid var(--gray-dddddd);
+  background: #fff;
+  box-sizing: border-box;
+
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sectionContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.sectionHeader {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: var(--text-24);
+  font-weight: var(--weight-bold);
+  color: var(--black);
+  margin: 0;
+}
+
+.editButton {
+  position: absolute;
+  left: calc(50% + 147px);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-818181);
+  font-size: var(--text-14);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+.habitList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.habitItem {
+  width: 400px;
+  height: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.emptyState {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--gray-818181);
+  text-align: center;
+  font-family: "Pretendard", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: var(--weight-medium);
+  line-height: normal;
+}
+
+.emptyState p {
+  margin: 0;
+}
+
+/* ======================================================== */
+/* 아이패드 미니 (태블릿) 뷰포트 처리 */
+/* ======================================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+  .sectionContainer {
+    width: 100%;
+    flex-grow: 1;
+    height: auto;
+    padding: 40px 24px;
+    align-items: flex-start;
+    gap: 10px;
+    border: 1px solid var(--gray-dddddd);
+  }
+
+  .sectionHeader {
+    justify-content: center;
+  }
+
+  .habitItem {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .editButton {
+    left: auto;
+    right: 0px;
+    top: 6px;
+  }
+}
+
+/* ======================================================== */
+/* 모바일 뷰포트 최적화 처리 */
+/* ======================================================== */
+@media (max-width: 480px) {
+  .sectionContainer {
+    display: flex;
+    width: 100% !important;
+    flex-grow: 1 !important;
+    height: auto !important;
+    padding: 24px 16px !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--gray-dddddd);
+    background: #fff;
+    box-sizing: border-box;
+  }
+
+  .sectionHeader {
+    margin-bottom: 0;
+    justify-content: center;
+  }
+
+  .sectionTitle {
+    font-size: var(--text-18);
+  }
+
+  .habitList {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .habitItem {
+    width: 100%;
+    max-width: 280px;
+    height: 54px;
+  }
+
+  .editButton {
+    font-size: var(--text-14);
+    left: auto;
+    right: 0;
+    top: 6px;
+  }
+
+  .emptyState {
+    width: 100%;
+    font-size: 16px;
+  }
+}

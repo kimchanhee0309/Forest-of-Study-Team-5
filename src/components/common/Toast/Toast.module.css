@@ -1,0 +1,25 @@
+.toast {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 349px;
+  height: 54px;
+  padding: 0 24px;
+
+  border-radius: 12px;
+
+  font-size: var(--text-18);
+  font-weight: var(--weight-bold);
+}
+
+.point {
+  background: var(--green-bg);
+  color: var(--green-text);
+}
+
+.warning {
+  background: var(--pink-bg);
+  color: var(--red);
+}

@@ -1,0 +1,81 @@
+/* 자식 컴포넌트인 휴지통의 절대 위치 기준을 잡아주기 위해 position을 relative로 설정함 */
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 습관 내용이 들어갈 메인 박스. 공용 테마 변수를 불러옴 */
+.item {
+  width: 400px;
+  height: 54px;
+  background: var(--gray-eeeeee);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* 휴지통 아이콘 버튼. 아이템 레이아웃 중앙 정렬이 깨지지 않게 화면 흐름에서 띄워버림 (absolute) */
+.deleteButton {
+  position: absolute;
+  left: calc(50% + 216px);
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  padding: 12px !important;
+  border-radius: 35px !important;
+  background: var(--pink-bg);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.icon {
+  width: 24px !important;
+  height: 24px !important;
+  display: block;
+  object-fit: contain;
+}
+
+/* ======================================================== */
+/* 태블릿 화면 위치 미세 조정 */
+/* ======================================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+  .deleteButton {
+    left: calc(50% + 208px);
+  }
+  .item {
+    width: 400px !important;
+    height: 54px !important;
+  }
+}
+
+/* ======================================================== */
+/* 모바일 화면에서는 절대 위치를 풀고 일반적인 flex 레이아웃으로 변경 */
+/* ======================================================== */
+@media (max-width: 480px) {
+  .wrapper {
+    justify-content: flex-start;
+    gap: 8px !important;
+  }
+  .item {
+    width: 256px !important;
+    min-width: 256px !important;
+    height: 54px !important;
+    margin: 0;
+  }
+  .deleteButton {
+    position: static;
+    left: auto;
+  }
+}
