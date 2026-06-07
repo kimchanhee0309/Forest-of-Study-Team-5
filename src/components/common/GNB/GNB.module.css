@@ -11,10 +11,7 @@
 }
 
 .container {
-  width: 100%;
-  max-width: 1920px;
-
-  padding: 0 40px;
+  width: min(1200px, calc(100% - 48px));
 
   display: flex;
   justify-content: space-between;
@@ -36,7 +33,7 @@
   }
 
   .container {
-    padding: 0 24px;
+    width: calc(100% - 48px);
   }
 
   .logo {
@@ -49,7 +46,7 @@
     height: 100px;
   }
   .container {
-    padding: 0 16px;
+    width: calc(100% - 32px);
   }
   .logo {
     width: 106px;
