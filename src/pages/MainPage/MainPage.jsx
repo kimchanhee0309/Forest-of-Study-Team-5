@@ -135,7 +135,7 @@ function MainPage() {
             {recentStudies.slice(0, 3).map((study) => (
               <StudyCard
                 key={study.id}
-                title={study.title}
+                title={`${study.nickname}의 ${study.title}`}
                 elapsedDays={study.elapsedDays}
                 description={study.description}
                 point={study.totalPoint}
@@ -199,7 +199,7 @@ function MainPage() {
               {studies.map((study) => (
                 <StudyCard
                   key={study.id}
-                  title={study.title}
+                  title={`${study.nickname}의 ${study.title}`}
                   elapsedDays={study.elapsedDays}
                   description={study.description}
                   point={study.totalPoint}
