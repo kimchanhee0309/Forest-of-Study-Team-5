@@ -109,3 +109,18 @@ ___
   - LocalStorage를 활용한 최근 조회한 스터디 고유 ID 저장 및 상단 표시 기능 구현
   - 기기별 반응형 UI 처리
 </details>
+
+___
+
+# 파일 구조
+```txt
+```
+
+___
+
+# 구현 홈페이지
+https://forest-of-study-team5.netlify.app
+
+____
+
+# 프로젝트 회고록
