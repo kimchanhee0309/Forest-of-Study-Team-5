@@ -1,4 +1,4 @@
-# Team 5
+[5팀_공부의 숲_발표자료.pdf](https://github.com/user-attachments/files/28693663/5._._.pdf)# Team 5
 **Notion 링크** : https://app.notion.com/p/899f88fb05a9830f99c7813a4167cfea?v=a42f88fb05a982b38f2088cf57d469d5
 
 # 팀원 구성
@@ -114,6 +114,149 @@ ___
 
 # 파일 구조
 ```txt
+├── src/
+│   ├── api/                
+│   │   ├── emoji.js
+│   │   └── modal.js
+│   │
+│   ├── assets/             
+│   │   ├── images/
+│   │   ├── icons/
+│   │   └── sticker/
+│   │
+│   ├── components/         
+│   │   ├── common/
+│   │   │     ├── Button/
+│   │   │     │     ├── Button.jsx    
+│   │   │     │     └── Button.module.css
+│   │   │     ├── Chip/
+│   │   │     │     ├── Chip.jsx    
+│   │   │     │     └── Chip.module.css
+│   │   │     ├── Dropdown/
+│   │   │     │     ├── Dropdown.jsx    
+│   │   │     │     └── Dropdown.module.css
+│   │   │     ├── GNB/
+│   │   │     │     ├── GNB.jsx    
+│   │   │     │     └── GNB.module.css
+│   │   │     ├── Input/
+│   │   │     │     ├── Input.jsx    
+│   │   │     │     └── Input.module.css
+│   │   │     ├── Modal/
+│   │   │     │     ├── Modal.jsx    
+│   │   │     │     └── Modal.module.css
+│   │   │     ├── Popup/
+│   │   │     │     ├── Popup.jsx    
+│   │   │     │     └── Popup.module.css
+│   │   │     ├── StartStopButton/
+│   │   │     │     ├── StartStopButton.jsx    
+│   │   │     │     └── StartStopButton.module.css
+│   │   │     ├── Sticker/
+│   │   │     │     ├── Sticker.jsx    
+│   │   │     │     └── Sticker.module.css
+│   │   │     ├── Tag/
+│   │   │     │     ├── Tag.jsx    
+│   │   │     │     └── Tag.module.css
+│   │   │     ├── TimerButton/
+│   │   │     │     ├── TimerButton.jsx    
+│   │   │     │     └── TimerButton.module.css
+│   │   │     ├── Toast/
+│   │   │     │     ├── Toast.jsx    
+│   │   │     │     └── Toast.module.css
+│   │   │     └── index.js
+│   │   │ 
+│   │   ├── focus/
+│   │   │     ├── FocusPoint/
+│   │   │     │     ├── FocusPoint.jsx    
+│   │   │     │     └── FocusPoint.module.css
+│   │   │     ├── Timer/
+│   │   │     │     ├── Timer.jsx    
+│   │   │     └──   └── Timer.module.css        
+│   │   │
+│   │   ├── Guide/
+│   │   │     └── GuidePage.jsx      
+│   │   │
+│   │   ├── habit/
+│   │   │     ├── HabitItem/
+│   │   │     │     ├── HabitItem.jsx    
+│   │   │     └──   └── HabitItem.module.css    
+│   │   │
+│   │   └── study/
+│   │         ├── Emoji/
+│   │         │     ├── EmojiReaction.jsx    
+│   │         │     └── EmojiReaction.module.css
+│   │         ├── HabitTable/
+│   │         │     ├── HabitTable.jsx
+│   │         │     ├── HabitTable.module.css
+│   │         │     ├── HabitTableHeader.jsx   
+│   │         │     └── HabitTableRow.jsx
+│   │         ├── PasswordModal/
+│   │         │     ├── PasswordModal.jsx    
+│   │         │     └── PasswordModal.module.css
+│   │         ├── StudyCard/
+│   │         │     ├── StudyCard.jsx    
+│   │         │     └── StudyCard.module.css
+│   │         ├── StudyCreateForm/
+│   │         │     ├── StudyCreateForm.jsx
+│   │         │     ├── StudyCreateForm.module.css       
+│   │         │     └── useStudyCreateForm.js
+│   │         ├── UpdateStudyForm/
+│   │         │     ├── UpdateStudyForm.jsx
+│   │         │     ├── UpdateStudyForm.module.css       
+│   │         └──   └── useUpdateStudyForm.js
+│   │
+│   ├── constants/
+│   │   └── api.js    
+│   │
+│   ├── hooks/
+│   │   ├── useFocusTimer.js
+│   │   └── useStudies.js     
+│   │
+│   ├── layouts/
+│   │   └── RootLayout.jsx       
+│   │
+│   ├── pages/
+│   │   ├── FocusPage/
+│   │   │     ├── FocusPage.jsx
+│   │   │     └── FocusPage.module.css   
+│   │   ├── Habitpages/
+│   │   │     ├── HabitEditModal/
+│   │   │     │     ├── HabitEditModal.jsx
+│   │   │     │     └── HabitEditModal.module.css   
+│   │   │     ├── HabitSection/
+│   │   │     │     ├── HabitSection.jsx
+│   │   │     │     └── HabitSection.module.css   
+│   │   │     ├── HabitPage.jsx
+│   │   │     └── HabitPage.module.css   
+│   │   ├── MainPage/
+│   │   │     ├── MainPage.jsx
+│   │   │     └── MainPage.module.css   
+│   │   ├── StudyCreatePage/
+│   │   │     └── StudyCreatePage.jsx   
+│   │   ├── StudyDetail/
+│   │   │     ├── StudyDetail.jsx
+│   │   │     └── StudyDetail.module.css   
+│   │   └── UpdatePage/
+│   │         └── UpdatePage.jsx
+│   │
+│   ├── styles/
+│   │     ├── global.css
+│   │     ├── reset.css
+│   │     └── theme.css    
+│   │
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   ├── main.jsx
+├── .env
+├── .gitignore
+├── .prettierrc
+├── eslint.config.js
+├── index.html
+├── netlify.toml
+├── package-lock.json
+├── package.json
+├── vite.config.js
+└── README.md               
 ```
 
 ___
@@ -124,3 +267,6 @@ https://forest-of-study-team5.netlify.app
 ____
 
 # 프로젝트 회고록
+[5팀_공부의 숲_발표자료.pdf](https://github.com/user-attachments/files/28693666/5._._.pdf)
+
+
