@@ -1,4 +1,4 @@
-[5팀_공부의 숲_발표자료.pdf](https://github.com/user-attachments/files/28693663/5._._.pdf)# Team 5
+# Team 5
 **Notion 링크** : https://app.notion.com/p/899f88fb05a9830f99c7813a4167cfea?v=a42f88fb05a982b38f2088cf57d469d5
 
 # 팀원 구성
@@ -265,6 +265,9 @@ ___
 https://forest-of-study-team5.netlify.app
 
 ____
+
+# 프로젝트 회고
+[5팀_공부의 숲_발표자료.pdf](https://github.com/user-attachments/files/28693663/5._._.pdf)
 
 # 프로젝트 회고록
 [5팀_공부의 숲_발표자료.pdf](https://github.com/user-attachments/files/28693666/5._._.pdf)
